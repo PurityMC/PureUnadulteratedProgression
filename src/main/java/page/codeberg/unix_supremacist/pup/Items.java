@@ -6,13 +6,13 @@ public enum Items {
     CIRCUIT,
     CIRCUIT_ADVANCED,
     CIRCUIT_COMPLEX,
-    CIRCUIT_DATA, //side circuit
+    CIRCUIT_DATA, // side circuit
     CIRCUIT_ELITE,
     CIRCUIT_MASTER,
     CIRCUIT_3D,
     CIRCUIT_FUTURISTIC,
     CIRCUIT_INFINITE,
-    CIRCUIT_BIO, //side circuit
+    CIRCUIT_BIO, // side circuit
     CIRCUIT_NANO,
     CIRCUIT_PICO,
     CIRCUIT_QUANTUM,

@@ -16,7 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class MetaItem extends Item {
 
-    @Getter final String modid;
+    @Getter
+    final String modid;
     public static final HashMap<Integer, String> items = new HashMap<>();
     public static final HashMap<Integer, IIcon> icons = new HashMap<>();
 
