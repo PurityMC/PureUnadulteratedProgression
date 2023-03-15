@@ -1,9 +1,9 @@
 package page.codeberg.unix_supremacist.pup.material;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.HashSet;
-
-import lombok.Getter;
 
 public class Material {
 

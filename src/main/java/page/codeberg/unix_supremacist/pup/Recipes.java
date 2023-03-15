@@ -1,8 +1,6 @@
 package page.codeberg.unix_supremacist.pup;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -11,12 +9,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
 import org.apache.commons.lang3.StringUtils;
-
 import page.codeberg.unix_supremacist.pup.material.MaterialEnum;
 import page.codeberg.unix_supremacist.pup.material.PartEnum;
-import cpw.mods.fml.common.registry.GameRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Recipes {
 

@@ -1,7 +1,7 @@
 package page.codeberg.unix_supremacist.pup;
 
-import page.codeberg.unix_supremacist.pup.material.PartEnum;
 import cpw.mods.fml.common.registry.GameRegistry;
+import page.codeberg.unix_supremacist.pup.material.PartEnum;
 
 public class ItemIterator {
 

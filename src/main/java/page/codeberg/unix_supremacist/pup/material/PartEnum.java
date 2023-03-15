@@ -1,16 +1,13 @@
 package page.codeberg.unix_supremacist.pup.material;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import lombok.Getter;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
 import org.apache.commons.lang3.StringUtils;
-
 import page.codeberg.unix_supremacist.pup.Tags;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public enum PartEnum {
 

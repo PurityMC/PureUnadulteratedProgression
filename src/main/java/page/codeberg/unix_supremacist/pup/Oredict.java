@@ -1,12 +1,11 @@
 package page.codeberg.unix_supremacist.pup;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
 import page.codeberg.unix_supremacist.pup.material.MaterialEnum;
 import page.codeberg.unix_supremacist.pup.material.Part;
 import page.codeberg.unix_supremacist.pup.material.PartEnum;
-import cpw.mods.fml.common.Loader;
 
 public class Oredict {
 
