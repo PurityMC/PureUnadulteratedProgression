@@ -1,10 +1,7 @@
 package page.codeberg.unix_supremacist.pup.machine;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -27,12 +24,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import page.codeberg.unix_supremacist.pup.Interfaces.ITSidedInventory;
 import page.codeberg.unix_supremacist.pup.Tags;
-
-import java.util.Random;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BasicMachine extends BlockContainer {
+
     public static final Class Tile = BasicTile.class;
     private final Random random = new Random();
     private boolean isOn;
@@ -93,9 +94,14 @@ public class BasicMachine extends BlockContainer {
                         int j1 = this.random.nextInt(21) + 10;
                         if (j1 > itemstack.stackSize) j1 = itemstack.stackSize;
                         itemstack.stackSize -= j1;
-                        EntityItem entityitem = new EntityItem(w, (float) x + f, (float) y + f1, (float) z + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-                        if (itemstack.hasTagCompound())
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+                        EntityItem entityitem = new EntityItem(
+                                w,
+                                (float) x + f,
+                                (float) y + f1,
+                                (float) z + f2,
+                                new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                        if (itemstack.hasTagCompound()) entityitem.getEntityItem()
+                                .setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 
                         float f3 = 0.05F;
                         entityitem.motionX = (float) this.random.nextGaussian() * f3;
@@ -121,8 +127,9 @@ public class BasicMachine extends BlockContainer {
     }
 
     public class BasicTile extends TileEntity implements ITSidedInventory, IEnergyHandler {
-        static final int[] slotsTop = new int[]{0};
-        static final int[] slotsBottom = new int[]{2};
+
+        static final int[] slotsTop = new int[] { 0 };
+        static final int[] slotsBottom = new int[] { 2 };
         public ItemStack[] inventory = new ItemStack[2];
 
         protected int processTime;
@@ -147,18 +154,17 @@ public class BasicMachine extends BlockContainer {
         @Override
         public ItemStack decrStackSize(int slot, int count) {
             ItemStack i = null;
-            if (this.inventory[slot] != null)
-                if (this.inventory[slot].stackSize <= count) {
-                    i = this.inventory[slot];
-                    this.inventory[slot] = null;
-                } else {
-                    i = this.inventory[slot].splitStack(count);
-                    if (this.inventory[slot].stackSize == 0) this.inventory[slot] = null;
-                }
+            if (this.inventory[slot] != null) if (this.inventory[slot].stackSize <= count) {
+                i = this.inventory[slot];
+                this.inventory[slot] = null;
+            } else {
+                i = this.inventory[slot].splitStack(count);
+                if (this.inventory[slot].stackSize == 0) this.inventory[slot] = null;
+            }
             return i;
         }
 
-        //Unneeded for machines, could be useful on destruction
+        // Unneeded for machines, could be useful on destruction
         @Override
         public ItemStack getStackInSlotOnClosing(int slot) {
             ItemStack i = null;
@@ -172,7 +178,8 @@ public class BasicMachine extends BlockContainer {
         @Override
         public void setInventorySlotContents(int slot, ItemStack item) {
             this.inventory[slot] = item;
-            if (item != null && item.stackSize > this.getInventoryStackLimit()) item.stackSize = this.getInventoryStackLimit();
+            if (item != null && item.stackSize > this.getInventoryStackLimit())
+                item.stackSize = this.getInventoryStackLimit();
         }
 
         @Override
@@ -196,16 +203,17 @@ public class BasicMachine extends BlockContainer {
 
         @Override
         public boolean isUseableByPlayer(EntityPlayer player) {
-            return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+            return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq(
+                    (double) this.xCoord + 0.5D,
+                    (double) this.yCoord + 0.5D,
+                    (double) this.zCoord + 0.5D) <= 64.0D;
         }
 
         @Override
-        public void openInventory() {
-        }
+        public void openInventory() {}
 
         @Override
-        public void closeInventory() {
-        }
+        public void closeInventory() {}
 
         @Override
         public boolean isItemValidForSlot(int slot, ItemStack item) {
@@ -220,7 +228,7 @@ public class BasicMachine extends BlockContainer {
             for (int i = 0; i < list.tagCount(); ++i) {
                 NBTTagCompound tag2 = list.getCompoundTagAt(i);
                 byte b = tag2.getByte("Slot");
-                if (/*b > 0 && */b < this.inventory.length) this.inventory[b] = ItemStack.loadItemStackFromNBT(tag2);
+                if (/* b > 0 && */b < this.inventory.length) this.inventory[b] = ItemStack.loadItemStackFromNBT(tag2);
             }
 
             if (tag.hasKey("CustomName", 8)) this.name = tag.getString("CustomName");
@@ -264,10 +272,8 @@ public class BasicMachine extends BlockContainer {
         public void processItem() {
             if (this.canProcess()) {
                 ItemStack i = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
-                if (this.inventory[1] == null)
-                    this.inventory[1] = i.copy();
-                else if (this.inventory[1].getItem() == i.getItem())
-                    this.inventory[1].stackSize += i.stackSize;
+                if (this.inventory[1] == null) this.inventory[1] = i.copy();
+                else if (this.inventory[1].getItem() == i.getItem()) this.inventory[1].stackSize += i.stackSize;
 
                 this.inventory[0].stackSize--;
 
@@ -289,8 +295,7 @@ public class BasicMachine extends BlockContainer {
                             this.processItem();
                             dirty = true;
                         }
-                    } else
-                        this.processTime = 0;
+                    } else this.processTime = 0;
                 }
             }
 
@@ -335,10 +340,11 @@ public class BasicMachine extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public class Gui extends GuiContainer {
+
         private BasicTile tile;
         private ResourceLocation guiTextures = new ResourceLocation("textures/gui/container/container.png");
 
-        public Gui(InventoryPlayer player, BasicTile tile){
+        public Gui(InventoryPlayer player, BasicTile tile) {
             super(new BasicContainer(player, tile));
             this.tile = tile;
         }
@@ -350,6 +356,7 @@ public class BasicMachine extends BlockContainer {
     }
 
     public class BasicContainer extends Container {
+
         private final BasicTile tile;
 
         public BasicContainer(InventoryPlayer playerInventory, BasicTile tile) {
@@ -358,9 +365,8 @@ public class BasicMachine extends BlockContainer {
             this.addSlotToContainer(new SlotFurnace(playerInventory.player, tile, 1, 116, 35));
             int i;
 
-            for (i = 0; i < 3; ++i)
-                for (int j = 0; j < 9; ++j)
-                    this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+            for (i = 0; i < 3; ++i) for (int j = 0; j < 9; ++j)
+                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 
             for (i = 0; i < 9; ++i) this.addSlotToContainer(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
@@ -385,17 +391,12 @@ public class BasicMachine extends BlockContainer {
                         if (!this.mergeItemStack(slotStack, 0, 1, false)) return null;
                     else if (TileEntityFurnace.isItemFuel(slotStack))
                         if (!this.mergeItemStack(slotStack, 1, 2, false)) return null;
-                    else if (slotNum < 30)
-                        if (!this.mergeItemStack(slotStack, 30, 39, false)) return null;
-                    else if (slotNum < 39 && !this.mergeItemStack(slotStack, 3, 30, false))
-                        return null;
-                }  else if (!this.mergeItemStack(slotStack, 3, 39, false))
-                    return null;
+                    else if (slotNum < 30) if (!this.mergeItemStack(slotStack, 30, 39, false)) return null;
+                    else if (slotNum < 39 && !this.mergeItemStack(slotStack, 3, 30, false)) return null;
+                } else if (!this.mergeItemStack(slotStack, 3, 39, false)) return null;
 
-                if (slotStack.stackSize == 0)
-                    slot.putStack((ItemStack) null);
-                else
-                    slot.onSlotChanged();
+                if (slotStack.stackSize == 0) slot.putStack((ItemStack) null);
+                else slot.onSlotChanged();
 
                 if (slotStack.stackSize == stack.stackSize) return null;
 

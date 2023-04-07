@@ -1,1 +1,19 @@
 add rockcutters (basic, advanced, nano) (use gregtech modern for example)
+rethink circuit progression to be more like GT4 by default and make a hard mode config like gt5
+minimize material set more
+cleanup missing textures
+replace all ic2 textures
+make it easier to add machines (possibly port to modular ui)
+make multiblocks like GT5
+add crafting tools like files, etc
+emissive textures
+move part to PUP metaitem
+make sure cells work as intended and does not require ic2 nor its tuextures
+use zedtech textures as a base
+compare all recipes to gt4
+add a solution to the ic2exp hammer issue
+implement IC2E nuclear stuff for classic, and gregtech nuclear stuff in general
+add a roaster, and some other gt6 machine ideas
+look at gt5/6 for expanion ideas
+add more stuff to the PDA, material descriptions etc
+automate smelting, plate bending, plate cutting, nugget to ingot, ingot to nugget, rod, small dust to dust, dust to small dust, recipes

@@ -1,58 +1,75 @@
 package page.codeberg.unix_supremacist.pup;
 
-import cpw.mods.fml.common.Loader;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import page.codeberg.unix_supremacist.pup.material.MaterialEnum;
-import page.codeberg.unix_supremacist.pup.material.Part;
-import page.codeberg.unix_supremacist.pup.material.PartEnum;
+
+import page.codeberg.unix_supremacist.pup.api.ItemApi;
+import page.codeberg.unix_supremacist.pup.recipes.Util;
+import cpw.mods.fml.common.Loader;
 
 public class Oredict {
 
     public static void load() {
-        itemRegister("circuitPrimitive", Items.CIRCUIT_PRIMITIVE.ordinal());
-        itemRegister("circuitBasic", Items.CIRCUIT_SIMPLE.ordinal());
-        itemRegister("circuitGood", Items.CIRCUIT.ordinal());
-        itemRegister("circuitAdvanced", Items.CIRCUIT_ADVANCED.ordinal());
-        itemRegister("circuitComplex", Items.CIRCUIT_COMPLEX.ordinal());
-        itemRegister("circuitData", Items.CIRCUIT_DATA.ordinal());
-        itemRegister("circuitElite", Items.CIRCUIT_ELITE.ordinal());
-        itemRegister("circuitMaster", Items.CIRCUIT_MASTER.ordinal());
-        itemRegister("circuitUltimate", Items.CIRCUIT_3D.ordinal());
-        itemRegister("capacitorPrimitive", Items.CAPACITOR.ordinal());
+        register("circuitSimple", "circuitBasic");
+        register("circuit", "circuitGood");
+        register("circuit3D", "circuitUltimate");
+        register("capacitor", "capacitorPrimitive");
         if (!Loader.isModLoaded("EnderIO")) {
-            itemRegister("capacitorBasic", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorAdvanced", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorEnder", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorCrystalline", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorMelodic", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorStellar", Items.CAPACITOR.ordinal());
-            itemRegister("capacitorTotemic", Items.CAPACITOR.ordinal());
+            register("capacitor", "capacitorBasic");
+            register("capacitor", "capacitorAdvanced");
+            register("capacitor", "capacitorEnder");
+            register("capacitor", "capacitorCrystalline");
+            register("capacitor", "capacitorMelodic");
+            register("capacitor", "capacitorStellar");
+            register("capacitor", "capacitorTotemic");
         }
         if (!Loader.isModLoaded("Mekanism")) {
-            itemRegister("alloyAdvanced", Items.CIRCUIT_PRIMITIVE.ordinal());
-            itemRegister("alloyElite", Items.CIRCUIT_PRIMITIVE.ordinal());
-            itemRegister("alloyUltimate", Items.CIRCUIT_PRIMITIVE.ordinal());
+            register("circuitPrimitive", "alloyAdvanced");
+            register("circuitPrimitive", "alloyElite");
+            register("circuitPrimitive", "alloyUltimate");
         }
-        itemRegister("boardBasic", Items.BOARD_BASIC.ordinal());
-        itemRegister("boardAdvanced", Items.BOARD_ADVANCED.ordinal());
-        itemRegister("boardMaster", Items.BOARD_MASTER.ordinal());
-        itemRegister("boardProcessor", Items.BOARD_PROCESSOR.ordinal());
-        itemRegister("tubeGlass", Items.GLASS_TUBE.ordinal());
-        itemRegister("tubeVacuum", Items.VACUUM_TUBE.ordinal());
-        matRegister("itemMachineChassi", PartEnum.hull.getPart(), MaterialEnum.steel.ordinal());
-        OreDictionary.registerOre(Recipes.hammerDict, new ItemStack(PUP.testHammer, 1, OreDictionary.WILDCARD_VALUE));
-        itemRegister("craftingSuperconductor", Items.SUPERCONDUCTOR.ordinal());
-        itemRegister("itemSuperconductor", Items.SUPERCONDUCTOR.ordinal());
+        register("hullSteel", "itemMachineChassi");
+        register("dustNikolite", "dustTeslatite");
+        OreDictionary.registerOre(Util.hammerDict, new ItemStack(PUP.testHammer, 1, OreDictionary.WILDCARD_VALUE));
+        register("craftingSuperconductor", "itemSuperconductor");
+        register("dustBlaze", net.minecraft.init.Items.blaze_powder, OreDictionary.WILDCARD_VALUE);
+        register("dustRedstone", net.minecraft.init.Items.redstone, OreDictionary.WILDCARD_VALUE);
+        register("dustGlowstone", net.minecraft.init.Items.glowstone_dust, OreDictionary.WILDCARD_VALUE);
+        register("ingotIron", net.minecraft.init.Items.iron_ingot, OreDictionary.WILDCARD_VALUE);
+        register("ingotGold", net.minecraft.init.Items.gold_ingot, OreDictionary.WILDCARD_VALUE);
+        register("nuggetGold", net.minecraft.init.Items.gold_nugget, OreDictionary.WILDCARD_VALUE);
+        register("blockObsidian", Blocks.obsidian, OreDictionary.WILDCARD_VALUE);
+        register("blockGold", Blocks.gold_block, OreDictionary.WILDCARD_VALUE);
+        register("blockIron", Blocks.iron_block, OreDictionary.WILDCARD_VALUE);
+        register("blockDiamond", Blocks.diamond_block, OreDictionary.WILDCARD_VALUE);
+        register("blockRedstone", Blocks.redstone_block, OreDictionary.WILDCARD_VALUE);
+        register("blockGlowstone", Blocks.glowstone, OreDictionary.WILDCARD_VALUE);
+        register("blockEmerald", Blocks.emerald_block, OreDictionary.WILDCARD_VALUE);
     }
 
-    public static void itemRegister(String od, int meta) {
-        if (new ItemStack(ItemIterator.metaItem, 1, meta).getUnlocalizedName() != "item.null")
-            OreDictionary.registerOre(od, new ItemStack(ItemIterator.metaItem, 1, meta));
+    public static void register(String od) {
+        OreDictionary.registerOre(od, ItemApi.getItem(od));
     }
 
-    public static void matRegister(String od, Part part, int meta) {
-        if (new ItemStack(part, 1, meta).getUnlocalizedName() != "item.null")
-            OreDictionary.registerOre(od, new ItemStack(part, 1, meta));
+    public static void register(String name, String od) {
+        OreDictionary.registerOre(od, ItemApi.getItem(name));
+    }
+
+    public static void register(String name, Item item, int meta) {
+        ItemApi.setItem(name, new ItemStack(item, 1, meta));
+        OreDictionary.registerOre(name, ItemApi.getItem(name));
+    }
+
+    public static void register(String name, ItemStack item) {
+        ItemApi.setItem(name, item);
+        OreDictionary.registerOre(name, ItemApi.getItem(name));
+    }
+
+    public static void register(String name, Block item, int meta) {
+        ItemApi.setItem(name, new ItemStack(item, 1, meta));
+        OreDictionary.registerOre(name, ItemApi.getItem(name));
     }
 }
