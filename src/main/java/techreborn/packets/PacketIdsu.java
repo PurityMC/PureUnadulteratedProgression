@@ -2,9 +2,9 @@ package techreborn.packets;
 
 import java.io.IOException;
 
+import io.netty.buffer.ByteBuf;
 import reborncore.common.packets.SimplePacket;
 import techreborn.tiles.idsu.TileIDSU;
-import io.netty.buffer.ByteBuf;
 
 public class PacketIdsu extends SimplePacket {
 

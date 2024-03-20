@@ -3,8 +3,6 @@ package page.codeberg.unix_supremacist.pup.item;
 import java.util.HashMap;
 import java.util.List;
 
-import lombok.Getter;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -13,6 +11,7 @@ import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lombok.Getter;
 
 public class Part extends Item {
 
@@ -32,16 +31,20 @@ public class Part extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack item) {
-        if (mats.containsKey(item.getItemDamage()))
-            return "item." + this.modid + "." + this.mats.get(item.getItemDamage()).getName() + "_" + this.name;
+        if (mats.containsKey(item.getItemDamage())) return "item." + this.modid
+            + "."
+            + this.mats.get(item.getItemDamage())
+                .getName()
+            + "_"
+            + this.name;
         return "item." + this.modid + ".null";
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public int getColorFromItemStack(ItemStack itemStack, int u) {
-        if (this.mats.containsKey(itemStack.getItemDamage()))
-            return this.mats.get(itemStack.getItemDamage()).getColor();
+        if (this.mats.containsKey(itemStack.getItemDamage())) return this.mats.get(itemStack.getItemDamage())
+            .getColor();
         return 0xFFFFFF;
     }
 

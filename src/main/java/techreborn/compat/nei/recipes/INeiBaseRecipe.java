@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 
-import techreborn.api.recipe.IBaseRecipeType;
 import codechicken.nei.PositionedStack;
+import techreborn.api.recipe.IBaseRecipeType;
 
 /**
  * Use this to make your neiHandler
@@ -19,7 +19,7 @@ public interface INeiBaseRecipe {
      * @param outputs add this output stacks to this
      */
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-            IBaseRecipeType recipeType);
+        IBaseRecipeType recipeType);
 
     /**
      * @return the recipe name that is used for the recipe

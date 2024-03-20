@@ -3,13 +3,12 @@ package techreborn.compat.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.minecraft.MineTweakerMC;
-
-import net.minecraft.item.ItemStack;
-
 import reborncore.common.util.ItemUtils;
 import techreborn.api.recipe.BaseRecipe;
 import techreborn.api.recipe.IBaseRecipeType;
@@ -50,12 +49,18 @@ public class MTGeneric {
 
         @Override
         public String describe() {
-            return "Adding " + recipe.getRecipeName() + " recipe for " + recipe.getOutput(0).getDisplayName();
+            return "Adding " + recipe.getRecipeName()
+                + " recipe for "
+                + recipe.getOutput(0)
+                    .getDisplayName();
         }
 
         @Override
         public String describeUndo() {
-            return "Removing " + recipe.getRecipeName() + " recipe for " + recipe.getOutput(0).getDisplayName();
+            return "Removing " + recipe.getRecipeName()
+                + " recipe for "
+                + recipe.getOutput(0)
+                    .getDisplayName();
         }
 
         @Override

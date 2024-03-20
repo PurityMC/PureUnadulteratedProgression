@@ -5,34 +5,40 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 import reborncore.common.util.ItemUtils;
 import techreborn.api.recipe.IBaseRecipeType;
 import techreborn.client.gui.GuiChemicalReactor;
 import techreborn.lib.Reference;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class ChemicalReactorRecipeHandler extends GenericRecipeHander implements INeiBaseRecipe {
 
     @Override
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-            IBaseRecipeType recipeType) {
+        IBaseRecipeType recipeType) {
         int offset = 4;
-        if (recipeType.getInputs().size() > 0) {
+        if (recipeType.getInputs()
+            .size() > 0) {
             PositionedStack pStack = new PositionedStack(
-                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(0)),
-                    70 - offset,
-                    21 - offset,
-                    false);
+                ItemUtils.getStackWithAllOre(
+                    recipeType.getInputs()
+                        .get(0)),
+                70 - offset,
+                21 - offset,
+                false);
             input.add(pStack);
         }
 
-        if (recipeType.getInputs().size() > 1) {
+        if (recipeType.getInputs()
+            .size() > 1) {
             PositionedStack pStack2 = new PositionedStack(
-                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(1)),
-                    90 - offset,
-                    21 - offset,
-                    false);
+                ItemUtils.getStackWithAllOre(
+                    recipeType.getInputs()
+                        .get(1)),
+                90 - offset,
+                21 - offset,
+                false);
             input.add(pStack2);
         }
 
@@ -65,9 +71,9 @@ public class ChemicalReactorRecipeHandler extends GenericRecipeHander implements
     @Override
     public void loadTransferRects() {
         this.transferRects.add(
-                new TemplateRecipeHandler.RecipeTransferRect(
-                        new Rectangle(70, 20, 25, 20),
-                        getNeiBaseRecipe().getRecipeName(),
-                        new Object[0]));
+            new TemplateRecipeHandler.RecipeTransferRect(
+                new Rectangle(70, 20, 25, 20),
+                getNeiBaseRecipe().getRecipeName(),
+                new Object[0]));
     }
 }

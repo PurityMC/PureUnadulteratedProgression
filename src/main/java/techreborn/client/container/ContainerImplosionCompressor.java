@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 
-import reborncore.client.gui.SlotOutput;
-import techreborn.tiles.TileImplosionCompressor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import reborncore.client.gui.SlotOutput;
+import techreborn.tiles.TileImplosionCompressor;
 
 public class ContainerImplosionCompressor extends ContainerCrafting {
 

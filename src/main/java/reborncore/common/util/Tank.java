@@ -63,10 +63,10 @@ public class Tank extends FluidTank {
                     PacketHandler.sendPacketToAllPlayers(tile.getDescriptionPacket(), tile.getWorldObj());
                     lastBeforeUpdate = current.copy();
                 } else if (lastBeforeUpdate.amount < this.getCapacity() && current.amount == this.getCapacity()
-                        || lastBeforeUpdate.amount == this.getCapacity() && current.amount < this.getCapacity()) {
-                            PacketHandler.sendPacketToAllPlayers(tile.getDescriptionPacket(), tile.getWorldObj());
-                            lastBeforeUpdate = current.copy();
-                        }
+                    || lastBeforeUpdate.amount == this.getCapacity() && current.amount < this.getCapacity()) {
+                        PacketHandler.sendPacketToAllPlayers(tile.getDescriptionPacket(), tile.getWorldObj());
+                        lastBeforeUpdate = current.copy();
+                    }
             } else {
                 PacketHandler.sendPacketToAllPlayers(tile.getDescriptionPacket(), tile.getWorldObj());
                 lastBeforeUpdate = current.copy();

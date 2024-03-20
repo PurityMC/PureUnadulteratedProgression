@@ -10,13 +10,11 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import page.codeberg.unix_supremacist.pup.pda.pages.*;
-import page.codeberg.unix_supremacist.pup.pda.pda.pages.*;
-import techreborn.init.ModBlocks;
-import techreborn.init.ModItems;
-import techreborn.pda.pages.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import page.codeberg.unix_supremacist.pup.pda.pages.*;
+import techreborn.init.ModBlocks;
+import techreborn.init.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class GuiManual extends GuiScreen {
@@ -51,276 +49,278 @@ public class GuiManual extends GuiScreen {
         pageCollection.addPage(new MultiBlockPage("MULTIBLOCKS", pageCollection, "MULTIBLOCK_PAGE"));
 
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_STORAGE_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Aesu),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_STORAGE_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Aesu),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.AlloyFurnace),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.AlloyFurnace),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.AlloySmelter),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.AlloySmelter),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.BlastFurnace),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.BlastFurnace),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.centrifuge),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.centrifuge),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.chargeBench),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.chargeBench),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.ChemicalReactor),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.ChemicalReactor),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.ChunkLoader),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.ChunkLoader),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.ComputerCube),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.ComputerCube),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.DieselGenerator),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.DieselGenerator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.digitalChest),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.digitalChest),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Distillationtower),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Distillationtower),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Dragoneggenergysiphoner),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Dragoneggenergysiphoner),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.ElectricCraftingTable),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.ElectricCraftingTable),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.FusionCoil),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.FusionCoil),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.FusionControlComputer),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.FusionControlComputer),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "BLOCK_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Gasturbine),
-                        ""));
+            new CraftingInfoPage(
+                "BLOCK_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Gasturbine),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Grinder),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Grinder),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.heatGenerator),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.heatGenerator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.HighAdvancedMachineBlock),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.HighAdvancedMachineBlock),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_STORAGE_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Idsu),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_STORAGE_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Idsu),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.ImplosionCompressor),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.ImplosionCompressor),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.IndustrialElectrolyzer),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.IndustrialElectrolyzer),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_STORAGE_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Lesu),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_STORAGE_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Lesu),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_STORAGE_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.LesuStorage),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_STORAGE_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.LesuStorage),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.LightningRod),
-                        ""));
-        /*pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.machineframe),
-                        ""));*/
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.LightningRod),
+                ""));
+        /*
+         * pageCollection.addPage(
+         * new CraftingInfoPage(
+         * "MACHINES_PAGE." + getNextPageIndex(),
+         * pageCollection,
+         * new ItemStack(ModBlocks.machineframe),
+         * ""));
+         */
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.MagicalAbsorber),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.MagicalAbsorber),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Magicenergeyconverter),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Magicenergeyconverter),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.MatterFabricator),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.MatterFabricator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.PlasmaGenerator),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.PlasmaGenerator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.quantumChest),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.quantumChest),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.quantumTank),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.quantumTank),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.RollingMachine),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.RollingMachine),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.Semifluidgenerator),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.Semifluidgenerator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "POWER_GENERATION_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.thermalGenerator),
-                        ""));
+            new CraftingInfoPage(
+                "POWER_GENERATION_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.thermalGenerator),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "MACHINES_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModBlocks.VacuumFreezer),
-                        ""));
+            new CraftingInfoPage(
+                "MACHINES_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModBlocks.VacuumFreezer),
+                ""));
 
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.advancedDrill),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.advancedDrill),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.cloakingDevice),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.cloakingDevice),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.lapotronicOrb),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.lapotronicOrb),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.lapotronpack),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.lapotronpack),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.lithiumBatpack),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.lithiumBatpack),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.omniTool),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.omniTool),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "TOOLS_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.rockCutter),
-                        ""));
+            new CraftingInfoPage(
+                "TOOLS_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.rockCutter),
+                ""));
         pageCollection.addPage(
-                new CraftingInfoPage(
-                        "ITEM_PAGE." + getNextPageIndex(),
-                        pageCollection,
-                        new ItemStack(ModItems.uuMatter),
-                        ""));
+            new CraftingInfoPage(
+                "ITEM_PAGE." + getNextPageIndex(),
+                pageCollection,
+                new ItemStack(ModItems.uuMatter),
+                ""));
 
         return pageCollection;
     }

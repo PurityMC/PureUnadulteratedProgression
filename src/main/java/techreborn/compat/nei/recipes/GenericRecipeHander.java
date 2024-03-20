@@ -13,12 +13,12 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import reborncore.common.util.ItemUtils;
-import techreborn.api.recipe.IBaseRecipeType;
-import techreborn.api.recipe.RecipeHandler;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import reborncore.common.util.ItemUtils;
+import techreborn.api.recipe.IBaseRecipeType;
+import techreborn.api.recipe.RecipeHandler;
 
 public abstract class GenericRecipeHander extends TemplateRecipeHandler {
 
@@ -88,12 +88,11 @@ public abstract class GenericRecipeHander extends TemplateRecipeHandler {
             symbols.setGroupingSeparator('.');
             formatter.setDecimalFormatSymbols(symbols);
             GuiDraw.drawString(
-                    "EU needed: " + formatter.format(
-                            new Integer(genericRecipe.recipie.euPerTick() * genericRecipe.recipie.tickTime())
-                                    .longValue()),
-                    16,
-                    105,
-                    -1);
+                "EU needed: " + formatter.format(
+                    new Integer(genericRecipe.recipie.euPerTick() * genericRecipe.recipie.tickTime()).longValue()),
+                16,
+                105,
+                -1);
             GuiDraw.drawString("Ticks to process: " + genericRecipe.recipie.tickTime(), 14, 115, -1);
             GuiDraw.drawString("Time to process: " + genericRecipe.recipie.tickTime() / 20 + " seconds", 14, 125, -1);
         }
@@ -113,7 +112,7 @@ public abstract class GenericRecipeHander extends TemplateRecipeHandler {
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(getNeiBaseRecipe().getRecipeName())) {
             for (IBaseRecipeType recipeType : RecipeHandler
-                    .getRecipeClassFromName(getNeiBaseRecipe().getRecipeName())) {
+                .getRecipeClassFromName(getNeiBaseRecipe().getRecipeName())) {
                 addCached(recipeType);
             }
         } else {

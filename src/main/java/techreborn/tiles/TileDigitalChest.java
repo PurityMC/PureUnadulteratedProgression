@@ -14,9 +14,8 @@ import reborncore.api.IListInfoProvider;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 import techreborn.init.ModBlocks;
-import ic2.api.tile.IWrenchable;
 
-public class TileDigitalChest extends TileMachineBase implements IInventory, IWrenchable, IListInfoProvider {
+public class TileDigitalChest extends TileMachineBase implements IInventory, IListInfoProvider {
 
     // Slot 0 = Input
     // Slot 1 = Output
@@ -178,37 +177,6 @@ public class TileDigitalChest extends TileMachineBase implements IInventory, IWr
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         return inventory.isItemValidForSlot(slot, stack);
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
-        return 0;
-    }
-
-    @Override
-    public void setFacing(short facing) {}
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-        if (entityPlayer.isSneaking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float getWrenchDropRate() {
-        return 1F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return getDropWithNBT();
     }
 
     public ItemStack getDropWithNBT() {

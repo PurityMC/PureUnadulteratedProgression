@@ -128,9 +128,9 @@ public class LesuConnectedTextureGenerator extends TextureAtlasSprite {
 
         type_image[0] = output_image;
         this.loadSprite(
-                type_image,
-                animation,
-                (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
+            type_image,
+            animation,
+            (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
         return false;
     }
 

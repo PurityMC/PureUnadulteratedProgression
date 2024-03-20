@@ -59,7 +59,7 @@ public abstract class IMultiblockPart extends TileEntity {
      * @see #onDetached(MultiblockControllerBase)
      */
     public abstract void onOrphaned(MultiblockControllerBase oldController, int oldControllerSize,
-            int newControllerSize);
+        int newControllerSize);
 
     // Multiblock fuse/split helper methods. Here there be dragons.
 

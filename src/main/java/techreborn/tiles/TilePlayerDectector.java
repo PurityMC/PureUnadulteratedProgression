@@ -53,17 +53,21 @@ public class TilePlayerDectector extends TilePowerAcceptor {
                 while (tIterator.hasNext()) {
                     EntityPlayer player = (EntityPlayer) tIterator.next();
                     if (player.getDistanceSq(
-                            (double) super.xCoord + 0.5D,
-                            (double) super.yCoord + 0.5D,
-                            (double) super.zCoord + 0.5D) <= 256.0D) {
+                        (double) super.xCoord + 0.5D,
+                        (double) super.yCoord + 0.5D,
+                        (double) super.zCoord + 0.5D) <= 256.0D) {
                         if (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {// ALL
                             redstone = true;
                         } else if (blockMetadata == 1) {// Others
-                            if (!owenerUdid.isEmpty() && !owenerUdid.equals(player.getUniqueID().toString())) {
+                            if (!owenerUdid.isEmpty() && !owenerUdid.equals(
+                                player.getUniqueID()
+                                    .toString())) {
                                 redstone = true;
                             }
                         } else {// You
-                            if (!owenerUdid.isEmpty() && owenerUdid.equals(player.getUniqueID().toString())) {
+                            if (!owenerUdid.isEmpty() && owenerUdid.equals(
+                                player.getUniqueID()
+                                    .toString())) {
                                 redstone = true;
                             }
                         }
@@ -73,11 +77,8 @@ public class TilePlayerDectector extends TilePowerAcceptor {
             }
             if (lastRedstone != redstone) {
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                worldObj.notifyBlocksOfNeighborChange(
-                        xCoord,
-                        yCoord,
-                        zCoord,
-                        worldObj.getBlock(xCoord, yCoord, zCoord));
+                worldObj
+                    .notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
             }
         }
     }

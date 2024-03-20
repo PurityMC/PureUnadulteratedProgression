@@ -34,6 +34,6 @@ public class UpgradeHandler {
             }
         }
         if (crafter.currentRecipe != null) crafter.currentNeededTicks = (int) (crafter.currentRecipe.tickTime()
-                * (1.0 - crafter.getSpeedMultiplier()));
+            * (1.0 - crafter.getSpeedMultiplier()));
     }
 }

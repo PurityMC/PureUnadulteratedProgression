@@ -6,9 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 
-import page.codeberg.unix_supremacist.pup.pda.pages.BasePage;
-
 import com.google.common.collect.Lists;
+
+import page.codeberg.unix_supremacist.pup.pda.pages.BasePage;
 
 public class PageCollection extends Gui {
 
@@ -28,7 +28,8 @@ public class PageCollection extends Gui {
 
     public BasePage getPageByName(String name) {
         for (BasePage component : pages) {
-            if (component.getReferenceName().equals(ACTIVE_PAGE)) {
+            if (component.getReferenceName()
+                .equals(ACTIVE_PAGE)) {
                 return component;
             }
         }
@@ -37,7 +38,8 @@ public class PageCollection extends Gui {
 
     public BasePage getActivePage() {
         for (BasePage component : pages) {
-            if (component.getReferenceName().equals(ACTIVE_PAGE)) {
+            if (component.getReferenceName()
+                .equals(ACTIVE_PAGE)) {
                 return component;
             }
         }

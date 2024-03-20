@@ -61,6 +61,5 @@ public enum Items {
     computerMonitor,
     machineParts,
     thickNeutronReflector,
-    neutronReflector,
-    ;
+    neutronReflector,;
 }

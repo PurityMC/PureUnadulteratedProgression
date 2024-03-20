@@ -16,7 +16,6 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import techreborn.Core;
 import techreborn.client.TechRebornCreativeTab;
 import techreborn.init.ModItems;
-import ic2.api.item.IC2Items;
 
 public class ItemCells extends ItemTR implements IFluidContainerItem {
 
@@ -26,19 +25,20 @@ public class ItemCells extends ItemTR implements IFluidContainerItem {
 
     public static ItemStack getCellByName(String name, int count, boolean lookForIC2) {
         Fluid fluid = FluidRegistry.getFluid("fluid" + name.toLowerCase());
-        if (lookForIC2 && IC2Items.getItem("cell") != null) {
-            if (fluid != null) {
-                ItemStack stack = IC2Items.getItem("cell").copy();
-                if (stack != null && stack.getItem() instanceof IFluidContainerItem) {
-                    IFluidContainerItem containerItem = (IFluidContainerItem) stack.getItem();
-                    containerItem.fill(stack, new FluidStack(fluid.getID(), 2147483647), true);
-                    stack.stackSize = count;
-                    return stack;
-                }
-            } else {
-                Core.logHelper.debug("Could not find " + "fluid" + name + " in the fluid registry!");
-            }
-        }
+        // if (lookForIC2 && IC2Items.getItem("cell") != null) {
+        //     if (fluid != null) {
+        //         ItemStack stack = IC2Items.getItem("cell")
+        //             .copy();
+        //         if (stack != null && stack.getItem() instanceof IFluidContainerItem) {
+        //             IFluidContainerItem containerItem = (IFluidContainerItem) stack.getItem();
+        //             containerItem.fill(stack, new FluidStack(fluid.getID(), 2147483647), true);
+        //             stack.stackSize = count;
+        //             return stack;
+        //         }
+        //     } else {
+        //         Core.logHelper.debug("Could not find " + "fluid" + name + " in the fluid registry!");
+        //     }
+        // }
         int index = -1;
         for (int i = 0; i < types.length; i++) {
             if (types[i].equals(name)) {
@@ -54,10 +54,10 @@ public class ItemCells extends ItemTR implements IFluidContainerItem {
     }
 
     public static final String[] types = new String[] { "Berylium", "biomass", "calciumCarbonate", "calcium", "carbon",
-            "chlorine", "deuterium", "diesel", "ethanol", "glyceryl", "helium3", "helium", "heliumPlasma", "hydrogen",
-            "ice", "lithium", "mercury", "methane", "nitrocarbon", "nitroCoalfuel", "nitroDiesel", "nitrogen",
-            "nitrogenDioxide", "oil", "potassium", "seedOil", "silicon", "sodium", "sodiumPersulfate", "sodiumSulfide",
-            "sulfur", "sulfuricAcid", "tritium", "wolframium", "empty" };
+        "chlorine", "deuterium", "diesel", "ethanol", "glyceryl", "helium3", "helium", "heliumPlasma", "hydrogen",
+        "ice", "lithium", "mercury", "methane", "nitrocarbon", "nitroCoalfuel", "nitroDiesel", "nitrogen",
+        "nitrogenDioxide", "oil", "potassium", "seedOil", "silicon", "sodium", "sodiumPersulfate", "sodiumSulfide",
+        "sulfur", "sulfuricAcid", "tritium", "wolframium", "empty" };
 
     private IIcon[] textures;
 
@@ -104,9 +104,9 @@ public class ItemCells extends ItemTR implements IFluidContainerItem {
             ItemStack stack = new ItemStack(item, 1, meta);
             if (FluidRegistry.getFluid("fluid" + types[meta].toLowerCase()) != null) {
                 this.fill(
-                        stack,
-                        new FluidStack(FluidRegistry.getFluid("fluid" + types[meta].toLowerCase()), getCapacity(stack)),
-                        true);
+                    stack,
+                    new FluidStack(FluidRegistry.getFluid("fluid" + types[meta].toLowerCase()), getCapacity(stack)),
+                    true);
             }
             list.add(stack);
         }

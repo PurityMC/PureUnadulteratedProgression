@@ -8,10 +8,10 @@ public class Freezer {
 
     public static void load() {
         RecipeHandler.addRecipe(
-                new VacuumFreezerRecipe(
-                        ItemApi.getItem("ingotHotTungstensteel"),
-                        ItemApi.getItem("ingotTungstensteel"),
-                        440,
-                        128));
+            new VacuumFreezerRecipe(
+                ItemApi.getItem("ingotHotTungstensteel"),
+                ItemApi.getItem("ingotTungstensteel"),
+                440,
+                128));
     }
 }

@@ -132,7 +132,7 @@ public class Location implements Comparable<Location> {
 
     public int getDifference(Location otherLoc) {
         return (int) Math.sqrt(
-                Math.pow(this.x - otherLoc.x, 2) + Math.pow(this.y - otherLoc.y, 2) + Math.pow(this.z - otherLoc.z, 2));
+            Math.pow(this.x - otherLoc.x, 2) + Math.pow(this.y - otherLoc.y, 2) + Math.pow(this.z - otherLoc.z, 2));
     }
 
     public String printLocation() {

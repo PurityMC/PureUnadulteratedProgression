@@ -36,17 +36,17 @@ public class VersionPage extends TitledPage {
     public void addDescription(Minecraft minecraft, int offsetX, int offsetY) {
         GL11.glPushMatrix();
         this.drawCenteredString(
-                minecraft.fontRenderer,
-                "INSTALLED VERSION  " + ModInfo.MOD_VERSION,
-                offsetX + 120,
-                offsetY + 20,
-                7777777);
+            minecraft.fontRenderer,
+            "INSTALLED VERSION  " + ModInfo.MOD_VERSION,
+            offsetX + 120,
+            offsetY + 20,
+            7777777);
         this.drawCenteredString(
-                minecraft.fontRenderer,
-                "LATEST VERSION      " + "TODO",
-                offsetX + 120,
-                offsetY + 40,
-                7777777);
+            minecraft.fontRenderer,
+            "LATEST VERSION      " + "TODO",
+            offsetX + 120,
+            offsetY + 40,
+            7777777);
         GL11.glPopMatrix();
     }
 

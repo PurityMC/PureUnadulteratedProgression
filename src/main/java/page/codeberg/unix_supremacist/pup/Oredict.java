@@ -1,14 +1,15 @@
 package page.codeberg.unix_supremacist.pup;
 
+import ganymedes01.etfuturum.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.Loader;
 import page.codeberg.unix_supremacist.pup.api.ItemApi;
 import page.codeberg.unix_supremacist.pup.recipes.Util;
-import cpw.mods.fml.common.Loader;
 
 public class Oredict {
 
@@ -38,9 +39,13 @@ public class Oredict {
         register("dustBlaze", net.minecraft.init.Items.blaze_powder, OreDictionary.WILDCARD_VALUE);
         register("dustRedstone", net.minecraft.init.Items.redstone, OreDictionary.WILDCARD_VALUE);
         register("dustGlowstone", net.minecraft.init.Items.glowstone_dust, OreDictionary.WILDCARD_VALUE);
+        register("gemAmethyst", ModItems.AMETHYST_SHARD.get(), OreDictionary.WILDCARD_VALUE);
         register("ingotIron", net.minecraft.init.Items.iron_ingot, OreDictionary.WILDCARD_VALUE);
         register("ingotGold", net.minecraft.init.Items.gold_ingot, OreDictionary.WILDCARD_VALUE);
+        register("ingotCopper", ModItems.COPPER_INGOT.get(), OreDictionary.WILDCARD_VALUE);
         register("nuggetGold", net.minecraft.init.Items.gold_nugget, OreDictionary.WILDCARD_VALUE);
+        register("nuggetIron", ModItems.NUGGET_IRON.get(), OreDictionary.WILDCARD_VALUE);
+
         register("blockObsidian", Blocks.obsidian, OreDictionary.WILDCARD_VALUE);
         register("blockGold", Blocks.gold_block, OreDictionary.WILDCARD_VALUE);
         register("blockIron", Blocks.iron_block, OreDictionary.WILDCARD_VALUE);

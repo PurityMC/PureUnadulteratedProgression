@@ -48,10 +48,10 @@ public class Vecs3dCube {
     public Vecs3d getCenter() {
 
         return new Vecs3d(
-                (getMinX() + getMaxX()) / 2D,
-                (getMinY() + getMaxY()) / 2D,
-                (getMinZ() + getMaxZ()) / 2D,
-                getMin().getWorld());
+            (getMinX() + getMaxX()) / 2D,
+            (getMinY() + getMaxY()) / 2D,
+            (getMinZ() + getMaxZ()) / 2D,
+            getMin().getWorld());
     }
 
     public double getMinX() {

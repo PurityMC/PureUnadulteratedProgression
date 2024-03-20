@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import reborncore.common.misc.Functions;
 import reborncore.common.misc.Location;
 import reborncore.common.misc.vecmath.Vecs3d;
@@ -22,18 +25,8 @@ import techreborn.partSystem.IModPart;
 import techreborn.partSystem.IPartDesc;
 import techreborn.partSystem.ModPart;
 import techreborn.partSystem.ModPartUtils;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ic2.api.energy.event.EnergyTileLoadEvent;
-import ic2.api.energy.event.EnergyTileUnloadEvent;
-import ic2.api.energy.tile.IEnergyConductor;
-import ic2.api.energy.tile.IEnergyTile;
-import ic2.api.info.IC2Classic;
-import ic2.api.item.IC2Items;
-import ic2.api.network.INetworkTileEntityEventListener;
 
-public class CablePart extends ModPart implements IEnergyConductor, INetworkTileEntityEventListener, IPartDesc {
+public class CablePart extends ModPart implements IPartDesc {
 
     public Vecs3dCube[] boundingBoxes = new Vecs3dCube[14];
     public float center = 0.6F;
@@ -253,20 +246,20 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
         float centerFirst = center - offset;
         double w = getCableThickness(type) / 2;
         boundingBoxes[6] = new Vecs3dCube(
-                centerFirst - w - 0.03,
-                centerFirst - w - 0.08,
-                centerFirst - w - 0.03,
-                centerFirst + w + 0.08,
-                centerFirst + w + 0.04,
-                centerFirst + w + 0.08);
+            centerFirst - w - 0.03,
+            centerFirst - w - 0.08,
+            centerFirst - w - 0.03,
+            centerFirst + w + 0.08,
+            centerFirst + w + 0.04,
+            centerFirst + w + 0.08);
 
         boundingBoxes[6] = new Vecs3dCube(
-                centerFirst - w,
-                centerFirst - w,
-                centerFirst - w,
-                centerFirst + w,
-                centerFirst + w,
-                centerFirst + w);
+            centerFirst - w,
+            centerFirst - w,
+            centerFirst - w,
+            centerFirst + w,
+            centerFirst + w,
+            centerFirst + w);
 
         int i = 0;
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
@@ -337,26 +330,38 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
     @SideOnly(Side.CLIENT)
     @Override
     public String getItemTextureName() {
-        if (IC2Classic.getLoadedIC2Type() == IC2Classic.IC2Type.SpeigersClassic) {
-            return IC2Items.getItem("copperCableBlock").getItem()
-                    .getIcon(new ItemStack(IC2Items.getItem("copperCableBlock").getItem(), type), 1).getIconName();
-        }
-        return IC2Items.getItem(getTextureNameFromType(type)).getIconIndex().getIconName();
+        // if (IC2Classic.getLoadedIC2Type() == IC2Classic.IC2Type.SpeigersClassic) {
+        //     return IC2Items.getItem("copperCableBlock")
+        //         .getItem()
+        //         .getIcon(
+        //             new ItemStack(
+        //                 IC2Items.getItem("copperCableBlock")
+        //                     .getItem(),
+        //                 type),
+        //             1)
+        //         .getIconName();
+        // }
+        // return IC2Items.getItem(getTextureNameFromType(type))
+        //     .getIconIndex()
+        //     .getIconName();
+        return "null";
     }
 
     @Override
     public void tick() {
-        if (!FMLCommonHandler.instance().getEffectiveSide().isClient() && !this.addedToEnergyNet) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-            this.addedToEnergyNet = true;
-            nearByChange();
-        }
-        if (worldObj != null) {
-            if (worldObj.getTotalWorldTime() % 80 == 0 || !hasCheckedSinceStartup) {
-                checkConnectedSides();
-                hasCheckedSinceStartup = true;
-            }
-        }
+        // if (!FMLCommonHandler.instance()
+        //     .getEffectiveSide()
+        //     .isClient() && !this.addedToEnergyNet) {
+        //     MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+        //     this.addedToEnergyNet = true;
+        //     nearByChange();
+        // }
+        // if (worldObj != null) {
+        //     if (worldObj.getTotalWorldTime() % 80 == 0 || !hasCheckedSinceStartup) {
+        //         checkConnectedSides();
+        //         hasCheckedSinceStartup = true;
+        //     }
+        // }
 
     }
 
@@ -364,14 +369,12 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
     public void nearByChange() {
         checkConnectedSides();
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            worldObj.markBlockForUpdate(
-                    xCoord + direction.offsetX,
-                    yCoord + direction.offsetY,
-                    zCoord + direction.offsetZ);
+            worldObj
+                .markBlockForUpdate(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             IModPart part = ModPartUtils.getPartFromWorld(
-                    world,
-                    new Location(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ),
-                    this.getName());
+                world,
+                new Location(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ),
+                this.getName());
             if (part != null) {
                 CablePart cablePart = (CablePart) part;
                 cablePart.checkConnectedSides();
@@ -381,21 +384,25 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
 
     @Override
     public void onAdded() {
-        checkConnections(world, getX(), getY(), getZ());
-        if (!FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-            this.addedToEnergyNet = true;
-            nearByChange();
-        }
-        nearByChange();
+        // checkConnections(world, getX(), getY(), getZ());
+        // if (!FMLCommonHandler.instance()
+        //     .getEffectiveSide()
+        //     .isClient()) {
+        //     MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+        //     this.addedToEnergyNet = true;
+        //     nearByChange();
+        // }
+        // nearByChange();
     }
 
     @Override
     public void onRemoved() {
-        if (!FMLCommonHandler.instance().getEffectiveSide().isClient() && this.addedToEnergyNet) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-            this.addedToEnergyNet = false;
-        }
+        // if (!FMLCommonHandler.instance()
+        //     .getEffectiveSide()
+        //     .isClient() && this.addedToEnergyNet) {
+        //     MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+        //     this.addedToEnergyNet = false;
+        // }
     }
 
     @Override
@@ -407,21 +414,26 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(IC2Items.getItem("copperCableItem").getItem(), 1, type);
+        // return new ItemStack(
+        //     IC2Items.getItem("copperCableItem")
+        //         .getItem(),
+        //     1,
+        //     type);
+        return null;
     }
 
     public boolean shouldConnectTo(TileEntity entity, ForgeDirection dir) {
         if (entity == null) {
             return false;
-        } else if (entity instanceof IEnergyTile) {
-            return true;
+        // } else if (entity instanceof IEnergyTile) {
+        //     return true;
         } else {
             if (ModPartUtils
-                    .hasPart(entity.getWorldObj(), entity.xCoord, entity.yCoord, entity.zCoord, this.getName())) {
+                .hasPart(entity.getWorldObj(), entity.xCoord, entity.yCoord, entity.zCoord, this.getName())) {
                 CablePart otherCable = (CablePart) ModPartUtils.getPartFromWorld(
-                        entity.getWorldObj(),
-                        new Location(entity.xCoord, entity.yCoord, entity.zCoord),
-                        this.getName());
+                    entity.getWorldObj(),
+                    new Location(entity.xCoord, entity.yCoord, entity.zCoord),
+                    this.getName());
                 if (otherCable == null || dir == null) {
                     return false;
                 }
@@ -432,11 +444,11 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
                 otherCable.connections[thereDir] = false;
 
                 if (ModPartUtils.checkOcclusion(
-                        entity.getWorldObj(),
-                        entity.xCoord,
-                        entity.yCoord,
-                        entity.zCoord,
-                        boundingBoxes[thereDir])) {
+                    entity.getWorldObj(),
+                    entity.xCoord,
+                    entity.yCoord,
+                    entity.zCoord,
+                    boundingBoxes[thereDir])) {
                     otherCable.connections[thereDir] = true;
                     return true;
                 }
@@ -461,7 +473,8 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
                 }
             }
             if (te != null) {
-                te.getWorldObj().markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+                te.getWorldObj()
+                    .markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
             }
         }
         checkConnections(world, getX(), getY(), getZ());
@@ -526,55 +539,6 @@ public class CablePart extends ModPart implements IEnergyConductor, INetworkTile
 
     public double getConductorBreakdownEnergy() {
         return (double) (getMaxCapacity(this.type) + 1);
-    }
-
-    @Override
-    public void removeInsulation() {
-
-    }
-
-    @Override
-    public void removeConductor() {
-
-    }
-
-    @Override
-    public boolean acceptsEnergyFrom(TileEntity tileEntity, ForgeDirection forgeDirection) {
-        return connectedSides.containsKey(forgeDirection);
-    }
-
-    @Override
-    public boolean emitsEnergyTo(TileEntity tileEntity, ForgeDirection forgeDirection) {
-        return connectedSides.containsKey(forgeDirection);
-    }
-
-    @Override
-    public void onNetworkEvent(int i) {
-        switch (i) {
-            case 0:
-                this.worldObj.playSoundEffect(
-                        (double) ((float) this.xCoord + 0.5F),
-                        (double) ((float) this.yCoord + 0.5F),
-                        (double) ((float) this.zCoord + 0.5F),
-                        "random.fizz",
-                        0.5F,
-                        2.6F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.8F);
-
-                for (int l = 0; l < 8; ++l) {
-                    this.worldObj.spawnParticle(
-                            "largesmoke",
-                            (double) this.xCoord + Math.random(),
-                            (double) this.yCoord + 1.2D,
-                            (double) this.zCoord + Math.random(),
-                            0.0D,
-                            0.0D,
-                            0.0D);
-                }
-
-                return;
-            default:
-
-        }
     }
 
     private void readConnectedSidesFromNBT(NBTTagCompound tagCompound) {

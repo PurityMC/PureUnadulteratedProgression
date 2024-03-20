@@ -181,8 +181,7 @@ public class Vecs3d {
 
         for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS)
             if (getBlockX() + d.offsetX == vec.getBlockX() && getBlockY() + d.offsetY == vec.getBlockY()
-                    && getBlockZ() + d.offsetZ == vec.getBlockZ())
-                return d;
+                && getBlockZ() + d.offsetZ == vec.getBlockZ()) return d;
         return null;
     }
 
@@ -227,7 +226,8 @@ public class Vecs3d {
             if (b == null && checkAir && bl.getMaterial() == Material.air) return true;
             if (b == null && checkAir && bl.isAir(w, (int) x, (int) y, (int) z)) return true;
 
-            return bl.getClass().isInstance(b);
+            return bl.getClass()
+                .isInstance(b);
         }
         return false;
     }
@@ -379,9 +379,12 @@ public class Vecs3d {
             while (st.hasMoreTokens()) {
                 String t = st.nextToken();
 
-                if (t.toLowerCase().startsWith("w")) {
+                if (t.toLowerCase()
+                    .startsWith("w")) {
                     int world = Integer.parseInt(t.split("=")[1]);
-                    if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+                    if (FMLCommonHandler.instance()
+                        .getEffectiveSide()
+                        .isServer()) {
                         for (World wo : MinecraftServer.getServer().worldServers) {
                             if (wo.provider.dimensionId == world) {
                                 w = wo;
@@ -393,9 +396,12 @@ public class Vecs3d {
                     }
                 }
 
-                if (t.toLowerCase().startsWith("x")) x = Double.parseDouble(t.split("=")[1]);
-                if (t.toLowerCase().startsWith("y")) y = Double.parseDouble(t.split("=")[1]);
-                if (t.toLowerCase().startsWith("z")) z = Double.parseDouble(t.split("=")[1]);
+                if (t.toLowerCase()
+                    .startsWith("x")) x = Double.parseDouble(t.split("=")[1]);
+                if (t.toLowerCase()
+                    .startsWith("y")) y = Double.parseDouble(t.split("=")[1]);
+                if (t.toLowerCase()
+                    .startsWith("z")) z = Double.parseDouble(t.split("=")[1]);
             }
 
             if (w != null) {

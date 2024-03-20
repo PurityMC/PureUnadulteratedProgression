@@ -41,7 +41,7 @@ dependencies {
     compile ("com.github.GTNewHorizons:TinkersConstruct:1.9.23-GTNH:dev") { transitive = false }
     compile ('com.github.GTNewHorizons:EnderCore:0.2.13:dev') { transitive = false }
     compile ("com.github.GTNewHorizons:EnderIO:2.3.1.55:dev") { transitive = false }
-    compile ("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev") { transitive = false }
+    //compile ("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev") { transitive = false }
     compileOnly ("com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.7.10-2.1.0.1465:deobf") { transitive = false }
     //compileOnly "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.0.0:dev"
     compile ("net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev") { transitive = false }
@@ -58,7 +58,7 @@ dependencies {
     compile ("com.InfinityRaider.AgriCraft:AgriCraft:1.7.10-1.5.0:dev") { transitive = false }
     compile ("twilightforest:twilightforest:1.7.10-2.3.8dev:dev") { transitive = false }
     compile ("vazkii.botania:Botania:r1.8-250:deobf") { transitive = false }
-    compile ("ganymedes01.etfuturum:Et_Futurum_Requiem:2.1.2:dev") { transitive = false }
+    compile ("maven.modrinth:etfuturum:2.5.1") { transitive = false }
     compile ("net.electricalage.eln:ElectricalAge-jrddunbr:1.16.3:dev") { transitive = false }
     compile ("appeng:appliedenergistics2:rv3-beta-6:dev") { transitive = false }
     compile ("mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10:dev") { transitive = false }

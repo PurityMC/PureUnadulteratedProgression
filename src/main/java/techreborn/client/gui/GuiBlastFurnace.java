@@ -23,8 +23,8 @@ import techreborn.tiles.TileBlastFurnace;
 public class GuiBlastFurnace extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-            "techreborn",
-            "textures/gui/industrial_blast_furnace.png");
+        "techreborn",
+        "textures/gui/industrial_blast_furnace.png");
 
     TileBlastFurnace blastfurnace;
 
@@ -46,9 +46,9 @@ public class GuiBlastFurnace extends GuiContainer {
         buttonList.add(button);
         super.initGui();
         ChunkCoordinates coordinates = new ChunkCoordinates(
-                blastfurnace.xCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetX * 2),
-                blastfurnace.yCoord - 1,
-                blastfurnace.zCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetZ * 2));
+            blastfurnace.xCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetX * 2),
+            blastfurnace.yCoord - 1,
+            blastfurnace.zCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetZ * 2));
         if (coordinates.equals(ClientProxy.multiblockRenderEvent.anchor) && blastfurnace.getHeat() != 0) {
             ClientProxy.multiblockRenderEvent.setMultiblock(null);
             button.displayString = "B";
@@ -60,7 +60,8 @@ public class GuiBlastFurnace extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(texture);
+        this.mc.getTextureManager()
+            .bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -68,14 +69,15 @@ public class GuiBlastFurnace extends GuiContainer {
         if (containerBlastFurnace.heat == 0) {
             GuiUtil.drawTooltipBox(k + 30, l + 50 + 12 - 0, 114, 10);
             this.fontRendererObj.drawString(
-                    StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
-                    k + 38,
-                    l + 52 + 12 - 0,
-                    -1);
+                StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
+                k + 38,
+                l + 52 + 12 - 0,
+                -1);
         }
 
         int j = 0;
-        this.mc.getTextureManager().bindTexture(texture);
+        this.mc.getTextureManager()
+            .bindTexture(texture);
         j = blastfurnace.getProgressScaled(24);
         if (j > 0) {
             this.drawTexturedModalRect(k + 64, l + 37, 176, 14, j + 1, 16);
@@ -92,12 +94,12 @@ public class GuiBlastFurnace extends GuiContainer {
         super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
         String name = StatCollector.translateToLocal("tile.techreborn.blastfurnace.name");
         this.fontRendererObj
-                .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
+            .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         if (containerBlastFurnace.heat != 0) {
             this.fontRendererObj.drawString("Current Heat: " + containerBlastFurnace.heat, 40, 60, 4210752);
         }
         this.fontRendererObj
-                .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+            .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
@@ -148,16 +150,14 @@ public class GuiBlastFurnace extends GuiContainer {
                     MultiblockSet set = new MultiblockSet(multiblock);
                     ClientProxy.multiblockRenderEvent.setMultiblock(set);
                     ClientProxy.multiblockRenderEvent.partent = new Location(
-                            blastfurnace.xCoord,
-                            blastfurnace.yCoord,
-                            blastfurnace.zCoord,
-                            blastfurnace.getWorldObj());
+                        blastfurnace.xCoord,
+                        blastfurnace.yCoord,
+                        blastfurnace.zCoord,
+                        blastfurnace.getWorldObj());
                     ClientProxy.multiblockRenderEvent.anchor = new ChunkCoordinates(
-                            blastfurnace.xCoord
-                                    - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetX * 2),
-                            blastfurnace.yCoord - 1,
-                            blastfurnace.zCoord
-                                    - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetZ * 2));
+                        blastfurnace.xCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetX * 2),
+                        blastfurnace.yCoord - 1,
+                        blastfurnace.zCoord - (ForgeDirection.getOrientation(blastfurnace.getRotation()).offsetZ * 2));
                 }
                 button.displayString = "A";
             } else {

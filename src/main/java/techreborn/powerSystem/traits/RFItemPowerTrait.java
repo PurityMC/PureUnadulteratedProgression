@@ -2,11 +2,11 @@ package techreborn.powerSystem.traits;
 
 import net.minecraft.item.ItemStack;
 
+import cofh.api.energy.IEnergyContainerItem;
 import reborncore.jtraits.JTrait;
 import techreborn.api.power.IEnergyInterfaceItem;
 import techreborn.config.ConfigTechReborn;
 import techreborn.powerSystem.PowerSystem;
-import cofh.api.energy.IEnergyContainerItem;
 
 public class RFItemPowerTrait extends JTrait<IEnergyInterfaceItem> implements IEnergyContainerItem {
 
@@ -18,8 +18,8 @@ public class RFItemPowerTrait extends JTrait<IEnergyInterfaceItem> implements IE
         }
         maxReceive *= ConfigTechReborn.euPerRF;
         int energyReceived = Math.min(
-                getMaxEnergyStored(container) - getEnergyStored(container),
-                Math.min((int) _self.getMaxTransfer(container) * ConfigTechReborn.euPerRF, maxReceive));
+            getMaxEnergyStored(container) - getEnergyStored(container),
+            Math.min((int) _self.getMaxTransfer(container) * ConfigTechReborn.euPerRF, maxReceive));
 
         if (!simulate) {
             _self.setEnergy(_self.getEnergy(container) + energyReceived, container);

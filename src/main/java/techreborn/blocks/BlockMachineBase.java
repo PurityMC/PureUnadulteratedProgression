@@ -24,11 +24,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
+import cpw.mods.fml.common.Loader;
 import techreborn.client.TechRebornCreativeTab;
 import techreborn.init.ModBlocks;
 import techreborn.tiles.TileMachineBase;
-import cpw.mods.fml.common.Loader;
-import ic2.api.item.IC2Items;
 
 public class BlockMachineBase extends BlockContainer {
 
@@ -126,8 +125,8 @@ public class BlockMachineBase extends BlockContainer {
             if (itemStack != null && itemStack.stackSize > 0) {
                 if (itemStack.getItem() instanceof ItemBlock) {
                     if (((ItemBlock) itemStack.getItem()).field_150939_a instanceof BlockFluidBase
-                            || ((ItemBlock) itemStack.getItem()).field_150939_a instanceof BlockStaticLiquid
-                            || ((ItemBlock) itemStack.getItem()).field_150939_a instanceof BlockDynamicLiquid) {
+                        || ((ItemBlock) itemStack.getItem()).field_150939_a instanceof BlockStaticLiquid
+                        || ((ItemBlock) itemStack.getItem()).field_150939_a instanceof BlockDynamicLiquid) {
                         return;
                     }
                 }
@@ -140,7 +139,10 @@ public class BlockMachineBase extends BlockContainer {
                 EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, itemStack.copy());
 
                 if (itemStack.hasTagCompound()) {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
+                    entityItem.getEntityItem()
+                        .setTagCompound(
+                            (NBTTagCompound) itemStack.getTagCompound()
+                                .copy());
                 }
 
                 float factor = 0.05F;
@@ -167,23 +169,20 @@ public class BlockMachineBase extends BlockContainer {
     }
 
     public int getTileRotation(IBlockAccess blockAccess, int x, int y, int z) {
-        return blockAccess.getTileEntity(x, y, z) != null
-                ? getTileRotation(blockAccess.getTileEntity(x, y, z).getWorldObj(), x, y, z)
-                : 0;
+        return blockAccess.getTileEntity(x, y, z) != null ? getTileRotation(
+            blockAccess.getTileEntity(x, y, z)
+                .getWorldObj(),
+            x,
+            y,
+            z) : 0;
     }
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-        if (Loader.isModLoaded("IC2")) {
-            ItemStack stack = IC2Items.getItem(isAdvanced() ? "advancedMachine" : "machine").copy();
-            stack.stackSize = 1;
-            items.add(stack);
-        } else {
-            items.add(
-                    isAdvanced() ? new ItemStack(Item.getItemFromBlock(ModBlocks.MachineCasing), 1, 2)
-                            : new ItemStack(Item.getItemFromBlock(ModBlocks.MachineCasing), 1, 0));
-        }
+        items.add(
+            isAdvanced() ? new ItemStack(Item.getItemFromBlock(ModBlocks.MachineCasing), 1, 2)
+                : new ItemStack(Item.getItemFromBlock(ModBlocks.MachineCasing), 1, 0));
         return items;
     }
 
@@ -200,7 +199,9 @@ public class BlockMachineBase extends BlockContainer {
             if (tile != null && tile instanceof TileMachineBase) {
                 TileMachineBase machineBase = (TileMachineBase) tile;
                 machineBase.setRotation(
-                        ForgeDirection.getOrientation(machineBase.getRotation()).getRotation(axis).ordinal());
+                    ForgeDirection.getOrientation(machineBase.getRotation())
+                        .getRotation(axis)
+                        .ordinal());
                 return true;
             }
             return false;
@@ -209,7 +210,7 @@ public class BlockMachineBase extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX,
-            float hitY, float hitZ) {
+        float hitY, float hitZ) {
         if (fillBlockWithFluid(world, x, y, z, entityplayer, side, hitX, hitY, hitZ)) {
             return true;
         }
@@ -217,7 +218,7 @@ public class BlockMachineBase extends BlockContainer {
     }
 
     public boolean fillBlockWithFluid(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX,
-            float hitY, float hitZ) {
+        float hitY, float hitZ) {
         ItemStack current = entityplayer.inventory.getCurrentItem();
 
         if (current != null) {
@@ -235,19 +236,18 @@ public class BlockMachineBase extends BlockContainer {
                         if (qty != 0 && !entityplayer.capabilities.isCreativeMode) {
                             if (current.stackSize > 1) {
                                 if (!entityplayer.inventory
-                                        .addItemStackToInventory(FluidContainerRegistry.drainFluidContainer(current))) {
+                                    .addItemStackToInventory(FluidContainerRegistry.drainFluidContainer(current))) {
                                     entityplayer.dropPlayerItemWithRandomChoice(
-                                            FluidContainerRegistry.drainFluidContainer(current),
-                                            false);
+                                        FluidContainerRegistry.drainFluidContainer(current),
+                                        false);
                                 }
 
-                                entityplayer.inventory.setInventorySlotContents(
-                                        entityplayer.inventory.currentItem,
-                                        consumeItem(current));
+                                entityplayer.inventory
+                                    .setInventorySlotContents(entityplayer.inventory.currentItem, consumeItem(current));
                             } else {
                                 entityplayer.inventory.setInventorySlotContents(
-                                        entityplayer.inventory.currentItem,
-                                        FluidContainerRegistry.drainFluidContainer(current));
+                                    entityplayer.inventory.currentItem,
+                                    FluidContainerRegistry.drainFluidContainer(current));
                             }
                         }
 
@@ -269,15 +269,15 @@ public class BlockMachineBase extends BlockContainer {
                                             return false;
                                         } else {
                                             entityplayer.inventory.setInventorySlotContents(
-                                                    entityplayer.inventory.currentItem,
-                                                    consumeItem(current));
+                                                entityplayer.inventory.currentItem,
+                                                consumeItem(current));
                                         }
                                     } else {
                                         entityplayer.inventory.setInventorySlotContents(
-                                                entityplayer.inventory.currentItem,
-                                                consumeItem(current));
+                                            entityplayer.inventory.currentItem,
+                                            consumeItem(current));
                                         entityplayer.inventory
-                                                .setInventorySlotContents(entityplayer.inventory.currentItem, filled);
+                                            .setInventorySlotContents(entityplayer.inventory.currentItem, filled);
                                     }
                                 }
 
@@ -321,8 +321,10 @@ public class BlockMachineBase extends BlockContainer {
 
     public static ItemStack consumeItem(ItemStack stack) {
         if (stack.stackSize == 1) {
-            if (stack.getItem().hasContainerItem(stack)) {
-                return stack.getItem().getContainerItem(stack);
+            if (stack.getItem()
+                .hasContainerItem(stack)) {
+                return stack.getItem()
+                    .getContainerItem(stack);
             } else {
                 return null;
             }

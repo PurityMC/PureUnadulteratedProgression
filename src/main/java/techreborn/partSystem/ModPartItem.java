@@ -22,7 +22,7 @@ public class ModPartItem extends Item {
 
     @Override
     public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int face, float x_,
-            float y_, float z_) {
+        float y_, float z_) {
         ForgeDirection dir = ForgeDirection.getOrientation(face);
         if (ModPartUtils.hasPart(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, modPart.getName())) {
             x = x + dir.offsetX;
@@ -34,7 +34,7 @@ public class ModPartItem extends Item {
         }
         if (ModPartRegistry.masterProvider != null) {
             if (ModPartRegistry.masterProvider
-                    .placePart(item, player, world, x, y, z, face, x_, y_, z_, (ModPart) modPart.copy())) {
+                .placePart(item, player, world, x, y, z, face, x_, y_, z_, (ModPart) modPart.copy())) {
                 player.swingItem();
                 return true;
             }

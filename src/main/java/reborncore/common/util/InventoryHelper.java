@@ -36,7 +36,7 @@ public class InventoryHelper {
             } else if (canMerge) {
                 if (targetInventory.isItemValidForSlot(slot, stack) && areMergeCandidates(stack, targetStack)) {
                     int space = Math.min(targetInventory.getInventoryStackLimit(), targetStack.getMaxStackSize())
-                            - targetStack.stackSize;
+                        - targetStack.stackSize;
                     int mergeAmount = Math.min(space, stack.stackSize);
 
                     ItemStack copy = targetStack.copy();
@@ -50,7 +50,7 @@ public class InventoryHelper {
 
     protected static boolean areMergeCandidates(ItemStack source, ItemStack target) {
         return source.isItemEqual(target) && ItemStack.areItemStackTagsEqual(source, target)
-                && target.stackSize < target.getMaxStackSize();
+            && target.stackSize < target.getMaxStackSize();
     }
 
     public static void insertItemIntoInventory(IInventory inventory, ItemStack stack) {
@@ -58,17 +58,17 @@ public class InventoryHelper {
     }
 
     public static void insertItemIntoInventory(IInventory inventory, ItemStack stack, ForgeDirection side,
-            int intoSlot) {
+        int intoSlot) {
         insertItemIntoInventory(inventory, stack, side, intoSlot, true);
     }
 
     public static void insertItemIntoInventory(IInventory inventory, ItemStack stack, ForgeDirection side, int intoSlot,
-            boolean doMove) {
+        boolean doMove) {
         insertItemIntoInventory(inventory, stack, side, intoSlot, doMove, true);
     }
 
     public static void insertItemIntoInventory(IInventory inventory, ItemStack stack, ForgeDirection side, int intoSlot,
-            boolean doMove, boolean canStack) {
+        boolean doMove, boolean canStack) {
         if (stack == null) return;
 
         IInventory targetInventory = inventory;
@@ -134,10 +134,10 @@ public class InventoryHelper {
 
             ItemStack inventorySlot = inventory.getStackInSlot(i);
             if (inventorySlot == null) itemSizeCounter -= Math
-                    .min(Math.min(itemSizeCounter, inventory.getInventoryStackLimit()), item.getMaxStackSize());
+                .min(Math.min(itemSizeCounter, inventory.getInventoryStackLimit()), item.getMaxStackSize());
             else if (areMergeCandidates(item, inventorySlot)) {
                 int space = Math.min(inventory.getInventoryStackLimit(), inventorySlot.getMaxStackSize())
-                        - inventorySlot.stackSize;
+                    - inventorySlot.stackSize;
                 itemSizeCounter -= Math.min(itemSizeCounter, space);
             }
         }
@@ -155,21 +155,21 @@ public class InventoryHelper {
         if (tileEntity instanceof TileEntityChest) {
             Block chestBlock = world.getBlock(x, y, z);
             if (world.getBlock(x - 1, y, z) == chestBlock) return new InventoryLargeChest(
-                    "Large chest",
-                    (IInventory) world.getTileEntity(x - 1, y, z),
-                    (IInventory) tileEntity);
+                "Large chest",
+                (IInventory) world.getTileEntity(x - 1, y, z),
+                (IInventory) tileEntity);
             if (world.getBlock(x + 1, y, z) == chestBlock) return new InventoryLargeChest(
-                    "Large chest",
-                    (IInventory) tileEntity,
-                    (IInventory) world.getTileEntity(x + 1, y, z));
+                "Large chest",
+                (IInventory) tileEntity,
+                (IInventory) world.getTileEntity(x + 1, y, z));
             if (world.getBlock(x, y, z - 1) == chestBlock) return new InventoryLargeChest(
-                    "Large chest",
-                    (IInventory) world.getTileEntity(x, y, z - 1),
-                    (IInventory) tileEntity);
+                "Large chest",
+                (IInventory) world.getTileEntity(x, y, z - 1),
+                (IInventory) tileEntity);
             if (world.getBlock(x, y, z + 1) == chestBlock) return new InventoryLargeChest(
-                    "Large chest",
-                    (IInventory) tileEntity,
-                    (IInventory) world.getTileEntity(x, y, z + 1));
+                "Large chest",
+                (IInventory) tileEntity,
+                (IInventory) world.getTileEntity(x, y, z + 1));
         }
         return tileEntity instanceof IInventory ? (IInventory) tileEntity : null;
     }

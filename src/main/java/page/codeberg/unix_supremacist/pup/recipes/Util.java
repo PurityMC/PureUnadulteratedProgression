@@ -10,8 +10,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import page.codeberg.unix_supremacist.pup.PUP;
 import cpw.mods.fml.common.registry.GameRegistry;
+import page.codeberg.unix_supremacist.pup.PUP;
 
 public class Util {
 
@@ -27,27 +27,30 @@ public class Util {
     }
 
     public static void removeFirstRecipeFor(Item item, int meta) {
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) if (recipe != null) {
-            ItemStack stack = ((IRecipe) recipe).getRecipeOutput();
-            if (stack != null && stack.getItem() == item
+        for (Object recipe : CraftingManager.getInstance()
+            .getRecipeList()) if (recipe != null) {
+                ItemStack stack = ((IRecipe) recipe).getRecipeOutput();
+                if (stack != null && stack.getItem() == item
                     && (meta == OreDictionary.WILDCARD_VALUE || meta == stack.getItemDamage())) {
-                recipesToRemove.add((IRecipe) recipe);
-                return;
+                    recipesToRemove.add((IRecipe) recipe);
+                    return;
+                }
             }
-        }
     }
 
     public static void removeALLRecipesFor(Item item, int meta) {
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) if (recipe != null) {
-            ItemStack stack = ((IRecipe) recipe).getRecipeOutput();
-            if (stack != null && stack.getItem() == item
+        for (Object recipe : CraftingManager.getInstance()
+            .getRecipeList()) if (recipe != null) {
+                ItemStack stack = ((IRecipe) recipe).getRecipeOutput();
+                if (stack != null && stack.getItem() == item
                     && (meta == OreDictionary.WILDCARD_VALUE || meta == stack.getItemDamage()))
-                recipesToRemove.add((IRecipe) recipe);
-        }
+                    recipesToRemove.add((IRecipe) recipe);
+            }
     }
 
     public static void bulkRemoveByRecipe() {
-        ArrayList<IRecipe> tList = (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList();
+        ArrayList<IRecipe> tList = (ArrayList<IRecipe>) CraftingManager.getInstance()
+            .getRecipeList();
         PUP.LOG.info("BulkRemoveByRecipe: tList: " + tList.size() + " toRemove: " + recipesToRemove.size());
         tList.removeIf(recipesToRemove::contains);
     }

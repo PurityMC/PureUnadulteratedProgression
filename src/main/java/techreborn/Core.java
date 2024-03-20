@@ -6,28 +6,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.commons.lang3.time.StopWatch;
 
-import page.codeberg.unix_supremacist.pup.PUP;
-import reborncore.common.multiblock.MultiblockEventHandler;
-import reborncore.common.multiblock.MultiblockServerTickHandler;
-import reborncore.common.packets.AddDiscriminatorEvent;
-import reborncore.common.util.LogHelper;
-import reborncore.common.util.VersionChecker;
-import page.codeberg.unix_supremacist.pup.achievement.Achievements;
-import techreborn.api.recipe.RecipeHandler;
-import techreborn.api.recipe.recipeConfig.RecipeConfigManager;
-import techreborn.client.GuiHandler;
-import techreborn.command.TechRebornDevCommand;
-import techreborn.compat.CompatManager;
-import techreborn.compat.ICompatModule;
-import techreborn.config.ConfigTechReborn;
-import page.codeberg.unix_supremacist.pup.Event;
-import techreborn.init.*;
-import techreborn.lib.ModInfo;
-import techreborn.packets.PacketAesu;
-import techreborn.packets.PacketIdsu;
-import techreborn.proxies.CommonProxy;
-import techreborn.tiles.idsu.IDSUManager;
-import techreborn.world.TROreGen;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -39,13 +17,35 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import page.codeberg.unix_supremacist.pup.Event;
+import page.codeberg.unix_supremacist.pup.PUP;
+import page.codeberg.unix_supremacist.pup.achievement.Achievements;
+import reborncore.common.multiblock.MultiblockEventHandler;
+import reborncore.common.multiblock.MultiblockServerTickHandler;
+import reborncore.common.packets.AddDiscriminatorEvent;
+import reborncore.common.util.LogHelper;
+import reborncore.common.util.VersionChecker;
+import techreborn.api.recipe.RecipeHandler;
+import techreborn.api.recipe.recipeConfig.RecipeConfigManager;
+import techreborn.client.GuiHandler;
+import techreborn.command.TechRebornDevCommand;
+import techreborn.compat.CompatManager;
+import techreborn.compat.ICompatModule;
+import techreborn.config.ConfigTechReborn;
+import techreborn.init.*;
+import techreborn.lib.ModInfo;
+import techreborn.packets.PacketAesu;
+import techreborn.packets.PacketIdsu;
+import techreborn.proxies.CommonProxy;
+import techreborn.tiles.idsu.IDSUManager;
+import techreborn.world.TROreGen;
 
 @Mod(
-        modid = ModInfo.MOD_ID,
-        name = ModInfo.MOD_NAME,
-        version = ModInfo.MOD_VERSION,
-        dependencies = ModInfo.MOD_DEPENDENCUIES,
-        guiFactory = ModInfo.GUI_FACTORY_CLASS)
+    modid = ModInfo.MOD_ID,
+    name = ModInfo.MOD_NAME,
+    version = ModInfo.MOD_VERSION,
+    dependencies = ModInfo.MOD_DEPENDENCUIES,
+    guiFactory = ModInfo.GUI_FACTORY_CLASS)
 public class Core {
 
     public static ConfigTechReborn config;
@@ -60,10 +60,14 @@ public class Core {
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
         event.getModMetadata().version = ModInfo.MOD_VERSION;
-        FMLCommonHandler.instance().bus().register(this);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(this);
         MinecraftForge.EVENT_BUS.register(this);
 
-        String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(ModInfo.MOD_ID, "TechReborn");
+        String path = event.getSuggestedConfigurationFile()
+            .getAbsolutePath()
+            .replace(ModInfo.MOD_ID, "TechReborn");
 
         config = ConfigTechReborn.initialize(new File(path));
 
@@ -112,8 +116,12 @@ public class Core {
         // IDSU manager
         IDSUManager.INSTANCE = new IDSUManager();
         MinecraftForge.EVENT_BUS.register(IDSUManager.INSTANCE);
-        FMLCommonHandler.instance().bus().register(new MultiblockServerTickHandler());
-        FMLCommonHandler.instance().bus().register(new Event());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new MultiblockServerTickHandler());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new Event());
         logHelper.info("Initialization Complete");
     }
 
@@ -147,7 +155,9 @@ public class Core {
 
     @SubscribeEvent
     public void addDiscriminator(AddDiscriminatorEvent event) {
-        event.getPacketHandler().addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketAesu.class);
-        event.getPacketHandler().addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketIdsu.class);
+        event.getPacketHandler()
+            .addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketAesu.class);
+        event.getPacketHandler()
+            .addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketIdsu.class);
     }
 }

@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import techreborn.init.ModBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import techreborn.init.ModBlocks;
 
 public class BlockFusionCoil extends BlockMachineBase {
 
@@ -43,9 +43,9 @@ public class BlockFusionCoil extends BlockMachineBase {
             return this.iconFront;
         }
         return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop
-                        : side == 0 ? this.iconBottom
-                                : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
+            : side == 1 ? this.iconTop
+                : side == 0 ? this.iconBottom
+                    : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
     }
 
 }

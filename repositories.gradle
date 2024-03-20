@@ -5,4 +5,8 @@ repositories {
         name = "thorfusion"
         url = "https://maven.thorfusion.com/artifactory/central/"
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }

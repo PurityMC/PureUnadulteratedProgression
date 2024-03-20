@@ -41,9 +41,9 @@ public class BlockHighlyAdvancedMachine extends BlockMachineBase {
             return this.iconFront;
         }
         return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop
-                        : side == 0 ? this.iconBottom
-                                : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
+            : side == 1 ? this.iconTop
+                : side == 0 ? this.iconBottom
+                    : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
     }
 
 }

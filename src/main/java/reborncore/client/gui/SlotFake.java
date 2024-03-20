@@ -11,7 +11,7 @@ public class SlotFake extends Slot {
     public int mMaxStacksize = 127;
 
     public SlotFake(IInventory par1iInventory, int par2, int par3, int par4, boolean aCanInsertItem,
-            boolean aCanStackItem, int aMaxStacksize) {
+        boolean aCanStackItem, int aMaxStacksize) {
         super(par1iInventory, par2, par3, par4);
         this.mCanInsertItem = aCanInsertItem;
         this.mCanStackItem = aCanStackItem;

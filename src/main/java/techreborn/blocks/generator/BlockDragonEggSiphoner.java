@@ -6,10 +6,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import techreborn.blocks.BlockMachineBase;
-import techreborn.tiles.TileDragonEggSiphoner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import techreborn.blocks.BlockMachineBase;
+import techreborn.tiles.TileDragonEggSiphoner;
 
 public class BlockDragonEggSiphoner extends BlockMachineBase {
 
@@ -45,9 +45,9 @@ public class BlockDragonEggSiphoner extends BlockMachineBase {
     public IIcon getIcon(int side, int metadata) {
 
         return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop
-                        : side == 0 ? this.iconBottom
-                                : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
+            : side == 1 ? this.iconTop
+                : side == 0 ? this.iconBottom
+                    : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
 
     }
 

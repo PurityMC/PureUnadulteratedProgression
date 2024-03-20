@@ -7,10 +7,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
+import cpw.mods.fml.common.IWorldGenerator;
 import techreborn.Core;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class TROreGen implements IWorldGenerator {
 
@@ -64,12 +64,13 @@ public class TROreGen implements IWorldGenerator {
         generateUndergroundOres(random, chunkX, chunkZ, world);
         generateHellOres(random, chunkX, chunkZ, world);
         generateEndOres(random, chunkX, chunkZ, world);
-        world.getChunkFromChunkCoords(chunkX, chunkZ).setChunkModified();
+        world.getChunkFromChunkCoords(chunkX, chunkZ)
+            .setChunkModified();
     }
 
     @Override
     public void generate(Random random, int xChunk, int zChunk, World world, IChunkProvider chunkGenerator,
-            IChunkProvider chunkProvider) {
+        IChunkProvider chunkProvider) {
         if (world.provider.isSurfaceWorld()) {
             generateUndergroundOres(random, xChunk * 16, zChunk * 16, world);
         } else if (world.provider.isHellWorld) {

@@ -11,7 +11,7 @@ public class TitledPage extends BasePage {
     private int colour;
 
     public TitledPage(String name, boolean showInMenue, PageCollection collection, String unlocalizedTitle,
-                      int colour) {
+        int colour) {
         super(name, showInMenue, collection);
         this.title = unlocalizedTitle;
         this.colour = colour;

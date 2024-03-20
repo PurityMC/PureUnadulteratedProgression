@@ -11,11 +11,8 @@ import reborncore.common.util.Inventory;
 import techreborn.api.power.IEnergyInterfaceItem;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
-import ic2.api.item.ElectricItem;
-import ic2.api.item.IElectricItem;
-import ic2.api.tile.IWrenchable;
 
-public class TileChargeBench extends TilePowerAcceptor implements IWrenchable, IInventory, ISidedInventory {
+public class TileChargeBench extends TilePowerAcceptor implements IInventory, ISidedInventory {
 
     public Inventory inventory = new Inventory(6, "TileChargeBench", 64);
     public int capacity = 100000;
@@ -35,47 +32,16 @@ public class TileChargeBench extends TilePowerAcceptor implements IWrenchable, I
                     if (stack.getItem() instanceof IEnergyInterfaceItem) {
                         IEnergyInterfaceItem interfaceItem = (IEnergyInterfaceItem) stack.getItem();
                         double trans = Math.min(
-                                interfaceItem.getMaxPower(stack) - interfaceItem.getEnergy(stack),
-                                Math.min(interfaceItem.getMaxTransfer(stack), getEnergy()));
+                            interfaceItem.getMaxPower(stack) - interfaceItem.getEnergy(stack),
+                            Math.min(interfaceItem.getMaxTransfer(stack), getEnergy()));
                         interfaceItem.setEnergy(trans + interfaceItem.getEnergy(stack), stack);
                         useEnergy(trans);
-                    } else if (stack.getItem() instanceof IElectricItem) {
-                        useEnergy(ElectricItem.manager.charge(stack, getEnergy(), 4, false, false));
-                    }
+                    }//  else if (stack.getItem() instanceof IElectricItem) {
+                    //     useEnergy(ElectricItem.manager.charge(stack, getEnergy(), 4, false, false));
+                    // }
                 }
             }
         }
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
-        return 0;
-    }
-
-    @Override
-    public void setFacing(short facing) {}
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-        if (entityPlayer.isSneaking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(ModBlocks.chargeBench, 1);
     }
 
     public boolean isComplete() {
@@ -167,11 +133,11 @@ public class TileChargeBench extends TilePowerAcceptor implements IWrenchable, I
 
     @Override
     public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side) {
-        if (itemStack.getItem() instanceof IElectricItem) {
-            double CurrentCharge = ElectricItem.manager.getCharge(itemStack);
-            double MaxCharge = ((IElectricItem) itemStack.getItem()).getMaxCharge(itemStack);
-            if (CurrentCharge == MaxCharge) return true;
-        }
+//        if (itemStack.getItem() instanceof IElectricItem) {
+//            double CurrentCharge = ElectricItem.manager.getCharge(itemStack);
+//            double MaxCharge = ((IElectricItem) itemStack.getItem()).getMaxCharge(itemStack);
+//            if (CurrentCharge == MaxCharge) return true;
+//        }
         return false;
     }
 

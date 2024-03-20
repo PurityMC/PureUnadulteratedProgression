@@ -24,7 +24,7 @@ public interface IPartProvider {
     public boolean hasPart(World world, Location location, String name);
 
     public boolean placePart(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side,
-            float hitX, float hitY, float hitZ, ModPart modPart);
+        float hitX, float hitY, float hitZ, ModPart modPart);
 
     public boolean isTileFromProvider(TileEntity tileEntity);
 

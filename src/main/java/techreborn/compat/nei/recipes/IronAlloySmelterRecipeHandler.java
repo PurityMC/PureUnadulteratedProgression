@@ -11,14 +11,14 @@ import net.minecraft.tileentity.TileEntityFurnace;
 
 import org.lwjgl.opengl.GL11;
 
-import reborncore.common.util.ItemUtils;
-import techreborn.api.recipe.IBaseRecipeType;
-import techreborn.client.gui.GuiAlloyFurnace;
-import techreborn.lib.Reference;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import reborncore.common.util.ItemUtils;
+import techreborn.api.recipe.IBaseRecipeType;
+import techreborn.client.gui.GuiAlloyFurnace;
+import techreborn.lib.Reference;
 
 /**
  * Created by MrBretzel on 01/11/2015.
@@ -27,20 +27,24 @@ public class IronAlloySmelterRecipeHandler extends GenericRecipeHander implement
 
     @Override
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-            IBaseRecipeType recipeType) {
+        IBaseRecipeType recipeType) {
         int offset = 4;
         PositionedStack pStack = new PositionedStack(
-                ItemUtils.getStackWithAllOre(recipeType.getInputs().get(0)),
-                46 - offset,
-                9 - offset,
-                false);
+            ItemUtils.getStackWithAllOre(
+                recipeType.getInputs()
+                    .get(0)),
+            46 - offset,
+            9 - offset,
+            false);
         input.add(pStack);
 
         PositionedStack pStack2 = new PositionedStack(
-                ItemUtils.getStackWithAllOre(recipeType.getInputs().get(1)),
-                64 - offset,
-                9 - offset,
-                false);
+            ItemUtils.getStackWithAllOre(
+                recipeType.getInputs()
+                    .get(1)),
+            64 - offset,
+            9 - offset,
+            false);
         input.add(pStack2);
 
         Iterator i = ItemList.items.iterator();
@@ -85,10 +89,10 @@ public class IronAlloySmelterRecipeHandler extends GenericRecipeHander implement
     @Override
     public void loadTransferRects() {
         this.transferRects.add(
-                new TemplateRecipeHandler.RecipeTransferRect(
-                        new Rectangle(75, 20, 25, 20),
-                        Reference.alloySmelteRecipe,
-                        new Object[0]));
+            new TemplateRecipeHandler.RecipeTransferRect(
+                new Rectangle(75, 20, 25, 20),
+                Reference.alloySmelteRecipe,
+                new Object[0]));
     }
 
     @Override

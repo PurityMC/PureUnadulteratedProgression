@@ -11,14 +11,14 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 
 import org.lwjgl.opengl.GL11;
 
-import reborncore.common.util.Color;
-import techreborn.api.power.IEnergyInterfaceItem;
-import techreborn.client.keybindings.KeyBindings;
-import techreborn.config.ConfigTechReborn;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import reborncore.common.util.Color;
+import techreborn.api.power.IEnergyInterfaceItem;
+import techreborn.client.keybindings.KeyBindings;
+import techreborn.config.ConfigTechReborn;
 
 public class ChargeHud {
 
@@ -49,7 +49,7 @@ public class ChargeHud {
         int y = 5;
 
         if (armorstack != null && ConfigTechReborn.ShowChargeHud
-                && armorstack.getItem() instanceof IEnergyInterfaceItem) {
+            && armorstack.getItem() instanceof IEnergyInterfaceItem) {
             double MaxCharge = ((IEnergyInterfaceItem) armorstack.getItem()).getMaxPower(armorstack);
             double CurrentCharge = ((IEnergyInterfaceItem) armorstack.getItem()).getEnergy(armorstack);
             Color color = Color.GREEN;
@@ -60,9 +60,11 @@ public class ChargeHud {
             RenderHelper.enableStandardItemLighting();
             RenderHelper.enableGUIStandardItemLighting();
             // Render the stack
-            RenderItem.getInstance().renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, armorstack, 0, y - 5);
+            RenderItem.getInstance()
+                .renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, armorstack, 0, y - 5);
             // Render Overlay
-            RenderItem.getInstance().renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, armorstack, 0, y - 5);
+            RenderItem.getInstance()
+                .renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, armorstack, 0, y - 5);
             // Get the color depending on current charge
             if (CurrentCharge <= half) {
                 color = Color.YELLOW;
@@ -85,8 +87,10 @@ public class ChargeHud {
                 GL11.glEnable(32826);
                 RenderHelper.enableStandardItemLighting();
                 RenderHelper.enableGUIStandardItemLighting();
-                RenderItem.getInstance().renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, stack, 0, y - 5);
-                RenderItem.getInstance().renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, stack, 0, y - 5);
+                RenderItem.getInstance()
+                    .renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, stack, 0, y - 5);
+                RenderItem.getInstance()
+                    .renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, stack, 0, y - 5);
                 if (CurrentCharge <= half) {
                     color = Color.YELLOW;
                 }
@@ -102,12 +106,15 @@ public class ChargeHud {
     private String GetEUString(double euValue) {
         if (euValue > 1000000) {
             double tenX = Math.round(euValue / 100000);
-            return Double.toString(tenX / 10.0).concat("M ");
+            return Double.toString(tenX / 10.0)
+                .concat("M ");
         } else if (euValue > 1000) {
             double tenX = Math.round(euValue / 100);
-            return Double.toString(tenX / 10.0).concat("k ");
+            return Double.toString(tenX / 10.0)
+                .concat("k ");
         } else {
-            return Double.toString(Math.floor(euValue)).concat(" EU");
+            return Double.toString(Math.floor(euValue))
+                .concat(" EU");
         }
     }
 }

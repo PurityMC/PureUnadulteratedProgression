@@ -36,14 +36,13 @@ public class TileLesu extends TilePowerAcceptor {// TODO wrench
         connectedBlocks = 0;
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
             if (worldObj.getTileEntity(
-                    xCoord + dir.offsetX,
-                    yCoord + dir.offsetY,
-                    zCoord + dir.offsetZ) instanceof TileLesuStorage) {
+                xCoord + dir.offsetX,
+                yCoord + dir.offsetY,
+                zCoord + dir.offsetZ) instanceof TileLesuStorage) {
                 if (((TileLesuStorage) worldObj
-                        .getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).network
-                        != null) {
+                    .getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).network != null) {
                     LesuNetwork network = ((TileLesuStorage) worldObj
-                            .getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).network;
+                        .getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)).network;
                     if (!countedNetworks.contains(network)) {
                         if (network.master == null || network.master == this) {
                             connectedBlocks += network.storages.size();

@@ -116,7 +116,7 @@ public class ItemNBTHelper {
      **/
     public static NBTTagCompound getCompound(ItemStack stack, String tag, boolean nullifyOnFail) {
         return verifyExistance(stack, tag) ? getNBT(stack).getCompoundTag(tag)
-                : nullifyOnFail ? null : new NBTTagCompound();
+            : nullifyOnFail ? null : new NBTTagCompound();
     }
 
     public static String getString(ItemStack stack, String tag, String defaultExpected) {
@@ -125,6 +125,6 @@ public class ItemNBTHelper {
 
     public static NBTTagList getList(ItemStack stack, String tag, int objtype, boolean nullifyOnFail) {
         return verifyExistance(stack, tag) ? getNBT(stack).getTagList(tag, objtype)
-                : nullifyOnFail ? null : new NBTTagList();
+            : nullifyOnFail ? null : new NBTTagList();
     }
 }

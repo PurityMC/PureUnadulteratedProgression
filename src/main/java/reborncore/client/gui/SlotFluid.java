@@ -16,7 +16,7 @@ public class SlotFluid extends Slot {
     public boolean isItemValid(ItemStack stack) {
 
         return FluidContainerRegistry.isContainer(stack)
-                || (stack != null && stack.getItem() instanceof IFluidContainerItem);
+            || (stack != null && stack.getItem() instanceof IFluidContainerItem);
 
     }
 }

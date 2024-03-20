@@ -3,22 +3,21 @@ package techreborn.compat.minetweaker;
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 import static minetweaker.api.minecraft.MineTweakerMC.getLiquidStack;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.IngredientStack;
 import minetweaker.api.liquid.ILiquidStack;
 import minetweaker.api.oredict.IOreDictEntry;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import techreborn.compat.ICompatModule;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class MinetweakerCompat implements ICompatModule {
 
@@ -65,7 +64,7 @@ public class MinetweakerCompat implements ICompatModule {
             else if (iStack instanceof IItemStack) return getItemStack((IItemStack) iStack);
             else if (iStack instanceof IngredientStack) {
                 IIngredient ingr = ReflectionHelper
-                        .getPrivateValue(IngredientStack.class, (IngredientStack) iStack, "ingredient");
+                    .getPrivateValue(IngredientStack.class, (IngredientStack) iStack, "ingredient");
                 return toObject(ingr);
             } else return null;
         }

@@ -15,6 +15,9 @@ public class ItemTR extends Item {
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(ModInfo.MOD_ID + ":" + getUnlocalizedName().toLowerCase().substring(5));
+        itemIcon = iconRegister.registerIcon(
+            ModInfo.MOD_ID + ":"
+                + getUnlocalizedName().toLowerCase()
+                    .substring(5));
     }
 }

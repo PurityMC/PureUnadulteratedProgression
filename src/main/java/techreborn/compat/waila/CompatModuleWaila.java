@@ -1,9 +1,9 @@
 package techreborn.compat.waila;
 
+import cpw.mods.fml.common.event.*;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import techreborn.compat.ICompatModule;
 import techreborn.tiles.TileMachineBase;
-import cpw.mods.fml.common.event.*;
 
 public class CompatModuleWaila implements ICompatModule {
 

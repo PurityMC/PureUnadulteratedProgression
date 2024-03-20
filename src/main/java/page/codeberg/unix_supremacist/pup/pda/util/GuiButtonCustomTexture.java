@@ -20,7 +20,7 @@ public class GuiButtonCustomTexture extends GuiButtonExt {
     public String NAME;
 
     public GuiButtonCustomTexture(int id, int xPos, int yPos, int u, int v, int width, int height, ItemStack stack,
-            String linkedPage, String name) {
+        String linkedPage, String name) {
         super(id, xPos, yPos, width, height, "_");
         textureU = u;
         textureV = v;
@@ -32,9 +32,10 @@ public class GuiButtonCustomTexture extends GuiButtonExt {
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.visible) {
             boolean flag = mouseX >= this.xPosition && mouseY >= this.yPosition
-                    && mouseX < this.xPosition + this.width
-                    && mouseY < this.yPosition + this.height;
-            mc.getTextureManager().bindTexture(buttonTextures);
+                && mouseX < this.xPosition + this.width
+                && mouseY < this.yPosition + this.height;
+            mc.getTextureManager()
+                .bindTexture(buttonTextures);
             int u = textureU;
             int v = textureV;
 
@@ -50,7 +51,7 @@ public class GuiButtonCustomTexture extends GuiButtonExt {
             RenderHelper.enableStandardItemLighting();
             RenderHelper.enableGUIStandardItemLighting();
             RenderItem.getInstance()
-                    .renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, this.xPosition, this.yPosition);
+                .renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, this.xPosition, this.yPosition);
             this.drawString(mc.fontRenderer, this.NAME, this.xPosition + 20, this.yPosition + 3, Color.white.getRGB());
         }
     }

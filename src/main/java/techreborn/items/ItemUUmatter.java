@@ -3,9 +3,9 @@ package techreborn.items;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
-import techreborn.client.TechRebornCreativeTabMisc;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import techreborn.client.TechRebornCreativeTabMisc;
 
 public class ItemUUmatter extends Item {
 

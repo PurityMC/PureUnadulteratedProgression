@@ -4,9 +4,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-import techreborn.blocks.BlockMachineBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import techreborn.blocks.BlockMachineBase;
 
 public class BlockMagicEnergyAbsorber extends BlockMachineBase {
 
@@ -37,9 +37,9 @@ public class BlockMagicEnergyAbsorber extends BlockMachineBase {
     public IIcon getIcon(int side, int metadata) {
 
         return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop
-                        : side == 0 ? this.iconBottom
-                                : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
+            : side == 1 ? this.iconTop
+                : side == 0 ? this.iconBottom
+                    : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
 
     }
 

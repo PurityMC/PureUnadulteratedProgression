@@ -8,11 +8,11 @@ public class Assembler {
 
     public static void load() {
         RecipeHandler.addRecipe(
-                new AssemblingMachineRecipe(
-                        ItemApi.getItem("ingotInductive", 1),
-                        ItemApi.getItem("dustGlowstone", 1),
-                        ItemApi.getItem("craftingSuperconductor", 1),
-                        200,
-                        16));
+            new AssemblingMachineRecipe(
+                ItemApi.getItem("ingotInductive", 1),
+                ItemApi.getItem("dustGlowstone", 1),
+                ItemApi.getItem("craftingSuperconductor", 1),
+                200,
+                16));
     }
 }

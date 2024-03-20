@@ -11,10 +11,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import techreborn.api.RollingMachineRecipe;
-import techreborn.client.gui.GuiRollingMachine;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.recipe.ShapelessRecipeHandler;
+import techreborn.api.RollingMachineRecipe;
+import techreborn.client.gui.GuiRollingMachine;
 
 public class ShapelessRollingMachineHandler extends ShapelessRecipeHandler {
 

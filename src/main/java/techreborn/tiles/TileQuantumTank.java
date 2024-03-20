@@ -20,10 +20,9 @@ import reborncore.common.util.FluidUtils;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.Tank;
 import techreborn.init.ModBlocks;
-import ic2.api.tile.IWrenchable;
 
 public class TileQuantumTank extends TileMachineBase
-        implements IFluidHandler, IInventory, IWrenchable, IListInfoProvider {
+    implements IFluidHandler, IInventory, IListInfoProvider {
 
     public Tank tank = new Tank("TileQuantumTank", Integer.MAX_VALUE, this);
     public Inventory inventory = new Inventory(3, "TileQuantumTank", 64);
@@ -69,7 +68,11 @@ public class TileQuantumTank extends TileMachineBase
             FluidUtils.drainContainers(this, inventory, 0, 1);
             FluidUtils.fillContainers(this, inventory, 0, 1, tank.getFluidType());
             if (tank.getFluidType() != null && getStackInSlot(2) == null) {
-                inventory.setInventorySlotContents(2, new ItemStack(tank.getFluidType().getBlock()));
+                inventory.setInventorySlotContents(
+                    2,
+                    new ItemStack(
+                        tank.getFluidType()
+                            .getBlock()));
             } else if (tank.getFluidType() == null && getStackInSlot(2) != null) {
                 setInventorySlotContents(2, null);
             }
@@ -101,12 +104,14 @@ public class TileQuantumTank extends TileMachineBase
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
+        return tank.getFluid() == null || tank.getFluid()
+            .getFluid() == fluid;
     }
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
+        return tank.getFluid() == null || tank.getFluid()
+            .getFluid() == fluid;
     }
 
     @Override
@@ -178,37 +183,6 @@ public class TileQuantumTank extends TileMachineBase
         return inventory.isItemValidForSlot(slot, stack);
     }
 
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
-        return 0;
-    }
-
-    @Override
-    public void setFacing(short facing) {}
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-        if (entityPlayer.isSneaking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float getWrenchDropRate() {
-        return 1F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return getDropWithNBT();
-    }
-
     public ItemStack getDropWithNBT() {
         NBTTagCompound tileEntity = new NBTTagCompound();
         ItemStack dropStack = new ItemStack(ModBlocks.quantumTank, 1);
@@ -222,7 +196,10 @@ public class TileQuantumTank extends TileMachineBase
     public void addInfo(List<String> info, boolean isRealTile) {
         if (isRealTile) {
             if (tank.getFluid() != null) {
-                info.add(tank.getFluidAmount() + " of " + tank.getFluidType().getName());
+                info.add(
+                    tank.getFluidAmount() + " of "
+                        + tank.getFluidType()
+                            .getName());
             } else {
                 info.add("Empty");
             }

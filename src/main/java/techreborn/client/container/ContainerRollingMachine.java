@@ -23,7 +23,7 @@ public class ContainerRollingMachine extends RebornContainer {
         for (int l = 0; l < 3; l++) {
             for (int k1 = 0; k1 < 3; k1++) {
                 this.addSlotToContainer(
-                        new Slot(tileRollingmachine.craftMatrix, k1 + l * 3, 30 + k1 * 18, 17 + l * 18));
+                    new Slot(tileRollingmachine.craftMatrix, k1 + l * 3, 30 + k1 * 18, 17 + l * 18));
             }
         }
 

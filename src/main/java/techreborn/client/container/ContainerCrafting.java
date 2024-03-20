@@ -2,10 +2,10 @@ package techreborn.client.container;
 
 import net.minecraft.inventory.ICrafting;
 
-import reborncore.common.container.RebornContainer;
-import techreborn.api.recipe.RecipeCrafter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import reborncore.common.container.RebornContainer;
+import techreborn.api.recipe.RecipeCrafter;
 
 public abstract class ContainerCrafting extends RebornContainer {
 

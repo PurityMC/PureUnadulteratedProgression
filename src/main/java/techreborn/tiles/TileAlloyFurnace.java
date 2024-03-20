@@ -9,16 +9,15 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 import techreborn.api.recipe.IBaseRecipeType;
 import techreborn.api.recipe.RecipeHandler;
 import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
-import cpw.mods.fml.common.registry.GameRegistry;
-import ic2.api.tile.IWrenchable;
 
-public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, IInventory {
+public class TileAlloyFurnace extends TileMachineBase implements IInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(4, "TileAlloyFurnace", 64);
@@ -87,8 +86,8 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
             Boolean hasItem = false;
             for (int inputslot = 0; inputslot < 2; inputslot++) {
                 if (ItemUtils
-                        .isItemEqual(input, inventory.getStackInSlot(inputslot), true, true, recipeType.useOreDic())
-                        && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
+                    .isItemEqual(input, inventory.getStackInSlot(inputslot), true, true, recipeType.useOreDic())
+                    && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
                     hasItem = true;
                 }
             }
@@ -111,16 +110,18 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
 
             if (itemstack == null) return false;
             if (this.getStackInSlot(output) == null) return true;
-            if (!this.getStackInSlot(output).isItemEqual(itemstack)) return false;
+            if (!this.getStackInSlot(output)
+                .isItemEqual(itemstack)) return false;
             int result = getStackInSlot(output).stackSize + itemstack.stackSize;
-            return result <= getInventoryStackLimit() && result <= this.getStackInSlot(output).getMaxStackSize(); // Forge
-                                                                                                                  // BugFix:
-                                                                                                                  // Make
-                                                                                                                  // it
-                                                                                                                  // respect
-                                                                                                                  // stack
-                                                                                                                  // sizes
-                                                                                                                  // properly.
+            return result <= getInventoryStackLimit() && result <= this.getStackInSlot(output)
+                .getMaxStackSize(); // Forge
+                                    // BugFix:
+                                    // Make
+                                    // it
+                                    // respect
+                                    // stack
+                                    // sizes
+                                    // properly.
         }
     }
 
@@ -143,9 +144,10 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
 
         if (this.getStackInSlot(output) == null) {
             setInventorySlotContents(output, itemstack.copy());
-        } else if (this.getStackInSlot(output).getItem() == itemstack.getItem()) {
-            decrStackSize(output, -itemstack.stackSize);
-        }
+        } else if (this.getStackInSlot(output)
+            .getItem() == itemstack.getItem()) {
+                decrStackSize(output, -itemstack.stackSize);
+            }
 
         for (IBaseRecipeType recipeType : RecipeHandler.getRecipeClassFromName(Reference.alloySmelteRecipe)) {
             boolean hasAllRecipes = true;
@@ -156,11 +158,11 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
                 for (ItemStack input : recipeType.getInputs()) {
                     for (int inputSlot = 0; inputSlot < 2; inputSlot++) {
                         if (ItemUtils.isItemEqual(
-                                input,
-                                inventory.getStackInSlot(inputSlot),
-                                true,
-                                true,
-                                recipeType.useOreDic())) {
+                            input,
+                            inventory.getStackInSlot(inputSlot),
+                            true,
+                            true,
+                            recipeType.useOreDic())) {
                             inventory.decrStackSize(inputSlot, input.stackSize);
                             break;
                         }
@@ -215,9 +217,12 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
                 }
             }
 
-            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemHoe && ((ItemHoe) item).getToolMaterialName().equals("WOOD")) return 200;
+            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName()
+                .equals("WOOD")) return 200;
+            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName()
+                .equals("WOOD")) return 200;
+            if (item instanceof ItemHoe && ((ItemHoe) item).getToolMaterialName()
+                .equals("WOOD")) return 200;
             if (item == Items.stick) return 100;
             if (item == Items.coal) return 1600;
             if (item == Items.lava_bucket) return 20000;
@@ -225,37 +230,6 @@ public class TileAlloyFurnace extends TileMachineBase implements IWrenchable, II
             if (item == Items.blaze_rod) return 2400;
             return GameRegistry.getFuelValue(stack);
         }
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
-        return 0;
-    }
-
-    @Override
-    public void setFacing(short facing) {}
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-        if (entityPlayer.isSneaking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(ModBlocks.AlloyFurnace, 1);
     }
 
     public boolean isComplete() {

@@ -22,9 +22,8 @@ public class SlotFilteredVoid extends Slot {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        for (ItemStack itemStack : filter)
-            if (itemStack.getItem().equals(stack.getItem()) && itemStack.getItemDamage() == stack.getItemDamage())
-                return false;
+        for (ItemStack itemStack : filter) if (itemStack.getItem()
+            .equals(stack.getItem()) && itemStack.getItemDamage() == stack.getItemDamage()) return false;
 
         return super.isItemValid(stack);
     }

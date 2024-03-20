@@ -71,8 +71,8 @@ public class CoordTriplet implements Comparable {
 
     public CoordTriplet[] getNeighbors() {
         return new CoordTriplet[] { new CoordTriplet(x + 1, y, z), new CoordTriplet(x - 1, y, z),
-                new CoordTriplet(x, y + 1, z), new CoordTriplet(x, y - 1, z), new CoordTriplet(x, y, z + 1),
-                new CoordTriplet(x, y, z - 1) };
+            new CoordTriplet(x, y + 1, z), new CoordTriplet(x, y - 1, z), new CoordTriplet(x, y, z + 1),
+            new CoordTriplet(x, y, z - 1) };
     }
 
     // /// IComparable

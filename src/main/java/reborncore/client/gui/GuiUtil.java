@@ -65,7 +65,7 @@ public class GuiUtil {
     }
 
     public static void drawColouredBox(int colour, int alpha, double posX, double posY, double width, double height,
-            double zLevel) {
+        double zLevel) {
         int r = (colour >> 16 & 0xff);
         int g = (colour >> 8 & 0xff);
         int b = (colour & 0xff);
@@ -73,7 +73,7 @@ public class GuiUtil {
     }
 
     public static void drawColouredBox(int r, int g, int b, int alpha, double posX, double posY, double width,
-            double height, double zLevel) {
+        double height, double zLevel) {
         if (width <= 0 || height <= 0) {
             return;
         }

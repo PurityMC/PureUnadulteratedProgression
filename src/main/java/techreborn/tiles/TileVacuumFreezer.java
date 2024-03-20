@@ -11,9 +11,8 @@ import techreborn.api.recipe.RecipeCrafter;
 import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
-import ic2.api.tile.IWrenchable;
 
-public class TileVacuumFreezer extends TilePowerAcceptor implements IWrenchable, IInventory {
+public class TileVacuumFreezer extends TilePowerAcceptor implements IInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(3, "TileVacuumFreezer", 64);
@@ -63,37 +62,6 @@ public class TileVacuumFreezer extends TilePowerAcceptor implements IWrenchable,
     @Override
     public double getMaxInput() {
         return 128;
-    }
-
-    @Override
-    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-        return false;
-    }
-
-    @Override
-    public short getFacing() {
-        return 0;
-    }
-
-    @Override
-    public void setFacing(short facing) {}
-
-    @Override
-    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-        if (entityPlayer.isSneaking()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float getWrenchDropRate() {
-        return 1.0F;
-    }
-
-    @Override
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(ModBlocks.AlloySmelter, 1);
     }
 
     public boolean isComplete() {
@@ -190,12 +158,12 @@ public class TileVacuumFreezer extends TilePowerAcceptor implements IWrenchable,
                 for (int k = -1; k < 2; k++) {
                     if ((i != 0) || (j != 0) || (k != 0)) {
                         if (worldObj.getBlock(xCoord - xDir + i, yCoord - yDir + j, zCoord - zDir + k)
-                                != ModBlocks.MachineCasing) {
+                            != ModBlocks.MachineCasing) {
                             return false;
                         }
                         if (worldObj.getBlockMetadata(xCoord - xDir + i, yCoord - yDir + j, zCoord - zDir + k)
-                                != (((i == 0) && (j == 0) && (k != 0)) || ((i == 0) && (j != 0) && (k == 0))
-                                        || ((i != 0) && (j == 0) && (k == 0)) ? 2 : 1)) {
+                            != (((i == 0) && (j == 0) && (k != 0)) || ((i == 0) && (j != 0) && (k == 0))
+                                || ((i != 0) && (j == 0) && (k == 0)) ? 2 : 1)) {
                             return false;
                         }
                     } else if (!worldObj.isAirBlock(xCoord - xDir + i, yCoord - yDir + j, zCoord - zDir + k)) {

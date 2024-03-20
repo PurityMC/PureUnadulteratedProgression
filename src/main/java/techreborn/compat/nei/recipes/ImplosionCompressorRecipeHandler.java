@@ -5,34 +5,40 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 import reborncore.common.util.ItemUtils;
 import techreborn.api.recipe.IBaseRecipeType;
 import techreborn.client.gui.GuiImplosionCompressor;
 import techreborn.lib.Reference;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class ImplosionCompressorRecipeHandler extends GenericRecipeHander implements INeiBaseRecipe {
 
     @Override
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-            IBaseRecipeType recipeType) {
+        IBaseRecipeType recipeType) {
         int offset = 4;
-        if (recipeType.getInputs().size() > 0) {
+        if (recipeType.getInputs()
+            .size() > 0) {
             PositionedStack pStack = new PositionedStack(
-                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(0)),
-                    37 - offset,
-                    26 - offset,
-                    false);
+                ItemUtils.getStackWithAllOre(
+                    recipeType.getInputs()
+                        .get(0)),
+                37 - offset,
+                26 - offset,
+                false);
             input.add(pStack);
         }
 
-        if (recipeType.getInputs().size() > 1) {
+        if (recipeType.getInputs()
+            .size() > 1) {
             PositionedStack pStack2 = new PositionedStack(
-                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(1)),
-                    37 - offset,
-                    44 - offset,
-                    false);
+                ItemUtils.getStackWithAllOre(
+                    recipeType.getInputs()
+                        .get(1)),
+                37 - offset,
+                44 - offset,
+                false);
             input.add(pStack2);
         }
 
@@ -70,9 +76,9 @@ public class ImplosionCompressorRecipeHandler extends GenericRecipeHander implem
     @Override
     public void loadTransferRects() {
         this.transferRects.add(
-                new TemplateRecipeHandler.RecipeTransferRect(
-                        new Rectangle(50, 20, 25, 20),
-                        getNeiBaseRecipe().getRecipeName(),
-                        new Object[0]));
+            new TemplateRecipeHandler.RecipeTransferRect(
+                new Rectangle(50, 20, 25, 20),
+                getNeiBaseRecipe().getRecipeName(),
+                new Object[0]));
     }
 }

@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 
-import reborncore.common.container.RebornContainer;
-import techreborn.tiles.TileAesu;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import reborncore.common.container.RebornContainer;
+import techreborn.tiles.TileAesu;
 
 public class ContainerAesu extends RebornContainer {
 

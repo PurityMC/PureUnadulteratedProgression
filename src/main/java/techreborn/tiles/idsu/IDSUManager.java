@@ -27,9 +27,11 @@ public class IDSUManager {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void worldSave(WorldEvent.Save event) {
         if (event.world != null && event.world.getSaveHandler() != null
-                && event.world.getSaveHandler().getWorldDirectory() != null) {
+            && event.world.getSaveHandler()
+                .getWorldDirectory() != null) {
             if (worldData.containsKey(event.world)) {
-                worldData.get(event.world).save();
+                worldData.get(event.world)
+                    .save();
             }
         }
     }
@@ -37,9 +39,11 @@ public class IDSUManager {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void worldLoad(WorldEvent.Load event) {
         if (event.world != null && event.world.getSaveHandler() != null
-                && event.world.getSaveHandler().getWorldDirectory() != null) {
+            && event.world.getSaveHandler()
+                .getWorldDirectory() != null) {
             if (worldData.containsKey(event.world)) {
-                worldData.get(event.world).load();
+                worldData.get(event.world)
+                    .load();
             } else {
                 IDSUWorldSaveData worldSaveData = new IDSUWorldSaveData(event.world);
                 worldData.put(event.world, worldSaveData);
@@ -51,9 +55,11 @@ public class IDSUManager {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void worldClosed(WorldEvent.Unload event) {
         if (event.world != null && event.world.getSaveHandler() != null
-                && event.world.getSaveHandler().getWorldDirectory() != null) {
+            && event.world.getSaveHandler()
+                .getWorldDirectory() != null) {
             if (worldData.containsKey(event.world)) {
-                worldData.get(event.world).save();
+                worldData.get(event.world)
+                    .save();
             }
         }
         // this clears the data ready for a new world
@@ -65,7 +71,8 @@ public class IDSUManager {
             return null;
         }
         if (worldData.containsKey(world)) {
-            return worldData.get(world).getSaves(channel);
+            return worldData.get(world)
+                .getSaves(channel);
         } else {
             IDSUWorldSaveData worldSaveData = new IDSUWorldSaveData(world);
             worldData.put(world, worldSaveData);
@@ -136,7 +143,8 @@ public class IDSUManager {
                 }
             }
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting()
+                .create();
             String json = gson.toJson(idsuValues);
             try {
                 FileWriter writer = new FileWriter(file);

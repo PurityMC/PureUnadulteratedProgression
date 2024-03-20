@@ -6,27 +6,25 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import reborncore.common.misc.Functions;
 import reborncore.common.misc.vecmath.Vecs3d;
 import reborncore.common.misc.vecmath.Vecs3dCube;
 import techreborn.client.IconSupplier;
 import techreborn.partSystem.parts.CablePart;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ic2.api.info.IC2Classic;
-import ic2.api.item.IC2Items;
 
 public class RenderCablePart {
 
     public static void renderBox(Vecs3dCube cube, Block block, Tessellator tessellator, RenderBlocks renderblocks,
-            IIcon texture, Double xD, Double yD, double zD, float thickness) {
+        IIcon texture, Double xD, Double yD, double zD, float thickness) {
         block.setBlockBounds(
-                (float) cube.getMinX(),
-                (float) cube.getMinY(),
-                (float) cube.getMinZ(),
-                (float) cube.getMaxX() + thickness,
-                (float) cube.getMaxY() + thickness,
-                (float) cube.getMaxZ() + thickness);
+            (float) cube.getMinX(),
+            (float) cube.getMinY(),
+            (float) cube.getMinZ(),
+            (float) cube.getMaxX() + thickness,
+            (float) cube.getMaxY() + thickness,
+            (float) cube.getMaxZ() + thickness);
         renderblocks.setRenderBoundsFromBlock(block);
         tessellator.setColorOpaque_F(0.5F, 0.5F, 0.5F);
         renderblocks.renderFaceYNeg(block, xD, yD, zD, texture);
@@ -49,21 +47,21 @@ public class RenderCablePart {
         double yD = part.yCoord;
         double zD = part.zCoord;
         Block block = part.getBlockType();
-        tessellator.setBrightness(
-                block.getMixedBrightnessForBlock(part.getWorld(), part.getX(), part.getY(), part.getZ()));
+        tessellator
+            .setBrightness(block.getMixedBrightnessForBlock(part.getWorld(), part.getX(), part.getY(), part.getZ()));
         renderBox(part.boundingBoxes[6], block, tessellator, renderblocks, texture, xD, yD, zD, 0F);
         for (ForgeDirection direction : ForgeDirection.values()) {
             if (part.connectedSides.get(direction) != null) {
                 renderBox(
-                        part.boundingBoxes[Functions.getIntDirFromDirection(direction)],
-                        block,
-                        tessellator,
-                        renderblocks,
-                        texture,
-                        xD,
-                        yD,
-                        zD,
-                        0f);
+                    part.boundingBoxes[Functions.getIntDirFromDirection(direction)],
+                    block,
+                    tessellator,
+                    renderblocks,
+                    texture,
+                    xD,
+                    yD,
+                    zD,
+                    0f);
             }
         }
         block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -73,9 +71,12 @@ public class RenderCablePart {
 
     @SideOnly(Side.CLIENT)
     public static IIcon getIconFromType(int cableType) {
-        if (IC2Classic.getLoadedIC2Type() == IC2Classic.IC2Type.SpeigersClassic) {
-            return Block.getBlockFromItem(IC2Items.getItem("copperCableBlock").getItem()).getIcon(0, cableType * 16);
-        }
+        // if (IC2Classic.getLoadedIC2Type() == IC2Classic.IC2Type.SpeigersClassic) {
+        //     return Block.getBlockFromItem(
+        //         IC2Items.getItem("copperCableBlock")
+        //             .getItem())
+        //         .getIcon(0, cableType * 16);
+        // }
         IIcon p = null;
         switch (cableType) {
             case 0:

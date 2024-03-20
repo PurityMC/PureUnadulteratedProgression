@@ -13,14 +13,13 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import reborncore.common.util.TorchHelper;
 import techreborn.api.power.IEnergyItemInfo;
 import techreborn.client.TechRebornCreativeTab;
 import techreborn.config.ConfigTechReborn;
 import techreborn.powerSystem.PoweredItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ic2.api.item.ElectricItem;
 
 public class ItemAdvancedDrill extends ItemPickaxe implements IEnergyItemInfo {
 
@@ -46,25 +45,21 @@ public class ItemAdvancedDrill extends ItemPickaxe implements IEnergyItemInfo {
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int par4, int par5, int par6,
-            EntityLivingBase entityLiving) {
-        ElectricItem.manager.use(stack, cost, entityLiving);
+        EntityLivingBase entityLiving) {
         return true;
     }
 
     @Override
     public boolean canHarvestBlock(Block block, ItemStack stack) {
         return Items.diamond_pickaxe.canHarvestBlock(block, stack)
-                || Items.diamond_shovel.canHarvestBlock(block, stack);
+            || Items.diamond_shovel.canHarvestBlock(block, stack);
     }
 
     @Override
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
-        if (!ElectricItem.manager.canUse(stack, cost)) {
-            return 4.0F;
-        }
 
         if (Items.wooden_pickaxe.getDigSpeed(stack, block, meta) > 1.0F
-                || Items.wooden_shovel.getDigSpeed(stack, block, meta) > 1.0F) {
+            || Items.wooden_shovel.getDigSpeed(stack, block, meta) > 1.0F) {
             return efficiencyOnProperMaterial;
         } else {
             return super.getDigSpeed(stack, block, meta);
@@ -78,7 +73,7 @@ public class ItemAdvancedDrill extends ItemPickaxe implements IEnergyItemInfo {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-            float xOffset, float yOffset, float zOffset) {
+        float xOffset, float yOffset, float zOffset) {
         return TorchHelper.placeTorch(stack, player, world, x, y, z, side, xOffset, yOffset, zOffset);
     }
 

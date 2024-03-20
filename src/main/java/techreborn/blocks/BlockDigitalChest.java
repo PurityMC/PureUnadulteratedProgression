@@ -8,11 +8,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import page.codeberg.unix_supremacist.pup.PUP;
 import techreborn.client.GuiHandler;
 import techreborn.tiles.TileDigitalChest;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDigitalChest extends BlockMachineBase {
 
@@ -37,7 +37,7 @@ public class BlockDigitalChest extends BlockMachineBase {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
-            float hitY, float hitZ) {
+        float hitY, float hitZ) {
         if (!player.isSneaking()) player.openGui(PUP.pupinstance, GuiHandler.digitalChestID, world, x, y, z);
         return true;
     }
@@ -59,9 +59,9 @@ public class BlockDigitalChest extends BlockMachineBase {
             return this.iconFront;
         }
         return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop
-                        : side == 0 ? this.iconBottom
-                                : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
+            : side == 1 ? this.iconTop
+                : side == 0 ? this.iconBottom
+                    : (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
     }
 
     @Override

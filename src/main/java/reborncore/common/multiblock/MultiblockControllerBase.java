@@ -123,11 +123,11 @@ public abstract class MultiblockControllerBase {
 
         if (!connectedParts.add(part)) {
             BeefCoreLog.warning(
-                    "[%s] Controller %s is double-adding part %d @ %s. This is unusual. If you encounter odd behavior, please tear down the machine and rebuild it.",
-                    (worldObj.isRemote ? "CLIENT" : "SERVER"),
-                    hashCode(),
-                    part.hashCode(),
-                    coord);
+                "[%s] Controller %s is double-adding part %d @ %s. This is unusual. If you encounter odd behavior, please tear down the machine and rebuild it.",
+                (worldObj.isRemote ? "CLIENT" : "SERVER"),
+                hashCode(),
+                part.hashCode(),
+                coord);
         }
 
         part.onAttached(this);
@@ -254,12 +254,12 @@ public abstract class MultiblockControllerBase {
         onDetachBlock(part);
         if (!connectedParts.remove(part)) {
             BeefCoreLog.warning(
-                    "[%s] Double-removing part (%d) @ %d, %d, %d, this is unexpected and may cause problems. If you encounter anomalies, please tear down the reactor and rebuild it.",
-                    worldObj.isRemote ? "CLIENT" : "SERVER",
-                    part.hashCode(),
-                    part.xCoord,
-                    part.yCoord,
-                    part.zCoord);
+                "[%s] Double-removing part (%d) @ %d, %d, %d, this is unexpected and may cause problems. If you encounter anomalies, please tear down the reactor and rebuild it.",
+                worldObj.isRemote ? "CLIENT" : "SERVER",
+                part.hashCode(),
+                part.xCoord,
+                part.yCoord,
+                part.zCoord);
         }
 
         if (connectedParts.isEmpty()) {
@@ -416,7 +416,7 @@ public abstract class MultiblockControllerBase {
         CoordTriplet otherReferenceCoord = other.getReferenceCoord();
         if (otherReferenceCoord != null && getReferenceCoord().compareTo(otherReferenceCoord) >= 0) {
             throw new IllegalArgumentException(
-                    "The controller with the lowest minimum-coord value must consume the one with the higher coords");
+                "The controller with the lowest minimum-coord value must consume the one with the higher coords");
         }
 
         TileEntity te;
@@ -448,7 +448,8 @@ public abstract class MultiblockControllerBase {
      */
     private void _onAssimilated(MultiblockControllerBase otherController) {
         if (referenceCoord != null) {
-            if (worldObj.getChunkProvider().chunkExists(referenceCoord.getChunkX(), referenceCoord.getChunkZ())) {
+            if (worldObj.getChunkProvider()
+                .chunkExists(referenceCoord.getChunkX(), referenceCoord.getChunkZ())) {
                 TileEntity te = this.worldObj.getTileEntity(referenceCoord.x, referenceCoord.y, referenceCoord.z);
                 if (te instanceof IMultiblockPart) {
                     ((IMultiblockPart) te).forfeitMultiblockSaveDelegate();
@@ -500,13 +501,13 @@ public abstract class MultiblockControllerBase {
             // If our chunks are loaded (they should be), we must mark our
             // chunks as dirty.
             if (minimumCoord != null && maximumCoord != null
-                    && this.worldObj.checkChunksExist(
-                            minimumCoord.x,
-                            minimumCoord.y,
-                            minimumCoord.z,
-                            maximumCoord.x,
-                            maximumCoord.y,
-                            maximumCoord.z)) {
+                && this.worldObj.checkChunksExist(
+                    minimumCoord.x,
+                    minimumCoord.y,
+                    minimumCoord.z,
+                    maximumCoord.x,
+                    maximumCoord.y,
+                    maximumCoord.z)) {
                 int minChunkX = minimumCoord.x >> 4;
                 int minChunkZ = minimumCoord.z >> 4;
                 int maxChunkX = maximumCoord.x >> 4;
@@ -553,7 +554,7 @@ public abstract class MultiblockControllerBase {
      */
     protected void isBlockGoodForFrame(World world, int x, int y, int z) throws MultiblockValidationException {
         throw new MultiblockValidationException(
-                String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
+            String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
     }
 
     /**
@@ -567,7 +568,7 @@ public abstract class MultiblockControllerBase {
      */
     protected void isBlockGoodForTop(World world, int x, int y, int z) throws MultiblockValidationException {
         throw new MultiblockValidationException(
-                String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
+            String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
     }
 
     /**
@@ -581,7 +582,7 @@ public abstract class MultiblockControllerBase {
      */
     protected void isBlockGoodForBottom(World world, int x, int y, int z) throws MultiblockValidationException {
         throw new MultiblockValidationException(
-                String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
+            String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
     }
 
     /**
@@ -595,7 +596,7 @@ public abstract class MultiblockControllerBase {
      */
     protected void isBlockGoodForSides(World world, int x, int y, int z) throws MultiblockValidationException {
         throw new MultiblockValidationException(
-                String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
+            String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
     }
 
     /**
@@ -609,7 +610,7 @@ public abstract class MultiblockControllerBase {
      */
     protected void isBlockGoodForInterior(World world, int x, int y, int z) throws MultiblockValidationException {
         throw new MultiblockValidationException(
-                String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
+            String.format("%d, %d, %d - Block is not valid for use in the machine's interior", x, y, z));
     }
 
     /**
@@ -711,9 +712,10 @@ public abstract class MultiblockControllerBase {
      * @return True if this multiblock should consume the other, false otherwise.
      */
     public boolean shouldConsume(MultiblockControllerBase otherController) {
-        if (!otherController.getClass().equals(getClass())) {
+        if (!otherController.getClass()
+            .equals(getClass())) {
             throw new IllegalArgumentException(
-                    "Attempting to merge two multiblocks with different master classes - this should never happen!");
+                "Attempting to merge two multiblocks with different master classes - this should never happen!");
         }
 
         if (otherController == this) {
@@ -728,8 +730,8 @@ public abstract class MultiblockControllerBase {
         } else {
             // Strip dead parts from both and retry
             BeefCoreLog.warning(
-                    "[%s] Encountered two controllers with the same reference coordinate. Auditing connected parts and retrying.",
-                    worldObj.isRemote ? "CLIENT" : "SERVER");
+                "[%s] Encountered two controllers with the same reference coordinate. Auditing connected parts and retrying.",
+                worldObj.isRemote ? "CLIENT" : "SERVER");
             auditParts();
             otherController.auditParts();
 
@@ -740,18 +742,18 @@ public abstract class MultiblockControllerBase {
                 return false;
             } else {
                 BeefCoreLog.error(
-                        "My Controller (%d): size (%d), parts: %s",
-                        hashCode(),
-                        connectedParts.size(),
-                        getPartsListString());
+                    "My Controller (%d): size (%d), parts: %s",
+                    hashCode(),
+                    connectedParts.size(),
+                    getPartsListString());
                 BeefCoreLog.error(
-                        "Other Controller (%d): size (%d), coords: %s",
-                        otherController.hashCode(),
-                        otherController.connectedParts.size(),
-                        otherController.getPartsListString());
+                    "Other Controller (%d): size (%d), coords: %s",
+                    otherController.hashCode(),
+                    otherController.connectedParts.size(),
+                    otherController.getPartsListString());
                 throw new IllegalArgumentException(
-                        "[" + (worldObj.isRemote ? "CLIENT" : "SERVER")
-                                + "] Two controllers with the same reference coord that somehow both have valid parts - this should never happen!");
+                    "[" + (worldObj.isRemote ? "CLIENT" : "SERVER")
+                        + "] Two controllers with the same reference coord that somehow both have valid parts - this should never happen!");
             }
 
         }
@@ -798,10 +800,10 @@ public abstract class MultiblockControllerBase {
 
         connectedParts.removeAll(deadParts);
         BeefCoreLog.warning(
-                "[%s] Controller found %d dead parts during an audit, %d parts remain attached",
-                worldObj.isRemote ? "CLIENT" : "SERVER",
-                deadParts.size(),
-                connectedParts.size());
+            "[%s] Controller found %d dead parts during an audit, %d parts remain attached",
+            worldObj.isRemote ? "CLIENT" : "SERVER",
+            deadParts.size(),
+            connectedParts.size());
     }
 
     /**

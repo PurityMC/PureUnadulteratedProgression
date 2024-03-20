@@ -15,10 +15,10 @@ import net.minecraft.client.resources.data.AnimationMetadataSection;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
-import reborncore.client.texture.ConnectedTexture;
-import techreborn.lib.ModInfo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import reborncore.client.texture.ConnectedTexture;
+import techreborn.lib.ModInfo;
 
 public class CasingConnectedTextureGenerator extends TextureAtlasSprite {
 
@@ -122,15 +122,15 @@ public class CasingConnectedTextureGenerator extends TextureAtlasSprite {
 
         type_image[0] = output_image;
         this.loadSprite(
-                type_image,
-                animation,
-                (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
+            type_image,
+            animation,
+            (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     public static IIcon genIcon(ConnectedTexture connectedTexture, IIconRegister iconRegister, int texNum, int meta,
-            String[] types) {
+        String[] types) {
         if (iconRegister instanceof TextureMap) {
             TextureMap map = (TextureMap) iconRegister;
             String name = CasingConnectedTextureGenerator.getDerivedName(types[meta] + "." + texNum);

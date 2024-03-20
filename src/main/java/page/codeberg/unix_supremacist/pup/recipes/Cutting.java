@@ -8,10 +8,10 @@ public class Cutting {
 
     public static void load() {
         RecipeHandler.addRecipe(
-                new PlateCuttingMachineRecipe(
-                        ItemApi.getItem("blockObsidian"),
-                        ItemApi.getItem("plateObsidian", 9),
-                        100,
-                        4));
+            new PlateCuttingMachineRecipe(
+                ItemApi.getItem("blockObsidian"),
+                ItemApi.getItem("plateObsidian", 9),
+                100,
+                4));
     }
 }

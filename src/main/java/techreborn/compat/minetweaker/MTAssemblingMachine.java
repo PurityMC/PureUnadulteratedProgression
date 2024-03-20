@@ -1,11 +1,10 @@
 package techreborn.compat.minetweaker;
 
+import net.minecraft.item.ItemStack;
+
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
-
-import net.minecraft.item.ItemStack;
-
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import techreborn.api.recipe.machines.AssemblingMachineRecipe;
@@ -20,11 +19,11 @@ public class MTAssemblingMachine extends MTGeneric {
         ItemStack oInput2 = (ItemStack) MinetweakerCompat.toObject(input2);
 
         AssemblingMachineRecipe r = new AssemblingMachineRecipe(
-                oInput1,
-                oInput2,
-                MinetweakerCompat.toStack(output),
-                ticktime,
-                euTick);
+            oInput1,
+            oInput2,
+            MinetweakerCompat.toStack(output),
+            ticktime,
+            euTick);
 
         addRecipe(r);
     }

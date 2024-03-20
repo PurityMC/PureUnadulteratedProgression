@@ -7,32 +7,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Optional;
 import reborncore.api.IListInfoProvider;
 import techreborn.api.power.IEnergyInterfaceTile;
 import techreborn.config.ConfigTechReborn;
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Optional;
-import ic2.api.energy.event.EnergyTileLoadEvent;
-import ic2.api.energy.event.EnergyTileUnloadEvent;
-import ic2.api.energy.tile.IEnergySink;
-import ic2.api.energy.tile.IEnergySource;
-import ic2.api.energy.tile.IEnergySourceInfo;
-import ic2.api.energy.tile.IEnergyTile;
-import ic2.api.info.Info;
-
-@Optional.InterfaceList(
-        value = { @Optional.Interface(iface = "ic2.api.energy.tile.IEnergyTile", modid = "IC2"),
-                @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2"),
-                @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = "IC2") })
 public abstract class TilePowerAcceptor extends RFProviderTile implements IEnergyReceiver, IEnergyProvider, // Cofh
-        IEnergyInterfaceTile, IListInfoProvider, // TechReborn
-        IEnergyTile, IEnergySink, IEnergySource, // Ic2
-        IEnergySourceInfo // IC2 Classic
+    IEnergyInterfaceTile, IListInfoProvider // TechReborn
 {
 
     public int tier;
@@ -41,90 +27,6 @@ public abstract class TilePowerAcceptor extends RFProviderTile implements IEnerg
     public TilePowerAcceptor(int tier) {
         this.tier = tier;
     }
-
-    // IC2
-
-    protected boolean addedToEnet;
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        onLoaded();
-    }
-
-    public void onLoaded() {
-        if (PowerSystem.EUPOWENET && !addedToEnet
-                && !FMLCommonHandler.instance().getEffectiveSide().isClient()
-                && Info.isIc2Available()) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-
-            addedToEnet = true;
-        }
-    }
-
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        onChunkUnload();
-    }
-
-    @Override
-    public void onChunkUnload() {
-        super.onChunkUnload();
-        if (PowerSystem.EUPOWENET) {
-            if (addedToEnet && Info.isIc2Available()) {
-                MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-
-                addedToEnet = false;
-            }
-        }
-    }
-
-    @Override
-    public double getDemandedEnergy() {
-        if (!PowerSystem.EUPOWENET) return 0;
-        return Math.min(getMaxPower() - getEnergy(), getMaxInput());
-    }
-
-    @Override
-    public int getSinkTier() {
-        return tier;
-    }
-
-    @Override
-    public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
-        setEnergy(getEnergy() + amount);
-        return 0;
-    }
-
-    @Override
-    public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-        if (!PowerSystem.EUPOWENET) return false;
-        return canAcceptEnergy(direction);
-    }
-
-    @Override
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
-        if (!PowerSystem.EUPOWENET) return false;
-        return canProvideEnergy(direction);
-    }
-
-    @Override
-    public double getOfferedEnergy() {
-        if (!PowerSystem.EUPOWENET) return 0;
-        return Math.min(getEnergy(), getMaxOutput());
-    }
-
-    @Override
-    public void drawEnergy(double amount) {
-        useEnergy((int) amount);
-    }
-
-    @Override
-    public int getSourceTier() {
-        return tier;
-    }
-    // END IC2
 
     // COFH
     @Override
@@ -141,8 +43,8 @@ public abstract class TilePowerAcceptor extends RFProviderTile implements IEnerg
         }
         maxReceive *= ConfigTechReborn.euPerRF;
         int energyReceived = Math.min(
-                getMaxEnergyStored(ForgeDirection.UNKNOWN) - getEnergyStored(ForgeDirection.UNKNOWN),
-                Math.min((int) this.getMaxInput() * ConfigTechReborn.euPerRF, maxReceive));
+            getMaxEnergyStored(ForgeDirection.UNKNOWN) - getEnergyStored(ForgeDirection.UNKNOWN),
+            Math.min((int) this.getMaxInput() * ConfigTechReborn.euPerRF, maxReceive));
 
         if (!simulate) {
             setEnergy(getEnergy() + energyReceived);
@@ -264,9 +166,7 @@ public abstract class TilePowerAcceptor extends RFProviderTile implements IEnerg
     @Override
     public void addInfo(List<String> info, boolean isRealTile) {
         info.add(
-                ChatFormatting.LIGHT_PURPLE + "Energy buffer Size "
-                        + ChatFormatting.GREEN
-                        + getEUString(getMaxPower()));
+            ChatFormatting.LIGHT_PURPLE + "Energy buffer Size " + ChatFormatting.GREEN + getEUString(getMaxPower()));
         if (getMaxInput() != 0) {
             info.add(ChatFormatting.LIGHT_PURPLE + "Max Input " + ChatFormatting.GREEN + getEUString(getMaxInput()));
         }
@@ -281,24 +181,20 @@ public abstract class TilePowerAcceptor extends RFProviderTile implements IEnerg
     private String getEUString(double euValue) {
         if (euValue >= 1000000) {
             double tenX = Math.round(euValue / 100000);
-            return Double.toString(tenX / 10.0).concat(" m EU");
+            return Double.toString(tenX / 10.0)
+                .concat(" m EU");
         } else if (euValue >= 1000) {
             double tenX = Math.round(euValue / 100);
-            return Double.toString(tenX / 10.0).concat(" k EU");
+            return Double.toString(tenX / 10.0)
+                .concat(" k EU");
         } else {
-            return Double.toString(Math.floor(euValue)).concat(" EU");
+            return Double.toString(Math.floor(euValue))
+                .concat(" EU");
         }
     }
 
     public double getFreeSpace() {
         return getMaxPower() - energy;
-    }
-
-    // IC2 Classic
-
-    @Override
-    public int getMaxEnergyAmount() {
-        return (int) getMaxOutput();
     }
 
     public int getEnergyScaled(int scale) {

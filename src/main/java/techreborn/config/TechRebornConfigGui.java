@@ -18,51 +18,51 @@ public class TechRebornConfigGui extends GuiConfig {
 
     public TechRebornConfigGui(GuiScreen top) {
         super(
-                top,
-                getConfigCategories(),
-                "TechReborn",
-                false,
-                false,
-                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+            top,
+            getConfigCategories(),
+            "TechReborn",
+            false,
+            false,
+            GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
     }
 
     private static List<IConfigElement> getConfigCategories() {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.general"),
-                        "tr.configgui.category.trGeneral",
-                        TRGeneral.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.general"),
+                "tr.configgui.category.trGeneral",
+                TRGeneral.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.world"),
-                        "tr.configgui.category.trWorld",
-                        TRWORLD.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.world"),
+                "tr.configgui.category.trWorld",
+                TRWORLD.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.power"),
-                        "tr.configgui.category.trPower",
-                        TRPOWER.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.power"),
+                "tr.configgui.category.trPower",
+                TRPOWER.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.crafting"),
-                        "tr.configgui.category.trCrafting",
-                        TRCRAFTING.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.crafting"),
+                "tr.configgui.category.trCrafting",
+                TRCRAFTING.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.uu"),
-                        "tr.configgui.category.truu",
-                        TRUU.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.uu"),
+                "tr.configgui.category.truu",
+                TRUU.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.emc"),
-                        "tr.configgui.category.tremc",
-                        TREMC.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.emc"),
+                "tr.configgui.category.tremc",
+                TREMC.class));
         list.add(
-                new DummyConfigElement.DummyCategoryElement(
-                        StatCollector.translateToLocal("config.techreborn.category.integration"),
-                        "tr.configgui.category.treinter",
-                        TRINT.class));
+            new DummyConfigElement.DummyCategoryElement(
+                StatCollector.translateToLocal("config.techreborn.category.integration"),
+                "tr.configgui.category.treinter",
+                TRINT.class));
 
         return list;
     }
@@ -76,14 +76,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(Configuration.CATEGORY_GENERAL)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(Configuration.CATEGORY_GENERAL)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -97,14 +97,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_WORLD)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_WORLD)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -118,14 +118,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_POWER)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_POWER)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -139,14 +139,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_CRAFTING)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_CRAFTING)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -160,14 +160,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_UU)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_UU)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -181,14 +181,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_EMC)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_EMC)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 
@@ -202,14 +202,14 @@ public class TechRebornConfigGui extends GuiConfig {
         @Override
         protected GuiScreen buildChildScreen() {
             return new GuiConfig(
-                    this.owningScreen,
-                    (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_INTEGRATION)))
-                            .getChildElements(),
-                    this.owningScreen.modID,
-                    Configuration.CATEGORY_GENERAL,
-                    this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-                    this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-                    GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
+                this.owningScreen,
+                (new ConfigElement(ConfigTechReborn.config.getCategory(ConfigTechReborn.CATEGORY_INTEGRATION)))
+                    .getChildElements(),
+                this.owningScreen.modID,
+                Configuration.CATEGORY_GENERAL,
+                this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
+                this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
+                GuiConfig.getAbridgedConfigPath(ConfigTechReborn.config.toString()));
         }
     }
 }

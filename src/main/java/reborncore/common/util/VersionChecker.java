@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
 
-import reborncore.common.IModInfo;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
+import reborncore.common.IModInfo;
 
 public class VersionChecker {
 
@@ -39,7 +39,8 @@ public class VersionChecker {
         InputStream in = con.getInputStream();
         String encoding = con.getContentEncoding();
         encoding = encoding == null ? "UTF-8" : encoding;
-        String body = IOUtils.toString(in, encoding).replaceAll("<br />", "");
+        String body = IOUtils.toString(in, encoding)
+            .replaceAll("<br />", "");
 
         Gson gson = new Gson();
         versions = gson.fromJson(body, new TypeToken<ArrayList<ModifacationVersionInfo>>() {}.getType());
@@ -101,7 +102,7 @@ public class VersionChecker {
         public boolean recommended;
 
         public ModifacationVersionInfo(String version, String minecraftVersion, ArrayList<String> changeLog,
-                String releaseDate, boolean recommended) {
+            String releaseDate, boolean recommended) {
             this.version = version;
             this.minecraftVersion = minecraftVersion;
             this.changeLog = changeLog;
@@ -123,7 +124,8 @@ public class VersionChecker {
         infos.add(new ModifacationVersionInfo("1.1.1", "1.7.10", changelog, "12th July", true));
         infos.add(new ModifacationVersionInfo("1.2.0", "1.7.10", changelog, "28th July", true));
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+            .create();
         String json = gson.toJson(infos);
         try {
             FileWriter writer = new FileWriter(new File("master.json"));
