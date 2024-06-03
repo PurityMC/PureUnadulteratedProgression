@@ -17,8 +17,9 @@ import reborncore.common.util.Tank;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileDieselGenerator extends TilePowerAcceptor implements IFluidHandler, IInventory {
+public class TileDieselGenerator extends TilePowerAcceptor implements IWrenchable, IFluidHandler, IInventory {
 
     public Tank tank = new Tank("TileDieselGenerator", FluidContainerRegistry.BUCKET_VOLUME * 10, this);
     public Inventory inventory = new Inventory(3, "TileDieselGenerator", 64);
@@ -26,6 +27,37 @@ public class TileDieselGenerator extends TilePowerAcceptor implements IFluidHand
 
     public TileDieselGenerator() {
         super(ConfigTechReborn.ThermalGeneratorTier);
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.DieselGenerator, 1);
     }
 
     @Override
@@ -59,8 +91,7 @@ public class TileDieselGenerator extends TilePowerAcceptor implements IFluidHand
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return tank.getFluid() == null || tank.getFluid()
-            .getFluid() == fluid;
+        return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
     }
 
     @Override
@@ -101,11 +132,7 @@ public class TileDieselGenerator extends TilePowerAcceptor implements IFluidHand
             FluidUtils.drainContainers(this, inventory, 0, 1);
             FluidUtils.fillContainers(this, inventory, 0, 1, tank.getFluidType());
             if (tank.getFluidType() != null && getStackInSlot(2) == null) {
-                inventory.setInventorySlotContents(
-                    2,
-                    new ItemStack(
-                        tank.getFluidType()
-                            .getBlock()));
+                inventory.setInventorySlotContents(2, new ItemStack(tank.getFluidType().getBlock()));
                 syncWithAll();
             } else if (tank.getFluidType() == null && getStackInSlot(2) != null) {
                 setInventorySlotContents(2, null);
@@ -113,7 +140,7 @@ public class TileDieselGenerator extends TilePowerAcceptor implements IFluidHand
             }
 
             if (!tank.isEmpty() && tank.getFluidType() != null
-                && FluidPowerManager.fluidPowerValues.containsKey(tank.getFluidType())) {
+                    && FluidPowerManager.fluidPowerValues.containsKey(tank.getFluidType())) {
                 double powerIn = FluidPowerManager.fluidPowerValues.get(tank.getFluidType());
                 if (getFreeSpace() >= powerIn) {
                     addEnergy(powerIn, false);

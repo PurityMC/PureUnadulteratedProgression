@@ -13,13 +13,13 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import reborncore.common.util.ItemUtils;
 import techreborn.api.reactor.FusionReactorRecipe;
 import techreborn.api.reactor.FusionReactorRecipeHelper;
 import techreborn.client.gui.GuiFusionReactor;
+import codechicken.lib.gui.GuiDraw;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class FustionReacorRecipeHandler extends TemplateRecipeHandler {
 
@@ -117,22 +117,22 @@ public class FustionReacorRecipeHandler extends TemplateRecipeHandler {
     }
 
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-        FusionReactorRecipe recipeType) {
+            FusionReactorRecipe recipeType) {
         int offset = 4;
 
         PositionedStack pStack = new PositionedStack(
-            ItemUtils.getStackWithAllOre(recipeType.getTopInput()),
-            88 - offset,
-            17 - offset,
-            false);
+                ItemUtils.getStackWithAllOre(recipeType.getTopInput()),
+                88 - offset,
+                17 - offset,
+                false);
         input.add(pStack);
 
         if (recipeType.getBottomInput() != null) {
             PositionedStack pStack2 = new PositionedStack(
-                ItemUtils.getStackWithAllOre(recipeType.getBottomInput()),
-                88 - offset,
-                53 - offset,
-                false);
+                    ItemUtils.getStackWithAllOre(recipeType.getBottomInput()),
+                    88 - offset,
+                    53 - offset,
+                    false);
             input.add(pStack2);
         }
 
@@ -158,10 +158,10 @@ public class FustionReacorRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadTransferRects() {
         this.transferRects.add(
-            new TemplateRecipeHandler.RecipeTransferRect(
-                new Rectangle(82, 23, 52, 18),
-                getRecipeName(),
-                new Object[0]));
+                new TemplateRecipeHandler.RecipeTransferRect(
+                        new Rectangle(82, 23, 52, 18),
+                        getRecipeName(),
+                        new Object[0]));
     }
 
 }

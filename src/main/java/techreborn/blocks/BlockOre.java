@@ -17,14 +17,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import page.codeberg.unix_supremacist.pup.api.ItemApi;
 import reborncore.common.util.OreDrop;
 import reborncore.common.util.OreDropSet;
 import techreborn.client.TechRebornCreativeTabMisc;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockOre extends Block {
 
@@ -44,8 +44,8 @@ public class BlockOre extends Block {
     }
 
     public static final String[] types = new String[] { "Galena", "Iridium", "Ruby", "Sapphire", "Bauxite", "Pyrite",
-        "Cinnabar", "Sphalerite", "Tungston", "Sheldonite", "Peridot", "Sodalite", "Tetrahedrite", "Cassiterite",
-        "Lead", "Silver" };
+            "Cinnabar", "Sphalerite", "Tungston", "Sheldonite", "Peridot", "Sodalite", "Tetrahedrite", "Cassiterite",
+            "Lead", "Silver" };
 
     private IIcon[] textures;
 
@@ -63,8 +63,8 @@ public class BlockOre extends Block {
         // Ruby
         if (metadata == 2) {
             OreDrop ruby = new OreDrop(
-                ItemApi.getItem("gemRuby"),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("gemRuby"),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDrop redGarnet = new OreDrop(ItemApi.getItem("gemRedGarnet"), 0.02);
             OreDropSet set = new OreDropSet(ruby, redGarnet);
             return set.drop(fortune, world.rand);
@@ -73,8 +73,8 @@ public class BlockOre extends Block {
         // Sapphire
         if (metadata == 3) {
             OreDrop sapphire = new OreDrop(
-                ItemApi.getItem("gemSapphire"),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("gemSapphire"),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDrop peridot = new OreDrop(ItemApi.getItem("gemPeridot"), 0.03);
             OreDropSet set = new OreDropSet(sapphire, peridot);
             return set.drop(fortune, world.rand);
@@ -83,8 +83,8 @@ public class BlockOre extends Block {
         // Pyrite
         if (metadata == 5) {
             OreDrop pyriteDust = new OreDrop(
-                ItemApi.getItem("dustPyrite"),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("dustPyrite"),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDropSet set = new OreDropSet(pyriteDust);
             return set.drop(fortune, world.rand);
         }
@@ -92,8 +92,8 @@ public class BlockOre extends Block {
         // Sodolite
         if (metadata == 11) {
             OreDrop sodalite = new OreDrop(
-                ItemApi.getItem("dustSodalite", 6),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("dustSodalite", 6),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDrop aluminum = new OreDrop(ItemApi.getItem("dustAluminium"), 0.50);
             OreDropSet set = new OreDropSet(sodalite, aluminum);
             return set.drop(fortune, world.rand);
@@ -102,8 +102,8 @@ public class BlockOre extends Block {
         // Cinnabar
         if (metadata == 6) {
             OreDrop cinnabar = new OreDrop(
-                ItemApi.getItem("dustCinnabar"),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("dustCinnabar"),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDrop redstone = new OreDrop(new ItemStack(Items.redstone), 0.25);
             OreDropSet set = new OreDropSet(cinnabar, redstone);
             return set.drop(fortune, world.rand);
@@ -112,8 +112,8 @@ public class BlockOre extends Block {
         // Sphalerite 1, 1/8 yellow garnet
         if (metadata == 7) {
             OreDrop sphalerite = new OreDrop(
-                ItemApi.getItem("dustSphalerite"),
-                ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
+                    ItemApi.getItem("dustSphalerite"),
+                    ConfigTechReborn.FortuneSecondaryOreMultiplierPerLevel);
             OreDrop yellowGarnet = new OreDrop(ItemApi.getItem("gemYellowGarnet"), 0.125);
             OreDropSet set = new OreDropSet(sphalerite, yellowGarnet);
             return set.drop(fortune, world.rand);
@@ -165,7 +165,7 @@ public class BlockOre extends Block {
         metaData = MathHelper.clamp_int(metaData, 0, types.length - 1);
 
         if (ForgeDirection.getOrientation(side) == ForgeDirection.UP
-            || ForgeDirection.getOrientation(side) == ForgeDirection.DOWN) {
+                || ForgeDirection.getOrientation(side) == ForgeDirection.DOWN) {
             return textures[metaData];
         } else {
             return textures[metaData];

@@ -12,12 +12,13 @@ import java.util.Map;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import techreborn.Core;
 import techreborn.client.TechRebornCreativeTab;
 import techreborn.init.ModParts;
 import techreborn.partSystem.parts.CablePart;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.api.item.IC2Items;
 
 public class ModPartRegistry {
 
@@ -43,14 +44,13 @@ public class ModPartRegistry {
         for (ModPart modPart : ModPartRegistry.parts) {
             if (modPart.needsItem()) {
                 Item part = new ModPartItem(modPart).setUnlocalizedName(modPart.getName())
-                    .setCreativeTab(TechRebornCreativeTab.instance)
-                    .setTextureName(modPart.getItemTextureName());
+                        .setCreativeTab(TechRebornCreativeTab.instance).setTextureName(modPart.getItemTextureName());
                 GameRegistry.registerItem(part, modPart.getName());
                 itemParts.put(modPart.getName(), part);
                 if (modPart instanceof CablePart) {
-                    // GameRegistry.addShapelessRecipe(
-                    //     new ItemStack(part),
-                    //     IC2Items.getItem(CablePart.getTextureNameFromType(((CablePart) modPart).type)));
+                    GameRegistry.addShapelessRecipe(
+                            new ItemStack(part),
+                            IC2Items.getItem(CablePart.getTextureNameFromType(((CablePart) modPart).type)));
                     ((CablePart) modPart).stack = new ItemStack(part);
                     ModParts.stackCable.put(((CablePart) modPart).type, new ItemStack(part));
                 }
@@ -64,8 +64,7 @@ public class ModPartRegistry {
 
     public static Item getItem(String string) {
         for (Map.Entry<String, Item> entry : itemParts.entrySet()) {
-            if (entry.getValue()
-                .equals(string)) {
+            if (entry.getValue().equals(string)) {
                 return entry.getValue();
             }
         }
@@ -76,8 +75,7 @@ public class ModPartRegistry {
         if (Loader.isModLoaded(modid) || modid.equals("Minecraft")) {
             try {
                 IPartProvider iPartProvider = null;
-                iPartProvider = (IPartProvider) Class.forName(className)
-                    .newInstance();
+                iPartProvider = (IPartProvider) Class.forName(className).newInstance();
                 providers.add(iPartProvider);
                 // I am doing this because the qlibProvider is the most stable
                 if (modid.equals("qmunitylib")) {
@@ -98,8 +96,7 @@ public class ModPartRegistry {
 
     // Only use this one if it is a standalone Provider
     public static void addProvider(IPartProvider iPartProvider) {
-        if (Loader.isModLoaded(iPartProvider.modID()) || iPartProvider.modID()
-            .equals("Minecraft")) {
+        if (Loader.isModLoaded(iPartProvider.modID()) || iPartProvider.modID().equals("Minecraft")) {
             providers.add(iPartProvider);
         }
     }

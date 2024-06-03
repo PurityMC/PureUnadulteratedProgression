@@ -8,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import techreborn.Core;
 import techreborn.blocks.*;
 import techreborn.blocks.generator.*;
@@ -23,6 +22,7 @@ import techreborn.tiles.fusionReactor.TileEntityFusionController;
 import techreborn.tiles.idsu.TileIDSU;
 import techreborn.tiles.lesu.TileLesu;
 import techreborn.tiles.lesu.TileLesuStorage;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
 
@@ -74,7 +74,7 @@ public class ModBlocks {
     public static Block ore;
     public static Block storage;
     public static Block storage2;
-    // public static Block machineframe;
+    //public static Block machineframe;
 
     public static void init() {
         thermalGenerator = new BlockThermalGenerator();
@@ -291,7 +291,7 @@ public class ModBlocks {
         OreDictionary.registerOre("craftingPiston", Blocks.piston);
         OreDictionary.registerOre("craftingPiston", Blocks.sticky_piston);
         OreDictionary.registerOre("crafterWood", Blocks.crafting_table);
-        // OreDictionary.registerOre("machineBasic", new ItemStack(machineframe, 1));
+        //OreDictionary.registerOre("machineBasic", new ItemStack(machineframe, 1));
 
     }
 

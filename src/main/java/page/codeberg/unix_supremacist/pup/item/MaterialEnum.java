@@ -39,7 +39,7 @@ public enum MaterialEnum {
     Clay(0xC8C8DC, Type.dust),
     Coal(0x464646, Type.dust),
     Cobalt(0x5050FF, Type.metal, Type.machine, Type.dust, Type.ore),
-    Copper(0xFF6400, Type.vanilla, Type.machine, Type.dust, Type.tool),
+    Copper(0xFF6400, Type.metal, Type.machine, Type.dust, Type.tool),
     Cupronickel(0xE39680, Type.metal, Type.dust, Type.coil),
     DarkAsh(0x323232, Type.dust),
     DarkIron(0x37283C, Type.dust, Type.ore),
@@ -55,13 +55,13 @@ public enum MaterialEnum {
     // Europium(0xF6B5FF, Type.metal, Type.dust),
     // Gadolinium(0x3BBA1C, Type.metal, Type.dust),
     // Gallium(0xDCDCFF, Type.metal, Type.dust),
-    Gold(0xFFFF1E, Type.vanilla, Type.dust, Type.tool),
+    Gold(0xFFFF1E, Type.gold, Type.dust, Type.tool),
     // Holmium(0x1608A6, Type.metal, Type.dust),
     Indium(0x400080, Type.metal, Type.dust, Type.ore),
     Inductive(0xFFC878, Type.metal, Type.dust),
     Invar(0xB4B478, Type.metal, Type.part, Type.dust, Type.tool),
     Iridium(0xF0F0F5, Type.metal, Type.dust, Type.ore),
-    Iron(0xB8B8B8, Type.vanilla, Type.part, Type.dust, Type.tool),
+    Iron(0xB8B8B8, Type.iron, Type.part, Type.dust, Type.tool),
     Kanthal(0xB4B478, Type.metal, Type.dust, Type.coil, Type.hot),
     // Lanthanum(0x8A8A8A, Type.metal, Type.dust),
     Lead(0x544773, Type.metal, Type.dust, Type.tool),
@@ -122,7 +122,7 @@ public enum MaterialEnum {
     Pyrite(0xB8B8B8, Type.dust, Type.ore),
 
     Garnierite(0x464D19, Type.dust, Type.ore),
-    Obsidian(0x0, Type.vanilla),
+    Obsidian(0x0, Type.gold),
 
     Ruby(0xFF6464, Type.gem, Type.dust),
     RedGarnet(0xC85050, Type.gem, Type.dust),
@@ -143,7 +143,6 @@ public enum MaterialEnum {
     Sapphire(0x0, Type.gem, Type.dust),
     YellowGarnet(0x0, Type.gem, Type.dust),
     Peridot(0x0, Type.gem, Type.dust),
-    Wood(0x0, Type.dust),
 
     ;
 

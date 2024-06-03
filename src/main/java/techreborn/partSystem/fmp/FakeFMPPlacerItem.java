@@ -9,12 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import techreborn.partSystem.ModPart;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Vector3;
 import codechicken.multipart.JItemMultiPart;
 import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.TMultiPart;
-import techreborn.partSystem.ModPart;
 
 /**
  * This item is never added into the game, it is only used to add the part to the world.
@@ -29,7 +29,7 @@ public class FakeFMPPlacerItem extends JItemMultiPart {
 
     @Override
     public TMultiPart newPart(ItemStack item, EntityPlayer player, World world, BlockCoord pos, int side,
-        Vector3 vhit) {
+            Vector3 vhit) {
         TMultiPart w = MultiPartRegistry.createPart(modPart.getName(), false);
         return w;
     }

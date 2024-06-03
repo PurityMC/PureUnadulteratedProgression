@@ -1,9 +1,9 @@
 package techreborn.compat.nei;
 
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
 import techreborn.compat.nei.recipes.*;
 import techreborn.lib.ModInfo;
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
 
 public class NEIConfig implements IConfigureNEI {
 

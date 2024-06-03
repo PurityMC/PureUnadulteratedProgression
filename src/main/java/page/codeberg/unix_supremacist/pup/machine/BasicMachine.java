@@ -25,12 +25,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import page.codeberg.unix_supremacist.pup.Interfaces.ITSidedInventory;
+import page.codeberg.unix_supremacist.pup.Tags;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import page.codeberg.unix_supremacist.pup.Interfaces.ITSidedInventory;
-import page.codeberg.unix_supremacist.pup.Tags;
 
 public class BasicMachine extends BlockContainer {
 
@@ -95,15 +95,13 @@ public class BasicMachine extends BlockContainer {
                         if (j1 > itemstack.stackSize) j1 = itemstack.stackSize;
                         itemstack.stackSize -= j1;
                         EntityItem entityitem = new EntityItem(
-                            w,
-                            (float) x + f,
-                            (float) y + f1,
-                            (float) z + f2,
-                            new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                                w,
+                                (float) x + f,
+                                (float) y + f1,
+                                (float) z + f2,
+                                new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
                         if (itemstack.hasTagCompound()) entityitem.getEntityItem()
-                            .setTagCompound(
-                                (NBTTagCompound) itemstack.getTagCompound()
-                                    .copy());
+                                .setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 
                         float f3 = 0.05F;
                         entityitem.motionX = (float) this.random.nextGaussian() * f3;
@@ -205,9 +203,10 @@ public class BasicMachine extends BlockContainer {
 
         @Override
         public boolean isUseableByPlayer(EntityPlayer player) {
-            return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player
-                .getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D)
-                <= 64.0D;
+            return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq(
+                    (double) this.xCoord + 0.5D,
+                    (double) this.yCoord + 0.5D,
+                    (double) this.zCoord + 0.5D) <= 64.0D;
         }
 
         @Override
@@ -259,8 +258,7 @@ public class BasicMachine extends BlockContainer {
             boolean canProcess = false;
             if (this.inventory[0] != null) {
                 canProcess = true;
-                ItemStack itemstack = FurnaceRecipes.smelting()
-                    .getSmeltingResult(this.inventory[0]);
+                ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
                 if (itemstack == null) canProcess = false;
                 if (this.inventory[1] != null) {
                     if (!this.inventory[1].isItemEqual(itemstack)) canProcess = false;
@@ -273,8 +271,7 @@ public class BasicMachine extends BlockContainer {
 
         public void processItem() {
             if (this.canProcess()) {
-                ItemStack i = FurnaceRecipes.smelting()
-                    .getSmeltingResult(this.inventory[0]);
+                ItemStack i = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
                 if (this.inventory[1] == null) this.inventory[1] = i.copy();
                 else if (this.inventory[1].getItem() == i.getItem()) this.inventory[1].stackSize += i.stackSize;
 
@@ -354,8 +351,7 @@ public class BasicMachine extends BlockContainer {
 
         @Override
         protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-            this.mc.getTextureManager()
-                .bindTexture(guiTextures);
+            this.mc.getTextureManager().bindTexture(guiTextures);
         }
     }
 
@@ -391,8 +387,7 @@ public class BasicMachine extends BlockContainer {
                     if (!this.mergeItemStack(slotStack, 3, 39, true)) return null;
                     slot.onSlotChange(slotStack, stack);
                 } else if (slotNum != 1 && slotNum != 0) {
-                    if (FurnaceRecipes.smelting()
-                        .getSmeltingResult(slotStack) != null)
+                    if (FurnaceRecipes.smelting().getSmeltingResult(slotStack) != null)
                         if (!this.mergeItemStack(slotStack, 0, 1, false)) return null;
                     else if (TileEntityFurnace.isItemFuel(slotStack))
                         if (!this.mergeItemStack(slotStack, 1, 2, false)) return null;

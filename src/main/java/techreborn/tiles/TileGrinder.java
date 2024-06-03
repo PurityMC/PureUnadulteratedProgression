@@ -18,8 +18,9 @@ import techreborn.init.ModBlocks;
 import techreborn.init.ModFluids;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileGrinder extends TilePowerAcceptor implements IFluidHandler, IInventory, ISidedInventory {
+public class TileGrinder extends TilePowerAcceptor implements IWrenchable, IFluidHandler, IInventory, ISidedInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(6, "TileGrinder", 64);
@@ -42,6 +43,37 @@ public class TileGrinder extends TilePowerAcceptor implements IFluidHandler, IIn
         crafter = new RecipeCrafter(Reference.grinderRecipe, this, 1, 4, inventory, inputs, outputs);
     }
 
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.Grinder, 1);
+    }
+
     public boolean isComplete() {
         return false;
     }
@@ -49,12 +81,11 @@ public class TileGrinder extends TilePowerAcceptor implements IFluidHandler, IIn
     public boolean getMutliBlock() {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = worldObj
-                .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                    .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (tileEntity instanceof TileMachineCasing) {
                 if (((TileMachineCasing) tileEntity).isConnected()
-                    && ((TileMachineCasing) tileEntity).getMultiblockController()
-                        .isAssembled()
-                    && ((TileMachineCasing) tileEntity).getMultiblockController().height == 3) {
+                        && ((TileMachineCasing) tileEntity).getMultiblockController().isAssembled()
+                        && ((TileMachineCasing) tileEntity).getMultiblockController().height == 3) {
                     connectionStatus = 1;
                     return true;
                 }
@@ -104,7 +135,7 @@ public class TileGrinder extends TilePowerAcceptor implements IFluidHandler, IIn
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         if (resource.getFluid() == FluidRegistry.WATER || resource.getFluid() == ModFluids.fluidMercury
-            || resource.getFluid() == ModFluids.fluidSodiumpersulfate) {
+                || resource.getFluid() == ModFluids.fluidSodiumpersulfate) {
             int filled = tank.fill(resource, doFill);
             tank.compareAndUpdate();
             return filled;
@@ -132,7 +163,7 @@ public class TileGrinder extends TilePowerAcceptor implements IFluidHandler, IIn
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
         if (fluid == FluidRegistry.WATER || fluid == ModFluids.fluidMercury
-            || fluid == ModFluids.fluidSodiumpersulfate) {
+                || fluid == ModFluids.fluidSodiumpersulfate) {
             return true;
         }
         return false;

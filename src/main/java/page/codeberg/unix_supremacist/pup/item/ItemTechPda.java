@@ -25,8 +25,13 @@ public class ItemTechPda extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        player
-            .openGui(PUP.pupinstance, GuiHandler.pdaID, world, (int) player.posX, (int) player.posY, (int) player.posY);
+        player.openGui(
+                PUP.pupinstance,
+                GuiHandler.pdaID,
+                world,
+                (int) player.posX,
+                (int) player.posY,
+                (int) player.posY);
         return itemStack;
     }
 

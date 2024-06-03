@@ -21,8 +21,8 @@ import techreborn.tiles.fusionReactor.TileEntityFusionController;
 public class GuiFusionReactor extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/fusion_reactor.png");
+            "techreborn",
+            "textures/gui/fusion_reactor.png");
 
     ContainerFusionReactor containerFusionReactor;
     TileEntityFusionController fusionController;
@@ -37,16 +37,16 @@ public class GuiFusionReactor extends GuiContainer {
         String name = StatCollector.translateToLocal("tile.techreborn.fusioncontrolcomputer.name");
         this.fontRendererObj.drawString(name, 87, 6, 4210752);
         this.fontRendererObj
-            .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+                .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 
         this.fontRendererObj.drawString("EU: " + containerFusionReactor.energy, 11, 8, 16448255);
         this.fontRendererObj
-            .drawString("Coils: " + (containerFusionReactor.coilStatus == 1 ? "Yes" : "No"), 11, 16, 16448255);
+                .drawString("Coils: " + (containerFusionReactor.coilStatus == 1 ? "Yes" : "No"), 11, 16, 16448255);
         if (containerFusionReactor.neededEU > 1 && containerFusionReactor.tickTime < 1) this.fontRendererObj.drawString(
-            "Start EU: " + percentage(containerFusionReactor.neededEU, containerFusionReactor.energy) + "%",
-            11,
-            24,
-            16448255);
+                "Start EU: " + percentage(containerFusionReactor.neededEU, containerFusionReactor.energy) + "%",
+                11,
+                24,
+                16448255);
 
     }
 
@@ -58,9 +58,9 @@ public class GuiFusionReactor extends GuiContainer {
         buttonList.add(button);
         super.initGui();
         ChunkCoordinates coordinates = new ChunkCoordinates(
-            fusionController.xCoord - (ForgeDirection.getOrientation(fusionController.getRotation()).offsetX * 2),
-            fusionController.yCoord - 1,
-            fusionController.zCoord - (ForgeDirection.getOrientation(fusionController.getRotation()).offsetZ * 2));
+                fusionController.xCoord - (ForgeDirection.getOrientation(fusionController.getRotation()).offsetX * 2),
+                fusionController.yCoord - 1,
+                fusionController.zCoord - (ForgeDirection.getOrientation(fusionController.getRotation()).offsetZ * 2));
         if (coordinates.equals(ClientProxy.multiblockRenderEvent.anchor)) {
             ClientProxy.multiblockRenderEvent.setMultiblock(null);
             button.displayString = "B";
@@ -72,8 +72,7 @@ public class GuiFusionReactor extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager()
-            .bindTexture(texture);
+        this.mc.getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -99,14 +98,14 @@ public class GuiFusionReactor extends GuiContainer {
                     MultiblockSet set = new MultiblockSet(ClientMultiBlocks.reactor);
                     ClientProxy.multiblockRenderEvent.setMultiblock(set);
                     ClientProxy.multiblockRenderEvent.partent = new Location(
-                        fusionController.xCoord,
-                        fusionController.yCoord,
-                        fusionController.zCoord,
-                        fusionController.getWorldObj());
+                            fusionController.xCoord,
+                            fusionController.yCoord,
+                            fusionController.zCoord,
+                            fusionController.getWorldObj());
                     ClientProxy.multiblockRenderEvent.anchor = new ChunkCoordinates(
-                        fusionController.xCoord,
-                        fusionController.yCoord - 1,
-                        fusionController.zCoord);
+                            fusionController.xCoord,
+                            fusionController.yCoord - 1,
+                            fusionController.zCoord);
                 }
                 button.displayString = "A";
             } else {

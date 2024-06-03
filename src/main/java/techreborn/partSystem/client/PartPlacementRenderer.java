@@ -13,13 +13,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import reborncore.common.misc.Location;
 import reborncore.common.misc.vecmath.Vecs3d;
 import techreborn.partSystem.IModPart;
 import techreborn.partSystem.ModPartItem;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * This is based of https://github.com/Qmunity/QmunityLib/blob/master/src%2Fmain%
@@ -47,7 +47,7 @@ public class PartPlacementRenderer {
         ForgeDirection faceHit = ForgeDirection.getOrientation(mop.sideHit);
         Location location = new Location(mop.blockX, mop.blockY, mop.blockZ);
         if (fb == null || width != Minecraft.getMinecraft().displayWidth
-            || height != Minecraft.getMinecraft().displayHeight) {
+                || height != Minecraft.getMinecraft().displayHeight) {
             width = Minecraft.getMinecraft().displayWidth;
             height = Minecraft.getMinecraft().displayHeight;
             fb = new Framebuffer(width, height, true);
@@ -55,9 +55,7 @@ public class PartPlacementRenderer {
 
         GL11.glPushMatrix();
         {
-            Minecraft.getMinecraft()
-                .getFramebuffer()
-                .unbindFramebuffer();
+            Minecraft.getMinecraft().getFramebuffer().unbindFramebuffer();
             GL11.glPushMatrix();
             {
                 GL11.glLoadIdentity();
@@ -83,9 +81,7 @@ public class PartPlacementRenderer {
                 fb.unbindFramebuffer();
             }
             GL11.glPopMatrix();
-            Minecraft.getMinecraft()
-                .getFramebuffer()
-                .bindFramebuffer(true);
+            Minecraft.getMinecraft().getFramebuffer().bindFramebuffer(true);
             GL11.glPushMatrix();
             {
                 Minecraft mc = Minecraft.getMinecraft();
@@ -94,12 +90,12 @@ public class PartPlacementRenderer {
                 GL11.glMatrixMode(GL11.GL_PROJECTION);
                 GL11.glLoadIdentity();
                 GL11.glOrtho(
-                    0,
-                    scaledresolution.getScaledWidth_double(),
-                    scaledresolution.getScaledHeight_double(),
-                    0,
-                    0.1,
-                    10000D);
+                        0,
+                        scaledresolution.getScaledWidth_double(),
+                        scaledresolution.getScaledHeight_double(),
+                        0,
+                        0.1,
+                        10000D);
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
                 GL11.glLoadIdentity();
                 GL11.glTranslatef(0.0F, 0.0F, -2000.0F);
@@ -127,9 +123,7 @@ public class PartPlacementRenderer {
             }
             GL11.glPopMatrix();
             fb.framebufferClear();
-            Minecraft.getMinecraft()
-                .getFramebuffer()
-                .bindFramebuffer(true);
+            Minecraft.getMinecraft().getFramebuffer().bindFramebuffer(true);
         }
         GL11.glPopMatrix();
     }

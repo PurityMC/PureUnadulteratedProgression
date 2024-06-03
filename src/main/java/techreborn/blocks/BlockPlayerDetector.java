@@ -18,10 +18,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import techreborn.client.TechRebornCreativeTab;
 import techreborn.tiles.TilePlayerDectector;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPlayerDetector extends BlockMachineBase {
 
@@ -113,14 +113,13 @@ public class BlockPlayerDetector extends BlockMachineBase {
         super.onBlockPlacedBy(world, x, y, z, player, itemstack);
         TileEntity tile = world.getTileEntity(x, y, z);
         if (tile instanceof TilePlayerDectector) {
-            ((TilePlayerDectector) tile).owenerUdid = player.getUniqueID()
-                .toString();
+            ((TilePlayerDectector) tile).owenerUdid = player.getUniqueID().toString();
         }
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX,
-        float hitY, float hitZ) {
+            float hitY, float hitZ) {
         if (super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ)) {
             return true;
         }

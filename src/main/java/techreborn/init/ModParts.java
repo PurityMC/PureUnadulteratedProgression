@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import techreborn.partSystem.IPartProvider;
 import techreborn.partSystem.ModPartRegistry;
 import techreborn.partSystem.parts.CablePart;
+import cpw.mods.fml.common.Loader;
 
 public class ModParts {
 
@@ -25,8 +25,7 @@ public class ModParts {
         ModPartRegistry.addProvider("techreborn.partSystem.QLib.QModPartFactory", "qmunitylib");
         ModPartRegistry.addAllPartsToSystems();
         for (IPartProvider provider : ModPartRegistry.providers) {
-            if (provider.modID()
-                .equals("ForgeMultipart")) {
+            if (provider.modID().equals("ForgeMultipart")) {
                 ModPartRegistry.masterProvider = provider;
             }
         }

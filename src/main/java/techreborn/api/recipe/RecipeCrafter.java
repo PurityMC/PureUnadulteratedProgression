@@ -67,7 +67,7 @@ public class RecipeCrafter {
      * @param outputSlots A list of output slot ids
      */
     public RecipeCrafter(String recipeName, TileMachineBase parentTile, int inputs, int outputs, Inventory inventory,
-        int[] inputSlots, int[] outputSlots) {
+            int[] inputSlots, int[] outputSlots) {
         this.recipeName = recipeName;
         this.parentTile = parentTile;
         if (parentTile instanceof IEnergyInterfaceTile) {
@@ -154,11 +154,8 @@ public class RecipeCrafter {
                 if (canGiveInvAll && currentRecipe.onCraft(parentTile)) {
                     for (int i = 0; i < currentRecipe.getOutputsSize(); i++) {
                         if (!filledSlots.contains(outputSlots[i])) {// checks it has not been filled
-                            fitStack(
-                                currentRecipe.getOutput(i)
-                                    .copy(),
-                                outputSlots[i]);// fills the slot with the
-                                                // output stack
+                            fitStack(currentRecipe.getOutput(i).copy(), outputSlots[i]);// fills the slot with the
+                                                                                        // output stack
                             filledSlots.add(outputSlots[i]);
                         }
                     }
@@ -187,8 +184,8 @@ public class RecipeCrafter {
             Boolean hasItem = false;
             for (int inputSlot : inputSlots) {// Checks to see if it can find the input
                 if (ItemUtils
-                    .isItemEqual(input, inventory.getStackInSlot(inputSlot), true, true, currentRecipe.useOreDic())
-                    && inventory.getStackInSlot(inputSlot).stackSize >= input.stackSize) {
+                        .isItemEqual(input, inventory.getStackInSlot(inputSlot), true, true, currentRecipe.useOreDic())
+                        && inventory.getStackInSlot(inputSlot).stackSize >= input.stackSize) {
                     hasItem = true;
                 }
             }
@@ -205,8 +202,8 @@ public class RecipeCrafter {
             Boolean hasItem = false;
             for (int inputslot : inputSlots) {
                 if (ItemUtils
-                    .isItemEqual(input, inventory.getStackInSlot(inputslot), true, true, recipeType.useOreDic())
-                    && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
+                        .isItemEqual(input, inventory.getStackInSlot(inputslot), true, true, recipeType.useOreDic())
+                        && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
                     hasItem = true;
                 }
             }
@@ -221,8 +218,12 @@ public class RecipeCrafter {
         }
         for (ItemStack input : currentRecipe.getInputs()) {
             for (int inputSlot : inputSlots) {// Uses all of the inputs
-                if (ItemUtils
-                    .isItemEqual(input, inventory.getStackInSlot(inputSlot), true, true, currentRecipe.useOreDic())) {
+                if (ItemUtils.isItemEqual(
+                        input,
+                        inventory.getStackInSlot(inputSlot),
+                        true,
+                        true,
+                        currentRecipe.useOreDic())) {
                     inventory.decrStackSize(inputSlot, input.stackSize);
                     break;
                 }
@@ -275,10 +276,8 @@ public class RecipeCrafter {
         if (data.hasKey("currentTickTime")) currentTickTime = data.getInteger("currentTickTime");
 
         if (parentTile != null && parentTile.getWorldObj() != null && parentTile.getWorldObj().isRemote) {
-            parentTile.getWorldObj()
-                .markBlockForUpdate(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord);
-            parentTile.getWorldObj()
-                .markBlockRangeForRenderUpdate(
+            parentTile.getWorldObj().markBlockForUpdate(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord);
+            parentTile.getWorldObj().markBlockRangeForRenderUpdate(
                     parentTile.xCoord,
                     parentTile.yCoord,
                     parentTile.zCoord,
@@ -336,13 +335,12 @@ public class RecipeCrafter {
     public void setIsActive() {
         if (isActive()) {
             parentTile.getWorldObj()
-                .setBlockMetadataWithNotify(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord, 1, 2);
+                    .setBlockMetadataWithNotify(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord, 1, 2);
         } else {
             parentTile.getWorldObj()
-                .setBlockMetadataWithNotify(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord, 0, 2);
+                    .setBlockMetadataWithNotify(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord, 0, 2);
         }
-        parentTile.getWorldObj()
-            .markBlockForUpdate(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord);
+        parentTile.getWorldObj().markBlockForUpdate(parentTile.xCoord, parentTile.yCoord, parentTile.zCoord);
     }
 
     public void setCurrentRecipe(IBaseRecipeType recipe) {

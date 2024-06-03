@@ -12,6 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import reborncore.common.misc.Location;
+import reborncore.common.misc.vecmath.Vecs3d;
+import reborncore.common.misc.vecmath.Vecs3dCube;
+import techreborn.partSystem.IPartDesc;
+import techreborn.partSystem.ModPart;
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
 import codechicken.lib.raytracer.IndexedCuboid6;
@@ -24,11 +29,6 @@ import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TSlottedPart;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import reborncore.common.misc.Location;
-import reborncore.common.misc.vecmath.Vecs3d;
-import reborncore.common.misc.vecmath.Vecs3dCube;
-import techreborn.partSystem.IPartDesc;
-import techreborn.partSystem.ModPart;
 
 public class FMPModPart extends TMultiPart implements TSlottedPart, JNormalOcclusion, ISidedHollowConnect {
 
@@ -167,9 +167,7 @@ public class FMPModPart extends TMultiPart implements TSlottedPart, JNormalOcclu
     public Iterable<ItemStack> getDrops() {
         List<ItemStack> stackArrayList = new ArrayList<ItemStack>();
         if (iModPart.getItem() != null) {
-            stackArrayList.add(
-                iModPart.getItem()
-                    .copy());
+            stackArrayList.add(iModPart.getItem().copy());
         }
         return stackArrayList;
     }

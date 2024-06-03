@@ -2,13 +2,13 @@ package techreborn.proxies;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import reborncore.client.multiblock.MultiblockRenderEvent;
 import techreborn.client.ClientMultiBlocks;
 import techreborn.client.IconSupplier;
 import techreborn.client.StackToolTipEvent;
 import techreborn.client.hud.ChargeHud;
 import techreborn.client.keybindings.KeyBindings;
+import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
 

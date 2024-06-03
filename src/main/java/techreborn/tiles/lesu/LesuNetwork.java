@@ -23,10 +23,10 @@ public class LesuNetwork {
         master = null;
         for (TileLesuStorage lesuStorage : storages) {
             lesuStorage.findAndJoinNetwork(
-                lesuStorage.getWorldObj(),
-                lesuStorage.xCoord,
-                lesuStorage.yCoord,
-                lesuStorage.zCoord);
+                    lesuStorage.getWorldObj(),
+                    lesuStorage.xCoord,
+                    lesuStorage.yCoord,
+                    lesuStorage.zCoord);
         }
     }
 

@@ -10,7 +10,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.google.common.base.Charsets;
-
 import io.netty.buffer.ByteBuf;
 
 public abstract class SimplePacket {

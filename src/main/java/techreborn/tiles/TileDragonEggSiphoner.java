@@ -11,8 +11,9 @@ import reborncore.common.util.Inventory;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileDragonEggSiphoner extends TilePowerAcceptor implements IInventory {
+public class TileDragonEggSiphoner extends TilePowerAcceptor implements IWrenchable, IInventory {
 
     public Inventory inventory = new Inventory(3, "TileAlloySmelter", 64);
     public static final int euTick = ConfigTechReborn.DragoneggsiphonerOutput;
@@ -30,6 +31,37 @@ public class TileDragonEggSiphoner extends TilePowerAcceptor implements IInvento
                 addEnergy(euTick);
             }
         }
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.Dragoneggenergysiphoner, 1);
     }
 
     public boolean isComplete() {

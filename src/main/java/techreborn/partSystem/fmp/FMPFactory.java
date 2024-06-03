@@ -14,6 +14,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import reborncore.common.misc.Location;
+import reborncore.common.misc.vecmath.Vecs3dCube;
+import techreborn.partSystem.IModPart;
+import techreborn.partSystem.IPartProvider;
+import techreborn.partSystem.ModPart;
+import techreborn.partSystem.ModPartRegistry;
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Cuboid6;
@@ -22,19 +28,12 @@ import codechicken.multipart.NormallyOccludedPart;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import cpw.mods.fml.common.Loader;
-import reborncore.common.misc.Location;
-import reborncore.common.misc.vecmath.Vecs3dCube;
-import techreborn.partSystem.IModPart;
-import techreborn.partSystem.IPartProvider;
-import techreborn.partSystem.ModPart;
-import techreborn.partSystem.ModPartRegistry;
 
 public class FMPFactory implements MultiPartRegistry.IPartFactory2, IPartProvider {
 
     public TMultiPart createPart(String type, boolean client) {
         for (ModPart modPart : ModPartRegistry.parts) {
-            if (modPart.getName()
-                .equals(type)) {
+            if (modPart.getName().equals(type)) {
                 return new FMPModPart((ModPart) modPart.copy());
             }
         }
@@ -42,7 +41,7 @@ public class FMPFactory implements MultiPartRegistry.IPartFactory2, IPartProvide
     }
 
     public boolean placePart(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side,
-        float hitX, float hitY, float hitZ, ModPart modPart) {
+            float hitX, float hitY, float hitZ, ModPart modPart) {
         return new FakeFMPPlacerItem(modPart).onItemUse(item, player, world, x, y, z, side, hitX, hitY, hitZ);
     }
 
@@ -60,8 +59,7 @@ public class FMPFactory implements MultiPartRegistry.IPartFactory2, IPartProvide
             List<TMultiPart> t = mp.jPartList();
             for (TMultiPart p : t) {
                 if (ret == false) {
-                    if (p.getType()
-                        .equals(name)) {
+                    if (p.getType().equals(name)) {
                         if (p instanceof FMPModPart) {
                             return ((FMPModPart) p).iModPart;
                         }
@@ -97,7 +95,7 @@ public class FMPFactory implements MultiPartRegistry.IPartFactory2, IPartProvide
     @Override
     public boolean checkOcclusion(World world, Location location, Vecs3dCube cube) {
         codechicken.multipart.TileMultipart tmp = codechicken.multipart.TileMultipart
-            .getOrConvertTile(world, new BlockCoord(location.getX(), location.getY(), location.getZ()));
+                .getOrConvertTile(world, new BlockCoord(location.getX(), location.getY(), location.getZ()));
         if (tmp == null) return false;
         return !tmp.occlusionTest(tmp.partList(), new NormallyOccludedPart(new Cuboid6(cube.toAABB())));
     }
@@ -111,8 +109,7 @@ public class FMPFactory implements MultiPartRegistry.IPartFactory2, IPartProvide
             List<TMultiPart> t = mp.jPartList();
             for (TMultiPart p : t) {
                 if (ret == false) {
-                    if (p.getType()
-                        .equals(name)) {
+                    if (p.getType().equals(name)) {
                         ret = true;
                     }
                 }

@@ -26,22 +26,21 @@ public class ItemsPage extends TitledPage {
         for (BasePage page : collection.pages) {
             if (page.hasIndexButton) {
                 String indexName = page.INDEX_NAME;
-                if (page.getReferenceName() != null && page.getReferenceName()
-                    .contains(PAGE)) {
+                if (page.getReferenceName() != null && page.getReferenceName().contains(PAGE)) {
                     if (indexName == null && page instanceof CraftingInfoPage)
                         indexName = ttl(((CraftingInfoPage) page).result.getUnlocalizedName() + ".name");
                     else if (indexName == null) indexName = page.getReferenceName();
                     int colour = 77777777;
                     buttonList.add(
-                        new GuiButtonTextOnly(
-                            999,
-                            getXMin() + 20 + collum * 120,
-                            getYMin() + 20 + (row * 7),
-                            82,
-                            7,
-                            indexName,
-                            page.getReferenceName(),
-                            6666666));
+                            new GuiButtonTextOnly(
+                                    999,
+                                    getXMin() + 20 + collum * 120,
+                                    getYMin() + 20 + (row * 7),
+                                    82,
+                                    7,
+                                    indexName,
+                                    page.getReferenceName(),
+                                    6666666));
                     row++;
                     if (row > 21) {
                         row = 0;
@@ -69,7 +68,7 @@ public class ItemsPage extends TitledPage {
         super.drawScreen(minecraft, offsetX, offsetY, mouseX, mouseY);
         for (int k = 0; k < this.buttonList.size(); ++k) {
             if (buttonList.get(k) instanceof GuiButtonTextOnly
-                && ((GuiButtonTextOnly) buttonList.get(k)).getIsHovering()) {
+                    && ((GuiButtonTextOnly) buttonList.get(k)).getIsHovering()) {
                 ((GuiButtonTextOnly) this.buttonList.get(k)).drawButton(this.mc, mouseX + offsetX, mouseY + offsetY);
             }
         }

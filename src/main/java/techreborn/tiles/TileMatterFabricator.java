@@ -12,8 +12,11 @@ import reborncore.common.util.ItemUtils;
 import techreborn.init.ModBlocks;
 import techreborn.init.ModItems;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.recipe.RecipeOutput;
+import ic2.api.recipe.Recipes;
+import ic2.api.tile.IWrenchable;
 
-public class TileMatterFabricator extends TilePowerAcceptor implements IInventory, ISidedInventory {
+public class TileMatterFabricator extends TilePowerAcceptor implements IWrenchable, IInventory, ISidedInventory {
 
     public static int fabricationRate = 2666656;
     public int tickTime;
@@ -24,6 +27,37 @@ public class TileMatterFabricator extends TilePowerAcceptor implements IInventor
     public TileMatterFabricator() {
         super(6);
         // TODO configs
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.MatterFabricator, 1);
     }
 
     public boolean isComplete() {
@@ -106,7 +140,7 @@ public class TileMatterFabricator extends TilePowerAcceptor implements IInventor
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
         return side == ForgeDirection.DOWN.ordinal() ? new int[] { 0, 1, 2, 3, 4, 5, 6 }
-            : new int[] { 0, 1, 2, 3, 4, 5, 6 };
+                : new int[] { 0, 1, 2, 3, 4, 5, 6 };
     }
 
     @Override
@@ -165,8 +199,8 @@ public class TileMatterFabricator extends TilePowerAcceptor implements IInventor
 
     private boolean spaceForOutput() {
         return inventory.getStackInSlot(6) == null
-            || ItemUtils.isItemEqual(inventory.getStackInSlot(6), new ItemStack(ModItems.uuMatter), true, true)
-                && inventory.getStackInSlot(6).stackSize < 64;
+                || ItemUtils.isItemEqual(inventory.getStackInSlot(6), new ItemStack(ModItems.uuMatter), true, true)
+                        && inventory.getStackInSlot(6).stackSize < 64;
     }
 
     private void addOutputProducts() {
@@ -193,17 +227,16 @@ public class TileMatterFabricator extends TilePowerAcceptor implements IInventor
     }
 
     public int getValue(ItemStack itemStack) {
-        // int value = getValue(Recipes.matterAmplifier.getOutputFor(itemStack, false));
-        int value = 0;
+        int value = getValue(Recipes.matterAmplifier.getOutputFor(itemStack, false));
         return value;
     }
 
-    // private static Integer getValue(RecipeOutput output) {
-    //     if (output != null && output.metadata != null) {
-    //         return output.metadata.getInteger("amplification");
-    //     }
-    //     return 0;
-    // }
+    private static Integer getValue(RecipeOutput output) {
+        if (output != null && output.metadata != null) {
+            return output.metadata.getInteger("amplification");
+        }
+        return 0;
+    }
 
     @Override
     public double getMaxPower() {

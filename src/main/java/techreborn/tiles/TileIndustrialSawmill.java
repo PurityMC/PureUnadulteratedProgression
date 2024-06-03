@@ -20,9 +20,10 @@ import techreborn.init.ModBlocks;
 import techreborn.init.ModFluids;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
 public class TileIndustrialSawmill extends TilePowerAcceptor
-    implements IFluidHandler, IInventory, ISidedInventory, IListInfoProvider {
+        implements IWrenchable, IFluidHandler, IInventory, ISidedInventory, IListInfoProvider {
 
     public int tickTime;
     public Inventory inventory = new Inventory(5, "TileIndustrialSawmill", 64);
@@ -56,16 +57,15 @@ public class TileIndustrialSawmill extends TilePowerAcceptor
     public boolean getMutliBlock() {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = worldObj
-                .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                    .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (tileEntity instanceof TileMachineCasing) {
                 if ((tileEntity.getBlockType() instanceof BlockMachineCasing)) {
                     int heat;
                     heat = BlockMachineCasing.getHeatFromMeta(tileEntity.getBlockMetadata());
                     Location location = new Location(xCoord, yCoord, zCoord, direction);
                     location.modifyPositionFromSide(direction, 1);
-                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ())
-                        .getUnlocalizedName()
-                        .equals("tile.lava")) {
+                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ()).getUnlocalizedName()
+                            .equals("tile.lava")) {
                         heat += 500;
                     }
                     return true;
@@ -73,6 +73,37 @@ public class TileIndustrialSawmill extends TilePowerAcceptor
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.industrialSawmill, 1);
     }
 
     public boolean isComplete() {
@@ -99,7 +130,7 @@ public class TileIndustrialSawmill extends TilePowerAcceptor
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         if (resource.getFluid() == FluidRegistry.WATER || resource.getFluid() == ModFluids.fluidMercury
-            || resource.getFluid() == ModFluids.fluidSodiumpersulfate) {
+                || resource.getFluid() == ModFluids.fluidSodiumpersulfate) {
             int filled = tank.fill(resource, doFill);
             tank.compareAndUpdate();
             return filled;

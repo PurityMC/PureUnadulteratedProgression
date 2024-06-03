@@ -20,12 +20,12 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import org.lwjgl.opengl.GL11;
 
+import page.codeberg.unix_supremacist.pup.pda.PageCollection;
+
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
-import page.codeberg.unix_supremacist.pup.pda.PageCollection;
 
 public class CraftingInfoPage extends TitledPage {
 
@@ -39,7 +39,7 @@ public class CraftingInfoPage extends TitledPage {
     private float descriptionScale = 0.66f;
 
     public CraftingInfoPage(String name, PageCollection collection, ItemStack itemStack,
-        String unlocalizedDescription) {
+                            String unlocalizedDescription) {
         super(name, true, collection, itemStack.getUnlocalizedName() + ".name", Color.white.getRGB());
         this.result = itemStack;
         this.recipe = getFirstRecipeForItem(itemStack);
@@ -85,8 +85,8 @@ public class CraftingInfoPage extends TitledPage {
                 int itemY = offsetY + gridOffsetY + (column * itemBoxSize);
                 drawItemStack(input, itemX, itemY, "");
                 if (relativeMouseX > itemX - 2 && relativeMouseX < itemX - 2 + itemBoxSize
-                    && relativeMouseY > itemY - 2
-                    && relativeMouseY < itemY - 2 + itemBoxSize) {
+                        && relativeMouseY > itemY - 2
+                        && relativeMouseY < itemY - 2 + itemBoxSize) {
                     tooltip = input;
                 }
             }
@@ -101,8 +101,8 @@ public class CraftingInfoPage extends TitledPage {
 
         drawItemStack(result, itemX, itemY, "");
         if (relativeMouseX > itemX - 2 && relativeMouseX < itemX - 2 + itemBoxSize
-            && relativeMouseY > itemY - 2
-            && relativeMouseY < itemY - 2 + itemBoxSize) {
+                && relativeMouseY > itemY - 2
+                && relativeMouseY < itemY - 2 + itemBoxSize) {
             tooltip = result;
         }
         if (tooltip != null) {
@@ -118,8 +118,7 @@ public class CraftingInfoPage extends TitledPage {
         int offset = 0;
         for (String s : getFormattedText(fontRendererObj)) {
             if (s == null) break;
-            if (s.contains("\\%") && s.substring(0, 2)
-                .equals("\\%")) {
+            if (s.contains("\\%") && s.substring(0, 2).equals("\\%")) {
                 s = s.substring(2);
                 offset += fontRendererObj.FONT_HEIGHT / 2;
             }
@@ -166,10 +165,7 @@ public class CraftingInfoPage extends TitledPage {
 
     protected void drawItemStackTooltip(ItemStack stack, int x, int y) {
         final Minecraft mc = Minecraft.getMinecraft();
-        FontRenderer font = Objects.firstNonNull(
-            stack.getItem()
-                .getFontRenderer(stack),
-            mc.fontRenderer);
+        FontRenderer font = Objects.firstNonNull(stack.getItem().getFontRenderer(stack), mc.fontRenderer);
 
         @SuppressWarnings("unchecked")
         List<String> list = stack.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips);
@@ -190,24 +186,21 @@ public class CraftingInfoPage extends TitledPage {
         GL11.glColor3f(1f, 1f, 1f);
         GL11.glEnable(GL11.GL_NORMALIZE);
         FontRenderer font = null;
-        if (par1ItemStack != null) font = par1ItemStack.getItem()
-            .getFontRenderer(par1ItemStack);
+        if (par1ItemStack != null) font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
         if (font == null) font = Minecraft.getMinecraft().fontRenderer;
         itemRenderer.renderItemAndEffectIntoGUI(
-            font,
-            Minecraft.getMinecraft()
-                .getTextureManager(),
-            par1ItemStack,
-            par2,
-            par3);
+                font,
+                Minecraft.getMinecraft().getTextureManager(),
+                par1ItemStack,
+                par2,
+                par3);
         itemRenderer.renderItemOverlayIntoGUI(
-            font,
-            Minecraft.getMinecraft()
-                .getTextureManager(),
-            par1ItemStack,
-            par2,
-            par3,
-            par4Str);
+                font,
+                Minecraft.getMinecraft().getTextureManager(),
+                par1ItemStack,
+                par2,
+                par3,
+                par4Str);
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
@@ -215,8 +208,7 @@ public class CraftingInfoPage extends TitledPage {
     @SuppressWarnings("unchecked")
     private ItemStack[] getFirstRecipeForItem(ItemStack resultingItem) {
         ItemStack[] recipeItems = new ItemStack[9];
-        for (IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance()
-            .getRecipeList()) {
+        for (IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList()) {
             if (recipe == null) continue;
 
             ItemStack result = recipe.getRecipeOutput();
@@ -230,10 +222,7 @@ public class CraftingInfoPage extends TitledPage {
 
         }
 
-        Iterator iterator = FurnaceRecipes.smelting()
-            .getSmeltingList()
-            .entrySet()
-            .iterator();
+        Iterator iterator = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator();
         Map.Entry entry;
 
         while (iterator.hasNext()) {
@@ -265,8 +254,7 @@ public class CraftingInfoPage extends TitledPage {
 
     @SuppressWarnings("unchecked")
     private Object[] getRecipeInput(IRecipe recipe) {
-        if (recipe instanceof ShapelessOreRecipe) return ((ShapelessOreRecipe) recipe).getInput()
-            .toArray();
+        if (recipe instanceof ShapelessOreRecipe) return ((ShapelessOreRecipe) recipe).getInput().toArray();
         else if (recipe instanceof ShapedOreRecipe) return getShapedOreRecipe((ShapedOreRecipe) recipe);
         else if (recipe instanceof ShapedRecipes) return ((ShapedRecipes) recipe).recipeItems;
         else if (recipe instanceof ShapelessRecipes)

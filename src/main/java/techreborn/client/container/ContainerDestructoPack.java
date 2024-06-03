@@ -8,6 +8,7 @@ import page.codeberg.unix_supremacist.pup.api.ItemApi;
 import reborncore.client.gui.SlotFilteredVoid;
 import reborncore.common.container.RebornContainer;
 import reborncore.common.util.Inventory;
+import techreborn.init.ModItems;
 
 public class ContainerDestructoPack extends RebornContainer {
 
@@ -27,7 +28,7 @@ public class ContainerDestructoPack extends RebornContainer {
 
     private void buildContainer() {
         this.addSlotToContainer(
-            new SlotFilteredVoid(inv, 0, 80, 36, new ItemStack[] { ItemApi.getItem("thickNeutronReflector") }));
+                new SlotFilteredVoid(inv, 0, 80, 36, new ItemStack[] {ItemApi.getItem("thickNeutronReflector")}));
         int i;
 
         for (i = 0; i < 3; ++i) {

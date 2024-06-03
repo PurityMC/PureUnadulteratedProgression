@@ -15,8 +15,9 @@ import techreborn.blocks.BlockMachineCasing;
 import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileImplosionCompressor extends TilePowerAcceptor implements IInventory, ISidedInventory {
+public class TileImplosionCompressor extends TilePowerAcceptor implements IWrenchable, IInventory, ISidedInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(4, "TileImplosionCompressor", 64);
@@ -34,10 +35,41 @@ public class TileImplosionCompressor extends TilePowerAcceptor implements IInven
         crafter = new RecipeCrafter(Reference.implosionCompressorRecipe, this, 2, 2, inventory, inputs, outputs);
     }
 
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.ImplosionCompressor, 1);
+    }
+
     public boolean getMutliBlock() {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = worldObj
-                .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                    .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (tileEntity instanceof TileMachineCasing) {
                 if (!((TileMachineCasing) tileEntity).isConnected()) {
                     return false;
@@ -47,9 +79,8 @@ public class TileImplosionCompressor extends TilePowerAcceptor implements IInven
                     heat = BlockMachineCasing.getHeatFromMeta(tileEntity.getBlockMetadata());
                     Location location = new Location(xCoord, yCoord, zCoord, direction);
                     location.modifyPositionFromSide(direction, 1);
-                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ())
-                        .getUnlocalizedName()
-                        .equals("tile.lava")) {
+                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ()).getUnlocalizedName()
+                            .equals("tile.lava")) {
                         heat += 500;
                     }
                     return true;

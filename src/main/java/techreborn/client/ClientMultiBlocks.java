@@ -20,28 +20,28 @@ public class ClientMultiBlocks {
 
     public static void checkCoils() {
         if ((isCoil(3, 0, 1)) && (isCoil(3, 0, 0))
-            && (isCoil(3, 0, 0 - 1))
-            && (isCoil(0 - 3, 0, 1))
-            && (isCoil(0 - 3, 0, 0))
-            && (isCoil(0 - 3, 0, 0 - 1))
-            && (isCoil(2, 0, 2))
-            && (isCoil(2, 0, 1))
-            && (isCoil(2, 0, 0 - 1))
-            && (isCoil(2, 0, 0 - 2))
-            && (isCoil(0 - 2, 0, 2))
-            && (isCoil(0 - 2, 0, 1))
-            && (isCoil(0 - 2, 0, 0 - 1))
-            && (isCoil(0 - 2, 0, 0 - 2))
-            && (isCoil(1, 0, 3))
-            && (isCoil(1, 0, 2))
-            && (isCoil(1, 0, 0 - 2))
-            && (isCoil(1, 0, 0 - 3))
-            && (isCoil(0 - 1, 0, 3))
-            && (isCoil(0 - 1, 0, 2))
-            && (isCoil(0 - 1, 0, 0 - 2))
-            && (isCoil(0 - 1, 0, 0 - 3))
-            && (isCoil(0, 0, 3))
-            && (isCoil(0, 0, 0 - 3))) {}
+                && (isCoil(3, 0, 0 - 1))
+                && (isCoil(0 - 3, 0, 1))
+                && (isCoil(0 - 3, 0, 0))
+                && (isCoil(0 - 3, 0, 0 - 1))
+                && (isCoil(2, 0, 2))
+                && (isCoil(2, 0, 1))
+                && (isCoil(2, 0, 0 - 1))
+                && (isCoil(2, 0, 0 - 2))
+                && (isCoil(0 - 2, 0, 2))
+                && (isCoil(0 - 2, 0, 1))
+                && (isCoil(0 - 2, 0, 0 - 1))
+                && (isCoil(0 - 2, 0, 0 - 2))
+                && (isCoil(1, 0, 3))
+                && (isCoil(1, 0, 2))
+                && (isCoil(1, 0, 0 - 2))
+                && (isCoil(1, 0, 0 - 3))
+                && (isCoil(0 - 1, 0, 3))
+                && (isCoil(0 - 1, 0, 2))
+                && (isCoil(0 - 1, 0, 0 - 2))
+                && (isCoil(0 - 1, 0, 0 - 3))
+                && (isCoil(0, 0, 3))
+                && (isCoil(0, 0, 0 - 3))) {}
     }
 
     private static boolean isCoil(int x, int y, int z) {
@@ -58,12 +58,12 @@ public class ClientMultiBlocks {
                 for (int k = -1; k < 2; k++) {
                     if ((i != 0) || (j != 0) || (k != 0)) {
                         frezzer.addComponent(
-                            xDir + i,
-                            yDir + j,
-                            zDir + k,
-                            ModBlocks.MachineCasing,
-                            (((i == 0) && (j == 0) && (k != 0)) || ((i == 0) && (j != 0) && (k == 0))
-                                || ((i != 0) && (j == 0) && (k == 0)) ? 2 : 1));
+                                xDir + i,
+                                yDir + j,
+                                zDir + k,
+                                ModBlocks.MachineCasing,
+                                (((i == 0) && (j == 0) && (k != 0)) || ((i == 0) && (j != 0) && (k == 0))
+                                        || ((i != 0) && (j == 0) && (k == 0)) ? 2 : 1));
                     }
                 }
             }

@@ -10,8 +10,9 @@ import reborncore.common.util.Inventory;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileAesu extends TilePowerAcceptor {
+public class TileAesu extends TilePowerAcceptor implements IWrenchable {
 
     public static final int MAX_OUTPUT = ConfigTechReborn.aesuMaxOutput;
     public static final int MAX_STORAGE = ConfigTechReborn.aesuMaxStorage;
@@ -41,6 +42,42 @@ public class TileAesu extends TilePowerAcceptor {
         }
 
         euLastTick = getEnergy();
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        if (!entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return (short) getRotation();
+    }
+
+    @Override
+    public void setFacing(short facing) {
+        setRotation(facing);
+    }
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return getDropWithNBT();
     }
 
     public boolean isComplete() {

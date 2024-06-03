@@ -10,12 +10,10 @@ import net.minecraftforge.event.ForgeEventFactory;
 public class TorchHelper {
 
     public static boolean placeTorch(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-        float xOffset, float yOffset, float zOffset) {
+            float xOffset, float yOffset, float zOffset) {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack torchStack = player.inventory.mainInventory[i];
-            if (torchStack == null || !torchStack.getUnlocalizedName()
-                .toLowerCase()
-                .contains("torch")) continue;
+            if (torchStack == null || !torchStack.getUnlocalizedName().toLowerCase().contains("torch")) continue;
             Item item = torchStack.getItem();
             if (!(item instanceof ItemBlock)) continue;
             int oldMeta = torchStack.getItemDamage();

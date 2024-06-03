@@ -19,8 +19,9 @@ import reborncore.common.util.Tank;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileGasTurbine extends TilePowerAcceptor implements IFluidHandler, IInventory {
+public class TileGasTurbine extends TilePowerAcceptor implements IWrenchable, IFluidHandler, IInventory {
 
     public Tank tank = new Tank("TileGasTurbine", FluidContainerRegistry.BUCKET_VOLUME * 10, this);
     public Inventory inventory = new Inventory(3, "TileGasTurbine", 64);
@@ -40,6 +41,37 @@ public class TileGasTurbine extends TilePowerAcceptor implements IFluidHandler, 
 
         fluids.put("fluidhydrogen", 15000);
         fluids.put("fluidmethane", 45000);
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.Gasturbine, 1);
     }
 
     @Override
@@ -73,8 +105,7 @@ public class TileGasTurbine extends TilePowerAcceptor implements IFluidHandler, 
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return tank.getFluid() == null || tank.getFluid()
-            .getFluid() == fluid;
+        return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
     }
 
     @Override
@@ -117,9 +148,7 @@ public class TileGasTurbine extends TilePowerAcceptor implements IFluidHandler, 
         }
 
         if (tank.getFluidAmount() > 0 && getMaxPower() - getEnergy() >= euTick) {
-            Integer euPerBucket = fluids.get(
-                tank.getFluidType()
-                    .getName());
+            Integer euPerBucket = fluids.get(tank.getFluidType().getName());
             // float totalTicks = (float)euPerBucket / 8f; //x eu per bucket / 8 eu per tick
             // float millibucketsPerTick = 1000f / totalTicks;
             float millibucketsPerTick = 16000f / (float) euPerBucket;
@@ -132,11 +161,7 @@ public class TileGasTurbine extends TilePowerAcceptor implements IFluidHandler, 
             addEnergy(euTick);
         }
         if (tank.getFluidType() != null && getStackInSlot(2) == null) {
-            inventory.setInventorySlotContents(
-                2,
-                new ItemStack(
-                    tank.getFluidType()
-                        .getBlock()));
+            inventory.setInventorySlotContents(2, new ItemStack(tank.getFluidType().getBlock()));
         } else if (tank.getFluidType() == null && getStackInSlot(2) != null) {
             setInventorySlotContents(2, null);
         }

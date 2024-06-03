@@ -38,8 +38,7 @@ public class MultiblockRegistry {
      */
     public static void onChunkLoaded(World world, int chunkX, int chunkZ) {
         if (registries.containsKey(world)) {
-            registries.get(world)
-                .onChunkLoaded(chunkX, chunkZ);
+            registries.get(world).onChunkLoaded(chunkX, chunkZ);
         }
     }
 
@@ -62,8 +61,7 @@ public class MultiblockRegistry {
      */
     public static void onPartRemovedFromWorld(World world, IMultiblockPart part) {
         if (registries.containsKey(world)) {
-            registries.get(world)
-                .onPartRemovedFromWorld(part);
+            registries.get(world).onPartRemovedFromWorld(part);
         }
 
     }
@@ -75,8 +73,7 @@ public class MultiblockRegistry {
      */
     public static void onWorldUnloaded(World world) {
         if (registries.containsKey(world)) {
-            registries.get(world)
-                .onWorldUnloaded();
+            registries.get(world).onWorldUnloaded();
             registries.remove(world);
         }
     }
@@ -89,11 +86,10 @@ public class MultiblockRegistry {
      */
     public static void addDirtyController(World world, MultiblockControllerBase controller) {
         if (registries.containsKey(world)) {
-            registries.get(world)
-                .addDirtyController(controller);
+            registries.get(world).addDirtyController(controller);
         } else {
             throw new IllegalArgumentException(
-                "Adding a dirty controller to a world that has no registered controllers!");
+                    "Adding a dirty controller to a world that has no registered controllers!");
         }
     }
 
@@ -106,13 +102,12 @@ public class MultiblockRegistry {
      */
     public static void addDeadController(World world, MultiblockControllerBase controller) {
         if (registries.containsKey(world)) {
-            registries.get(world)
-                .addDeadController(controller);
+            registries.get(world).addDeadController(controller);
         } else {
             BeefCoreLog.warning(
-                "Controller %d in world %s marked as dead, but that world is not tracked! Controller is being ignored.",
-                controller.hashCode(),
-                world);
+                    "Controller %d in world %s marked as dead, but that world is not tracked! Controller is being ignored.",
+                    controller.hashCode(),
+                    world);
         }
     }
 
@@ -122,8 +117,7 @@ public class MultiblockRegistry {
      */
     public static Set<MultiblockControllerBase> getControllersFromWorld(World world) {
         if (registries.containsKey(world)) {
-            return registries.get(world)
-                .getControllers();
+            return registries.get(world).getControllers();
         }
         return null;
     }

@@ -68,8 +68,7 @@ public class Mixin<T> {
 
             annCheckMixin = true;
             annCheckMixinField = a.value();
-            annCheckMixinOwner = c.getName()
-                .replace('.', '/');
+            annCheckMixinOwner = c.getName().replace('.', '/');
             break;
         } while ((c = c.getSuperclass()) != null && c != Object.class);
     }
@@ -90,12 +89,12 @@ public class Mixin<T> {
 
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         writer.visit(
-            V1_6,
-            ACC_PUBLIC,
-            newType,
-            null,
-            parentType,
-            traitNode.interfaces.toArray(new String[traitNode.interfaces.size()]));
+                V1_6,
+                ACC_PUBLIC,
+                newType,
+                null,
+                parentType,
+                traitNode.interfaces.toArray(new String[traitNode.interfaces.size()]));
         writer.visitSource(traitType.substring(traitType.lastIndexOf("/") + 1) + ".java", null);
 
         transferParentFields(writer);
@@ -138,12 +137,12 @@ public class Mixin<T> {
                         Object val = it.next();
                         try {
                             if (val instanceof Object[] && !(val instanceof byte[] || val instanceof boolean[]
-                                || val instanceof short[]
-                                || val instanceof char[]
-                                || val instanceof int[]
-                                || val instanceof long[]
-                                || val instanceof float[]
-                                || val instanceof double[])) {
+                                    || val instanceof short[]
+                                    || val instanceof char[]
+                                    || val instanceof int[]
+                                    || val instanceof long[]
+                                    || val instanceof float[]
+                                    || val instanceof double[])) {
                                 av = av.visitArray(key);
                                 int i = 0;
                                 for (Object o : (Object[]) val) {
@@ -185,12 +184,12 @@ public class Mixin<T> {
         List<String> constructors = new ArrayList<String>();
         for (MethodNode m : traitNode.methods) {
             MethodVisitor v = writer.visitMethod(
-                ACC_PUBLIC | ACC_SYNTHETIC
-                    | (m.access & ~ACC_ABSTRACT & ~ACC_INTERFACE & ~ACC_PROTECTED & ~ACC_PRIVATE),
-                m.name,
-                m.desc,
-                null,
-                null);
+                    ACC_PUBLIC | ACC_SYNTHETIC
+                            | (m.access & ~ACC_ABSTRACT & ~ACC_INTERFACE & ~ACC_PROTECTED & ~ACC_PRIVATE),
+                    m.name,
+                    m.desc,
+                    null,
+                    null);
             v.visitCode();
 
             ASMUtils.resetCopy(m.instructions);
@@ -204,13 +203,13 @@ public class Mixin<T> {
                 int index = 1;
                 for (Type t : Type.getArgumentTypes(m.desc)) {
                     v.visitVarInsn(
-                        t == Type.BOOLEAN_TYPE || t == Type.BYTE_TYPE
-                            || t == Type.CHAR_TYPE
-                            || t == Type.INT_TYPE
-                            || t == Type.LONG_TYPE
-                            || t == Type.SHORT_TYPE ? ILOAD
-                                : (t == Type.DOUBLE_TYPE ? DLOAD : (t == Type.FLOAT_TYPE ? FLOAD : ALOAD)),
-                        index);
+                            t == Type.BOOLEAN_TYPE || t == Type.BYTE_TYPE
+                                    || t == Type.CHAR_TYPE
+                                    || t == Type.INT_TYPE
+                                    || t == Type.LONG_TYPE
+                                    || t == Type.SHORT_TYPE ? ILOAD
+                                            : (t == Type.DOUBLE_TYPE ? DLOAD : (t == Type.FLOAT_TYPE ? FLOAD : ALOAD)),
+                            index);
                     index += t.getSize();
                 }
                 v.visitMethodInsn(INVOKESPECIAL, parentType, m.name, m.desc, false);
@@ -235,13 +234,15 @@ public class Mixin<T> {
                 AbstractInsnNode node = originalInsns.next();
                 AbstractInsnNode next = node.getNext(), prev = node.getPrevious();
                 if (next != null && node instanceof VarInsnNode
-                    && ((VarInsnNode) node).var == 0
-                    && next instanceof MethodInsnNode
-                    && ((MethodInsnNode) next).name.equals("<init>")) continue;
+                        && ((VarInsnNode) node).var == 0
+                        && next instanceof MethodInsnNode
+                        && ((MethodInsnNode) next).name.equals("<init>"))
+                    continue;
                 if (prev != null && prev instanceof VarInsnNode
-                    && ((VarInsnNode) prev).var == 0
-                    && node instanceof MethodInsnNode
-                    && ((MethodInsnNode) node).name.equals("<init>")) continue;
+                        && ((VarInsnNode) prev).var == 0
+                        && node instanceof MethodInsnNode
+                        && ((MethodInsnNode) node).name.equals("<init>"))
+                    continue;
 
                 int result = ASMUtils.addInstructionsWithSuperRedirections(node, added, supercall, this);
                 if (result == 1) supercall = 1;
@@ -279,14 +280,15 @@ public class Mixin<T> {
                 int index = 1;
                 for (Type t : Type.getArgumentTypes(m.desc)) {
                     v.visitVarInsn(
-                        t == Type.BOOLEAN_TYPE || t == Type.BYTE_TYPE
-                            || t == Type.CHAR_TYPE
-                            || t == Type.INT_TYPE
-                            || t == Type.SHORT_TYPE
-                                ? ILOAD
-                                : (t == Type.LONG_TYPE ? LLOAD
-                                    : (t == Type.DOUBLE_TYPE ? DLOAD : (t == Type.FLOAT_TYPE ? FLOAD : ALOAD))),
-                        index);
+                            t == Type.BOOLEAN_TYPE || t == Type.BYTE_TYPE
+                                    || t == Type.CHAR_TYPE
+                                    || t == Type.INT_TYPE
+                                    || t == Type.SHORT_TYPE
+                                            ? ILOAD
+                                            : (t == Type.LONG_TYPE ? LLOAD
+                                                    : (t == Type.DOUBLE_TYPE ? DLOAD
+                                                            : (t == Type.FLOAT_TYPE ? FLOAD : ALOAD))),
+                            index);
                     index += t.getSize();
                 }
                 v.visitMethodInsn(INVOKESPECIAL, parentType, m.name, m.desc, false);

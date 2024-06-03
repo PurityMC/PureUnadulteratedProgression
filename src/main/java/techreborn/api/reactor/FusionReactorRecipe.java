@@ -49,7 +49,7 @@ public class FusionReactorRecipe {
      * @param tickTime    This is the time the recipe takes to process
      */
     public FusionReactorRecipe(ItemStack topInput, ItemStack bottomInput, ItemStack output, double startEU,
-        double euTick, int tickTime) {
+            double euTick, int tickTime) {
         this.topInput = topInput;
         this.bottomInput = bottomInput;
         this.output = output;

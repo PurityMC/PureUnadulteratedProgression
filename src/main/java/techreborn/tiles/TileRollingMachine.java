@@ -13,9 +13,12 @@ import reborncore.common.util.ItemUtils;
 import techreborn.api.RollingMachineRecipe;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.tile.IWrenchable;
 
 // TODO add tick and power bars.
-public class TileRollingMachine extends TilePowerAcceptor implements IInventory {
+public class TileRollingMachine extends TilePowerAcceptor implements IWrenchable, IInventory {
 
     public Inventory inventory = new Inventory(3, "TileRollingMachine", 64);
     public final InventoryCrafting craftMatrix = new InventoryCrafting(new RollingTileContainer(), 3, 3);
@@ -34,17 +37,17 @@ public class TileRollingMachine extends TilePowerAcceptor implements IInventory 
 
     public void charge(int slot) {
         if (getStackInSlot(slot) != null) {
-            // if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
-            //     if (getEnergy() != getMaxPower()) {
-            //         ItemStack stack = inventory.getStackInSlot(slot);
-            //         double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
-            //         double CurrentCharge = ElectricItem.manager.getCharge(stack);
-            //         if (CurrentCharge != 0) {
-            //             ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
-            //             addEnergy(5);
-            //         }
-            //     }
-            // }
+            if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
+                if (getEnergy() != getMaxPower()) {
+                    ItemStack stack = inventory.getStackInSlot(slot);
+                    double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
+                    double CurrentCharge = ElectricItem.manager.getCharge(stack);
+                    if (CurrentCharge != 0) {
+                        ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
+                        addEnergy(5);
+                    }
+                }
+            }
         }
     }
 
@@ -98,7 +101,7 @@ public class TileRollingMachine extends TilePowerAcceptor implements IInventory 
                             hasCrafted = true;
                         } else {
                             if (inventory.getStackInSlot(0).stackSize + currentRecipe.stackSize
-                                <= currentRecipe.getMaxStackSize()) {
+                                    <= currentRecipe.getMaxStackSize()) {
                                 ItemStack stack = inventory.getStackInSlot(0);
                                 stack.stackSize = stack.stackSize + currentRecipe.stackSize;
                                 inventory.setInventorySlotContents(0, stack);
@@ -139,6 +142,37 @@ public class TileRollingMachine extends TilePowerAcceptor implements IInventory 
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.RollingMachine, 1);
     }
 
     @Override

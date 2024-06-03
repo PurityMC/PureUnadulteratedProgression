@@ -1,10 +1,11 @@
 package techreborn.compat.minetweaker;
 
-import net.minecraft.item.ItemStack;
-
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
+
+import net.minecraft.item.ItemStack;
+
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import techreborn.api.recipe.machines.ChemicalReactorRecipe;
@@ -19,11 +20,11 @@ public class MTChemicalReactor extends MTGeneric {
         ItemStack oInput2 = (ItemStack) MinetweakerCompat.toObject(input2);
 
         ChemicalReactorRecipe r = new ChemicalReactorRecipe(
-            oInput1,
-            oInput2,
-            MinetweakerCompat.toStack(output1),
-            ticktime,
-            euTick);
+                oInput1,
+                oInput2,
+                MinetweakerCompat.toStack(output1),
+                ticktime,
+                euTick);
 
         addRecipe(r);
     }

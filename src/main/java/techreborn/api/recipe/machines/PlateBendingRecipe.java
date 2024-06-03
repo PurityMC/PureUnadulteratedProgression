@@ -8,7 +8,7 @@ import techreborn.lib.Reference;
 public class PlateBendingRecipe extends BaseRecipe {
 
     public PlateBendingRecipe(ItemStack input1, ItemStack input2, ItemStack output1, ItemStack output2,
-        ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
+            ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
         super(Reference.plateBenderRecipe, tickTime, euPerTick);
         if (input1 != null) inputs.add(input1);
         if (input2 != null) inputs.add(input2);

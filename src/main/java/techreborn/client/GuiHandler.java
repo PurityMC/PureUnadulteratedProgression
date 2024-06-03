@@ -3,14 +3,14 @@ package techreborn.client;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import page.codeberg.unix_supremacist.pup.pda.GuiManual;
 import techreborn.client.container.*;
 import techreborn.client.gui.*;
+import page.codeberg.unix_supremacist.pup.pda.GuiManual;
 import techreborn.tiles.*;
 import techreborn.tiles.fusionReactor.TileEntityFusionController;
 import techreborn.tiles.idsu.TileIDSU;
 import techreborn.tiles.lesu.TileLesu;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -82,8 +82,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerDieselGenerator((TileDieselGenerator) world.getTileEntity(x, y, z), player);
         } else if (ID == industrialElectrolyzerID) {
             return new ContainerIndustrialElectrolyzer(
-                (TileIndustrialElectrolyzer) world.getTileEntity(x, y, z),
-                player);
+                    (TileIndustrialElectrolyzer) world.getTileEntity(x, y, z),
+                    player);
         } else if (ID == aesuID) {
             return new ContainerAesu((TileAesu) world.getTileEntity(x, y, z), player);
         } else if (ID == alloyFurnaceID) {

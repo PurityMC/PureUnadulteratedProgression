@@ -13,8 +13,11 @@ import techreborn.api.upgrade.UpgradeHandler;
 import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.tile.IWrenchable;
 
-public class TileAlloySmelter extends TilePowerAcceptor implements IInventory, ISidedInventory {
+public class TileAlloySmelter extends TilePowerAcceptor implements IWrenchable, IInventory, ISidedInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(8, "TileAlloySmelter", 64);
@@ -44,18 +47,49 @@ public class TileAlloySmelter extends TilePowerAcceptor implements IInventory, I
 
     public void charge(int slot) {
         if (getStackInSlot(slot) != null) {
-            // if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
-            //     if (getEnergy() != capacity) {
-            //         ItemStack stack = inventory.getStackInSlot(slot);
-            //         double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
-            //         double CurrentCharge = ElectricItem.manager.getCharge(stack);
-            //         if (CurrentCharge != 0) {
-            //             ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
-            //             addEnergy(5);
-            //         }
-            //     }
-            // }
+            if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
+                if (getEnergy() != capacity) {
+                    ItemStack stack = inventory.getStackInSlot(slot);
+                    double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
+                    double CurrentCharge = ElectricItem.manager.getCharge(stack);
+                    if (CurrentCharge != 0) {
+                        ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
+                        addEnergy(5);
+                    }
+                }
+            }
         }
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.AlloySmelter, 1);
     }
 
     public boolean isComplete() {

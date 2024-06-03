@@ -4,9 +4,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import techreborn.init.ModBlocks;
 import techreborn.lib.ModInfo;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Achievements {
 
@@ -22,16 +22,13 @@ public class Achievements {
         centrifuge_Craft = new AchUtil("centrifuge_Craft", 1, 1, ModBlocks.centrifuge, ore_PickUp);
         thermalgen_Craft = new AchUtil("thermalgen_Craft", 2, 1, ModBlocks.thermalGenerator, ore_PickUp);
 
-        pageIndex = AchievementPage.getAchievementPages()
-            .size();
+        pageIndex = AchievementPage.getAchievementPages().size();
         pupPage = new AchievementPage(
-            ModInfo.MOD_NAME,
-            AchUtil.achievements.toArray(new Achievement[AchUtil.achievements.size()]));
+                ModInfo.MOD_NAME,
+                AchUtil.achievements.toArray(new Achievement[AchUtil.achievements.size()]));
         AchievementPage.registerAchievementPage(pupPage);
 
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new AchTrigger());
+        FMLCommonHandler.instance().bus().register(new AchTrigger());
 
     }
 

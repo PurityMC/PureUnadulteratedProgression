@@ -8,7 +8,7 @@ import techreborn.lib.Reference;
 public class IndustrialElectrolyzerRecipe extends BaseRecipe {
 
     public IndustrialElectrolyzerRecipe(ItemStack inputCells, ItemStack input2, ItemStack output1, ItemStack output2,
-        ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
+            ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
         super(Reference.industrialElectrolyzerRecipe, tickTime, euPerTick);
         if (inputCells != null) inputs.add(inputCells);
         if (input2 != null) inputs.add(input2);

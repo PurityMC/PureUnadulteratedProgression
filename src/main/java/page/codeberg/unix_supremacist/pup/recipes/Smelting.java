@@ -1,7 +1,7 @@
 package page.codeberg.unix_supremacist.pup.recipes;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import page.codeberg.unix_supremacist.pup.api.ItemApi;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Smelting {
 

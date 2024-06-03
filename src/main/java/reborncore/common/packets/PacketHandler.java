@@ -35,37 +35,22 @@ public class PacketHandler extends FMLIndexedMessageToMessageCodec<SimplePacket>
     }
 
     public static void sendPacketToServer(SimplePacket packet) {
-        PacketHandler.getChannels()
-            .get(Side.CLIENT)
-            .attr(FMLOutboundHandler.FML_MESSAGETARGET)
-            .set(FMLOutboundHandler.OutboundTarget.TOSERVER);
-        PacketHandler.getChannels()
-            .get(Side.CLIENT)
-            .writeOutbound(packet);
+        PacketHandler.getChannels().get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                .set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+        PacketHandler.getChannels().get(Side.CLIENT).writeOutbound(packet);
     }
 
     public static void sendPacketToPlayer(SimplePacket packet, EntityPlayer player) {
-        PacketHandler.getChannels()
-            .get(Side.SERVER)
-            .attr(FMLOutboundHandler.FML_MESSAGETARGET)
-            .set(FMLOutboundHandler.OutboundTarget.PLAYER);
-        PacketHandler.getChannels()
-            .get(Side.SERVER)
-            .attr(FMLOutboundHandler.FML_MESSAGETARGETARGS)
-            .set(player);
-        PacketHandler.getChannels()
-            .get(Side.SERVER)
-            .writeOutbound(packet);
+        PacketHandler.getChannels().get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                .set(FMLOutboundHandler.OutboundTarget.PLAYER);
+        PacketHandler.getChannels().get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+        PacketHandler.getChannels().get(Side.SERVER).writeOutbound(packet);
     }
 
     public static void sendPacketToAllPlayers(SimplePacket packet) {
-        PacketHandler.getChannels()
-            .get(Side.SERVER)
-            .attr(FMLOutboundHandler.FML_MESSAGETARGET)
-            .set(FMLOutboundHandler.OutboundTarget.ALL);
-        PacketHandler.getChannels()
-            .get(Side.SERVER)
-            .writeOutbound(packet);
+        PacketHandler.getChannels().get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET)
+                .set(FMLOutboundHandler.OutboundTarget.ALL);
+        PacketHandler.getChannels().get(Side.SERVER).writeOutbound(packet);
     }
 
     public static void sendPacketToAllPlayers(Packet packet, World world) {
@@ -86,14 +71,13 @@ public class PacketHandler extends FMLIndexedMessageToMessageCodec<SimplePacket>
             msg.readPacketData(source);
             msg.execute();
         } catch (IOException e) {
-            Logger.getLogger("Network")
-                .warning("Something caused a Protocol Exception!");
+            Logger.getLogger("Network").warning("Something caused a Protocol Exception!");
         }
     }
 
     @Override
     public FMLIndexedMessageToMessageCodec<SimplePacket> addDiscriminator(int discriminator,
-        Class<? extends SimplePacket> type) {
+            Class<? extends SimplePacket> type) {
         nextDiscriminator++;
         return super.addDiscriminator(discriminator, type);
     }

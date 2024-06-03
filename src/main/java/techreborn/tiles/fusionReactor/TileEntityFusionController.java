@@ -12,6 +12,7 @@ import techreborn.api.reactor.FusionReactorRecipe;
 import techreborn.api.reactor.FusionReactorRecipeHelper;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.item.IC2Items;
 
 public class TileEntityFusionController extends TilePowerAcceptor implements IInventory {
 
@@ -167,29 +168,29 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
 
     public boolean checkCoils() {
         if ((isCoil(this.xCoord + 3, this.yCoord, this.zCoord + 1))
-            && (isCoil(this.xCoord + 3, this.yCoord, this.zCoord))
-            && (isCoil(this.xCoord + 3, this.yCoord, this.zCoord - 1))
-            && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord + 1))
-            && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord))
-            && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord - 1))
-            && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord + 2))
-            && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord + 1))
-            && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord - 1))
-            && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord - 2))
-            && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord + 2))
-            && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord + 1))
-            && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord - 1))
-            && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord - 2))
-            && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord + 3))
-            && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord + 2))
-            && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord - 2))
-            && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord - 3))
-            && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord + 3))
-            && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord + 2))
-            && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord - 2))
-            && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord - 3))
-            && (isCoil(this.xCoord, this.yCoord, this.zCoord + 3))
-            && (isCoil(this.xCoord, this.yCoord, this.zCoord - 3))) {
+                && (isCoil(this.xCoord + 3, this.yCoord, this.zCoord))
+                && (isCoil(this.xCoord + 3, this.yCoord, this.zCoord - 1))
+                && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord + 1))
+                && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord))
+                && (isCoil(this.xCoord - 3, this.yCoord, this.zCoord - 1))
+                && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord + 2))
+                && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord + 1))
+                && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord - 1))
+                && (isCoil(this.xCoord + 2, this.yCoord, this.zCoord - 2))
+                && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord + 2))
+                && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord + 1))
+                && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord - 1))
+                && (isCoil(this.xCoord - 2, this.yCoord, this.zCoord - 2))
+                && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord + 3))
+                && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord + 2))
+                && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord - 2))
+                && (isCoil(this.xCoord + 1, this.yCoord, this.zCoord - 3))
+                && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord + 3))
+                && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord + 2))
+                && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord - 2))
+                && (isCoil(this.xCoord - 1, this.yCoord, this.zCoord - 3))
+                && (isCoil(this.xCoord, this.yCoord, this.zCoord + 3))
+                && (isCoil(this.xCoord, this.yCoord, this.zCoord - 3))) {
             coilStatus = 1;
             return true;
         }
@@ -213,10 +214,7 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
         if (!worldObj.isRemote) {
             if (emptyCellCount > 0) {
                 if (getStackInSlot(outputStackSlot) == null) {
-                    // setInventorySlotContents(
-                    //     outputStackSlot,
-                    //     IC2Items.getItem("cell")
-                    //         .splitStack(emptyCellCount));
+                    setInventorySlotContents(outputStackSlot, IC2Items.getItem("cell").splitStack(emptyCellCount));
                     emptyCellCount = 0;
                 }
             }
@@ -225,18 +223,18 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
                     if (inventory.hasChanged || crafingTickTime != 0) {
                         for (FusionReactorRecipe reactorRecipe : FusionReactorRecipeHelper.reactorRecipes) {
                             if (ItemUtils.isItemEqual(
-                                getStackInSlot(topStackSlot),
-                                reactorRecipe.getTopInput(),
-                                true,
-                                true,
-                                true)) {
+                                    getStackInSlot(topStackSlot),
+                                    reactorRecipe.getTopInput(),
+                                    true,
+                                    true,
+                                    true)) {
                                 if (reactorRecipe.getBottomInput() != null) {
                                     if (ItemUtils.isItemEqual(
-                                        getStackInSlot(bottomStackSlot),
-                                        reactorRecipe.getBottomInput(),
-                                        true,
-                                        true,
-                                        true) == false) {
+                                            getStackInSlot(bottomStackSlot),
+                                            reactorRecipe.getBottomInput(),
+                                            true,
+                                            true,
+                                            true) == false) {
                                         break;
                                     }
                                 }
@@ -287,29 +285,20 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
                         } else {
                             if (canFitStack(currentRecipe.getOutput(), outputStackSlot, true)) {
                                 if (getStackInSlot(outputStackSlot) == null) {
-                                    setInventorySlotContents(
-                                        outputStackSlot,
-                                        currentRecipe.getOutput()
-                                            .copy());
+                                    setInventorySlotContents(outputStackSlot, currentRecipe.getOutput().copy());
                                 } else {
                                     decrStackSize(outputStackSlot, -currentRecipe.getOutput().stackSize);
                                 }
 
-                                if (currentRecipe.getTopInput()
-                                    .getItem()
-                                    .getUnlocalizedName()
-                                    .toLowerCase()
-                                    .contains("cell")) emptyCellCount++;
-                                if (currentRecipe.getBottomInput()
-                                    .getItem()
-                                    .getUnlocalizedName()
-                                    .toLowerCase()
-                                    .contains("cell")) emptyCellCount++;
-                                if (currentRecipe.getOutput()
-                                    .getItem()
-                                    .getUnlocalizedName()
-                                    .toLowerCase()
-                                    .contains("cell")) emptyCellCount--;
+                                if (currentRecipe.getTopInput().getItem().getUnlocalizedName().toLowerCase()
+                                        .contains("cell"))
+                                    emptyCellCount++;
+                                if (currentRecipe.getBottomInput().getItem().getUnlocalizedName().toLowerCase()
+                                        .contains("cell"))
+                                    emptyCellCount++;
+                                if (currentRecipe.getOutput().getItem().getUnlocalizedName().toLowerCase()
+                                        .contains("cell"))
+                                    emptyCellCount--;
 
                                 if (emptyCellCount > 64) emptyCellCount = 64;
                                 // System.out.println(String.valueOf(emptyCellCount));
@@ -346,8 +335,8 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
         if (ItemUtils.isItemEqual(getStackInSlot(topStackSlot), currentRecipe.getTopInput(), true, true, true)) {
             if (currentRecipe.getBottomInput() != null) {
                 if (ItemUtils
-                    .isItemEqual(getStackInSlot(bottomStackSlot), currentRecipe.getBottomInput(), true, true, true)
-                    == false) {
+                        .isItemEqual(getStackInSlot(bottomStackSlot), currentRecipe.getBottomInput(), true, true, true)
+                        == false) {
                     return false;
                 }
             }
@@ -379,5 +368,11 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
             }
         }
         return false;
+    }
+
+    @Override
+    public void onLoaded() {
+        super.onLoaded();
+        checkCoils();
     }
 }

@@ -16,9 +16,12 @@ import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
+import ic2.api.tile.IWrenchable;
 
 public class TileCentrifuge extends TilePowerAcceptor
-    implements IInventory, ISidedInventory, IListInfoProvider {
+        implements IWrenchable, IInventory, ISidedInventory, IListInfoProvider {
 
     public int tickTime;
     public Inventory inventory = new Inventory(11, "TileCentrifuge", 64);
@@ -50,18 +53,49 @@ public class TileCentrifuge extends TilePowerAcceptor
 
     public void charge(int slot) {
         if (getStackInSlot(slot) != null) {
-            // if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
-            //     if (getEnergy() != getMaxPower()) {
-            //         ItemStack stack = inventory.getStackInSlot(slot);
-            //         double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
-            //         double CurrentCharge = ElectricItem.manager.getCharge(stack);
-            //         if (CurrentCharge != 0) {
-            //             ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
-            //             addEnergy(5);
-            //         }
-            //     }
-            // }
+            if (getStackInSlot(slot).getItem() instanceof IElectricItem) {
+                if (getEnergy() != getMaxPower()) {
+                    ItemStack stack = inventory.getStackInSlot(slot);
+                    double MaxCharge = ((IElectricItem) stack.getItem()).getMaxCharge(stack);
+                    double CurrentCharge = ElectricItem.manager.getCharge(stack);
+                    if (CurrentCharge != 0) {
+                        ElectricItem.manager.discharge(stack, 5, 4, false, false, false);
+                        addEnergy(5);
+                    }
+                }
+            }
         }
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.centrifuge, 1);
     }
 
     public boolean isComplete() {

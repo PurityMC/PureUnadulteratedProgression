@@ -61,8 +61,7 @@ public class ModPartUtils {
 
     public static Item getItemForPart(String string) {
         for (Map.Entry<String, Item> item : ModPartRegistry.itemParts.entrySet()) {
-            if (item.getValue()
-                .equals(string)) {
+            if (item.getValue().equals(string)) {
                 return item.getValue();
             }
         }
@@ -72,7 +71,7 @@ public class ModPartUtils {
     public static IPartProvider getPartProvider(World world, Location location) {
         for (IPartProvider partProvider : ModPartRegistry.providers) {
             if (partProvider
-                .isTileFromProvider(world.getTileEntity(location.getX(), location.getY(), location.getZ()))) {
+                    .isTileFromProvider(world.getTileEntity(location.getX(), location.getY(), location.getZ()))) {
                 return partProvider;
             }
         }

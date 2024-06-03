@@ -16,6 +16,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import reborncore.common.packets.AddDiscriminatorEvent;
+import reborncore.common.packets.PacketHandler;
+import techreborn.partSystem.parts.CablePart;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.lib.vec.BlockCoord;
@@ -25,34 +28,30 @@ import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import reborncore.common.packets.AddDiscriminatorEvent;
-import reborncore.common.packets.PacketHandler;
-import techreborn.partSystem.parts.CablePart;
+import ic2.api.item.IC2Items;
+import ic2.core.block.wiring.BlockCable;
+import ic2.core.block.wiring.TileEntityCable;
 
 public class CableConverter implements MultiPartRegistry.IPartConverter {
 
     @Override
     public Iterable<Block> blockTypes() {
-        // return Arrays.asList(
-        //     Block.getBlockFromItem(
-        //         IC2Items.getItem("copperCableBlock")
-        //             .getItem()));
-        return null;
+        return Arrays.asList(Block.getBlockFromItem(IC2Items.getItem("copperCableBlock").getItem()));
     }
 
     @Override
     public TMultiPart convert(World world, BlockCoord blockCoord) {
         Block block = world.getBlock(blockCoord.x, blockCoord.y, blockCoord.z);
-//        if (block instanceof BlockCable) {
-//            TileEntity tileEntity = world.getTileEntity(blockCoord.x, blockCoord.y, blockCoord.z);
-//             if (tileEntity instanceof TileEntityCable) {
-//                 TileEntityCable cable = (TileEntityCable) tileEntity;
-//                 int type = cable.cableType;
-//                 CablePart newPart = new CablePart();
-//                 newPart.setType(type);
-//                 return new FMPModPart(newPart);
-//             }
-//        }
+        if (block instanceof BlockCable) {
+            TileEntity tileEntity = world.getTileEntity(blockCoord.x, blockCoord.y, blockCoord.z);
+            if (tileEntity instanceof TileEntityCable) {
+                TileEntityCable cable = (TileEntityCable) tileEntity;
+                int type = cable.cableType;
+                CablePart newPart = new CablePart();
+                newPart.setType(type);
+                return new FMPModPart(newPart);
+            }
+        }
         return null;
     }
 
@@ -79,12 +78,11 @@ public class CableConverter implements MultiPartRegistry.IPartConverter {
         if (held == null) return false;
 
         Item heldItem = held.getItem();
-        // if (heldItem == IC2Items.getItem("copperCableItem")
-        //     .getItem()) {
-        //     CablePart cablePart = new CablePart();
-        //     cablePart.setType(held.getItemDamage());
-        //     part = new FMPModPart(cablePart);
-        // }
+        if (heldItem == IC2Items.getItem("copperCableItem").getItem()) {
+            CablePart cablePart = new CablePart();
+            cablePart.setType(held.getItemDamage());
+            part = new FMPModPart(cablePart);
+        }
 
         if (part == null) return false;
 
@@ -94,26 +92,26 @@ public class CableConverter implements MultiPartRegistry.IPartConverter {
             Vector3 f = new Vector3(hit.hitVec).add(-hit.blockX, -hit.blockY, -hit.blockZ);
             Block block = world.getBlock(hit.blockX, hit.blockY, hit.blockZ);
             if (!ignoreActivate(block) && block.onBlockActivated(
-                world,
-                hit.blockX,
-                hit.blockY,
-                hit.blockZ,
-                player,
-                hit.sideHit,
-                (float) f.x,
-                (float) f.y,
-                (float) f.z)) {
+                    world,
+                    hit.blockX,
+                    hit.blockY,
+                    hit.blockZ,
+                    player,
+                    hit.sideHit,
+                    (float) f.x,
+                    (float) f.y,
+                    (float) f.z)) {
                 player.swingItem();
                 PacketCustom.sendToServer(
-                    new C08PacketPlayerBlockPlacement(
-                        hit.blockX,
-                        hit.blockY,
-                        hit.blockZ,
-                        hit.sideHit,
-                        player.inventory.getCurrentItem(),
-                        (float) f.x,
-                        (float) f.y,
-                        (float) f.z));
+                        new C08PacketPlayerBlockPlacement(
+                                hit.blockX,
+                                hit.blockY,
+                                hit.blockZ,
+                                hit.sideHit,
+                                player.inventory.getCurrentItem(),
+                                (float) f.x,
+                                (float) f.y,
+                                (float) f.z));
                 return true;
             }
         }
@@ -128,12 +126,12 @@ public class CableConverter implements MultiPartRegistry.IPartConverter {
         if (!world.isRemote) {
             TileMultipart.addPart(world, pos, part);
             world.playSoundEffect(
-                pos.x + 0.5,
-                pos.y + 0.5,
-                pos.z + 0.5,
-                Blocks.wool.stepSound.func_150496_b(),
-                (Blocks.wool.stepSound.getVolume() + 1.0F) / 2.0F,
-                Blocks.wool.stepSound.getPitch() * 0.8F);
+                    pos.x + 0.5,
+                    pos.y + 0.5,
+                    pos.z + 0.5,
+                    Blocks.wool.stepSound.func_150496_b(),
+                    (Blocks.wool.stepSound.getVolume() + 1.0F) / 2.0F,
+                    Blocks.wool.stepSound.getPitch() * 0.8F);
             if (!player.capabilities.isCreativeMode) {
                 held.stackSize--;
                 if (held.stackSize == 0) {
@@ -158,8 +156,7 @@ public class CableConverter implements MultiPartRegistry.IPartConverter {
 
     @SubscribeEvent
     public void addDiscriminator(AddDiscriminatorEvent event) {
-        event.getPacketHandler()
-            .addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketFMPPlacePart.class);
+        event.getPacketHandler().addDiscriminator(event.getPacketHandler().nextDiscriminator, PacketFMPPlacePart.class);
     }
 
 }

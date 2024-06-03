@@ -21,6 +21,6 @@ public interface IMultiblockRenderHook {
     public static Map<Block, IMultiblockRenderHook> renderHooks = new HashMap();
 
     public void renderBlockForMultiblock(IBlockAccess world, Multiblock mb, Block block, int meta,
-        RenderBlocks renderBlocks);
+            RenderBlocks renderBlocks);
 
 }

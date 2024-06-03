@@ -8,43 +8,37 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 
-import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import reborncore.client.gui.GuiUtil;
 import reborncore.common.util.ItemUtils;
 import techreborn.api.recipe.IBaseRecipeType;
 import techreborn.api.recipe.machines.GrinderRecipe;
 import techreborn.client.gui.GuiGrinder;
 import techreborn.lib.Reference;
+import codechicken.lib.gui.GuiDraw;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class GrinderRecipeHandler extends GenericRecipeHander implements INeiBaseRecipe {
 
     @Override
     public void addPositionedStacks(List<PositionedStack> input, List<PositionedStack> outputs,
-        IBaseRecipeType recipeType) {
+            IBaseRecipeType recipeType) {
         int offset = 4;
-        if (recipeType.getInputs()
-            .size() > 0) {
+        if (recipeType.getInputs().size() > 0) {
             PositionedStack pStack = new PositionedStack(
-                ItemUtils.getStackWithAllOre(
-                    recipeType.getInputs()
-                        .get(0)),
-                32 - offset,
-                26 - offset,
-                false);
+                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(0)),
+                    32 - offset,
+                    26 - offset,
+                    false);
             input.add(pStack);
         }
 
-        if (recipeType.getInputs()
-            .size() > 1) {
+        if (recipeType.getInputs().size() > 1) {
             PositionedStack pStack2 = new PositionedStack(
-                ItemUtils.getStackWithAllOre(
-                    recipeType.getInputs()
-                        .get(1)),
-                32 - offset,
-                44 - offset,
-                false);
+                    ItemUtils.getStackWithAllOre(recipeType.getInputs().get(1)),
+                    32 - offset,
+                    44 - offset,
+                    false);
             input.add(pStack2);
         }
 
@@ -93,10 +87,10 @@ public class GrinderRecipeHandler extends GenericRecipeHander implements INeiBas
     @Override
     public void loadTransferRects() {
         this.transferRects.add(
-            new TemplateRecipeHandler.RecipeTransferRect(
-                new Rectangle(44, 20, 25, 20),
-                getNeiBaseRecipe().getRecipeName(),
-                new Object[0]));
+                new TemplateRecipeHandler.RecipeTransferRect(
+                        new Rectangle(44, 20, 25, 20),
+                        getNeiBaseRecipe().getRecipeName(),
+                        new Object[0]));
     }
 
     @Override
@@ -107,28 +101,25 @@ public class GrinderRecipeHandler extends GenericRecipeHander implements INeiBas
             if (((CachedGenericRecipe) recipe).recipie instanceof GrinderRecipe) {
                 GrinderRecipe grinderRecipe = (GrinderRecipe) ((CachedGenericRecipe) recipe).recipie;
                 if (grinderRecipe.fluidStack != null) {
-                    IIcon fluidIcon = grinderRecipe.fluidStack.getFluid()
-                        .getIcon();
+                    IIcon fluidIcon = grinderRecipe.fluidStack.getFluid().getIcon();
                     if (fluidIcon != null) {
 
-                        Minecraft.getMinecraft()
-                            .getTextureManager()
-                            .bindTexture(TextureMap.locationBlocksTexture);
+                        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
                         int liquidHeight = grinderRecipe.fluidStack.amount * 100 / 16000;
                         GuiUtil.drawRepeated(
-                            fluidIcon,
-                            7,
-                            22 + 47 - liquidHeight,
-                            14.0D,
-                            liquidHeight,
-                            GuiDraw.gui.getZLevel());
+                                fluidIcon,
+                                7,
+                                22 + 47 - liquidHeight,
+                                14.0D,
+                                liquidHeight,
+                                GuiDraw.gui.getZLevel());
 
                     }
                     GuiDraw.drawString(
-                        grinderRecipe.fluidStack.amount + "mb of " + grinderRecipe.fluidStack.getLocalizedName(),
-                        14,
-                        135,
-                        -1);
+                            grinderRecipe.fluidStack.amount + "mb of " + grinderRecipe.fluidStack.getLocalizedName(),
+                            14,
+                            135,
+                            -1);
                 }
             }
         }

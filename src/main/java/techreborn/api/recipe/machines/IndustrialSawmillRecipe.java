@@ -15,7 +15,7 @@ public class IndustrialSawmillRecipe extends BaseRecipe {
     public boolean canUseOreDict = false;
 
     public IndustrialSawmillRecipe(ItemStack input1, ItemStack input2, FluidStack fluidStack, ItemStack output1,
-        ItemStack output2, ItemStack output3, int tickTime, int euPerTick) {
+            ItemStack output2, ItemStack output3, int tickTime, int euPerTick) {
         super(Reference.industrialSawmillRecipe, tickTime, euPerTick);
         if (input1 != null) inputs.add(input1);
         if (input2 != null) inputs.add(input2);
@@ -26,7 +26,7 @@ public class IndustrialSawmillRecipe extends BaseRecipe {
     }
 
     public IndustrialSawmillRecipe(ItemStack input1, ItemStack input2, FluidStack fluidStack, ItemStack output1,
-        ItemStack output2, ItemStack output3, int tickTime, int euPerTick, boolean canUseOreDict) {
+            ItemStack output2, ItemStack output3, int tickTime, int euPerTick, boolean canUseOreDict) {
         super(Reference.industrialSawmillRecipe, tickTime, euPerTick);
         if (input1 != null) inputs.add(input1);
         if (input2 != null) inputs.add(input2);
@@ -52,8 +52,7 @@ public class IndustrialSawmillRecipe extends BaseRecipe {
             if (sawmill.tank.getFluid() == null) {
                 return false;
             }
-            if (sawmill.tank.getFluid()
-                .getFluidID() == fluidStack.getFluidID()) {
+            if (sawmill.tank.getFluid().getFluidID() == fluidStack.getFluidID()) {
                 if (sawmill.tank.getFluidAmount() >= fluidStack.amount) {
                     return true;
                 }
@@ -72,12 +71,13 @@ public class IndustrialSawmillRecipe extends BaseRecipe {
             if (sawmill.tank.getFluid() == null) {
                 return false;
             }
-            if (sawmill.tank.getFluid()
-                .getFluidID() == fluidStack.getFluidID()) {
+            if (sawmill.tank.getFluid().getFluidID() == fluidStack.getFluidID()) {
                 if (sawmill.tank.getFluidAmount() >= fluidStack.amount) {
                     if (sawmill.tank.getFluidAmount() > 0) {
                         sawmill.tank.setFluid(
-                            new FluidStack(fluidStack.getFluid(), sawmill.tank.getFluidAmount() - fluidStack.amount));
+                                new FluidStack(
+                                        fluidStack.getFluid(),
+                                        sawmill.tank.getFluidAmount() - fluidStack.amount));
                     } else {
                         sawmill.tank.setFluid(null);
                     }

@@ -40,18 +40,14 @@ public class RollingMachineRecipe {
                 String s2 = as[l];
                 k++;
                 j = s2.length();
-                s = (new StringBuilder()).append(s)
-                    .append(s2)
-                    .toString();
+                s = (new StringBuilder()).append(s).append(s2).toString();
             }
         } else {
             while (components[i] instanceof String) {
                 String s1 = (String) components[i++];
                 k++;
                 j = s1.length();
-                s = (new StringBuilder()).append(s)
-                    .append(s1)
-                    .toString();
+                s = (new StringBuilder()).append(s).append(s1).toString();
             }
         }
         HashMap hashmap = new HashMap();

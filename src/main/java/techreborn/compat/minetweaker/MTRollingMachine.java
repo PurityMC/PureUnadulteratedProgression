@@ -3,13 +3,14 @@ package techreborn.compat.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.oredict.IOreDictEntry;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+
 import reborncore.common.util.ItemUtils;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -37,8 +38,7 @@ public class MTRollingMachine {
                 toRemove.add(recipe);
             }
         }
-        RollingMachineRecipe.instance.getRecipeList()
-            .removeAll(toRemove);
+        RollingMachineRecipe.instance.getRecipeList().removeAll(toRemove);
     }
 
     public static ItemStack toStack(IItemStack iStack) {
@@ -46,8 +46,7 @@ public class MTRollingMachine {
         else {
             Object internal = iStack.getInternal();
             if (internal == null || !(internal instanceof ItemStack)) {
-                MineTweakerAPI.getLogger()
-                    .logError("Not a valid item stack: " + iStack);
+                MineTweakerAPI.getLogger().logError("Not a valid item stack: " + iStack);
             }
 
             return (ItemStack) internal;

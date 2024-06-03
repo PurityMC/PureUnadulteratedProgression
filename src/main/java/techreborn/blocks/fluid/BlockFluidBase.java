@@ -8,10 +8,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import techreborn.client.TechRebornCreativeTabMisc;
 import techreborn.lib.ModInfo;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFluidBase extends BlockFluidClassic {
 
@@ -34,27 +34,22 @@ public class BlockFluidBase extends BlockFluidClassic {
     @Override
     public void registerBlockIcons(IIconRegister register) {
         stillIcon = register.registerIcon(
-            ModInfo.MOD_ID.toLowerCase() + ":" + "fluids/" + getUnlocalizedName().substring(16) + "_flowing");
+                ModInfo.MOD_ID.toLowerCase() + ":" + "fluids/" + getUnlocalizedName().substring(16) + "_flowing");
         flowingIcon = register.registerIcon(
-            ModInfo.MOD_ID.toLowerCase() + ":" + "fluids/" + getUnlocalizedName().substring(16) + "_flowing");
+                ModInfo.MOD_ID.toLowerCase() + ":" + "fluids/" + getUnlocalizedName().substring(16) + "_flowing");
 
-        this.stack.getFluid()
-            .setIcons(stillIcon, flowingIcon);
+        this.stack.getFluid().setIcons(stillIcon, flowingIcon);
     }
 
     @Override
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-        if (world.getBlock(x, y, z)
-            .getMaterial()
-            .isLiquid()) return false;
+        if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
         return super.canDisplace(world, x, y, z);
     }
 
     @Override
     public boolean displaceIfPossible(World world, int x, int y, int z) {
-        if (world.getBlock(x, y, z)
-            .getMaterial()
-            .isLiquid()) return false;
+        if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
         return super.displaceIfPossible(world, x, y, z);
     }
 

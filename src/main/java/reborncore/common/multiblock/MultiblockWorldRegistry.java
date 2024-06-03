@@ -162,8 +162,7 @@ public class MultiblockWorldRegistry {
                             mergePools.add(compatibleControllers);
                         } else if (candidatePools.size() == 1) {
                             // Only one pool nearby, simply add to that one
-                            candidatePools.get(0)
-                                .addAll(compatibleControllers);
+                            candidatePools.get(0).addAll(compatibleControllers);
                         } else {
                             // Multiple pools- merge into one, then add the
                             // compatible controllers
@@ -200,8 +199,8 @@ public class MultiblockWorldRegistry {
 
                 if (newMaster == null) {
                     BeefCoreLog.fatal(
-                        "Multiblock system checked a merge pool of size %d, found no master candidates. This should never happen.",
-                        mergePool.size());
+                            "Multiblock system checked a merge pool of size %d, found no master candidates. This should never happen.",
+                            mergePool.size());
                 } else {
                     // Merge all the other machines into the master machine,
                     // then unregister them
@@ -257,7 +256,7 @@ public class MultiblockWorldRegistry {
                 // Validate that they are empty/dead, then unregister them.
                 if (!controller.isEmpty()) {
                     BeefCoreLog.fatal(
-                        "Found a non-empty controller. Forcing it to shed its blocks and die. This should never happen!");
+                            "Found a non-empty controller. Forcing it to shed its blocks and die. This should never happen!");
                     detachedParts.addAll(controller.detachAllBlocks());
                 }
 
@@ -292,8 +291,7 @@ public class MultiblockWorldRegistry {
     public void onPartAdded(IMultiblockPart part) {
         CoordTriplet worldLocation = part.getWorldLocation();
 
-        if (!worldObj.getChunkProvider()
-            .chunkExists(worldLocation.getChunkX(), worldLocation.getChunkZ())) {
+        if (!worldObj.getChunkProvider().chunkExists(worldLocation.getChunkX(), worldLocation.getChunkZ())) {
             // Part goes into the waiting-for-chunk-load list
             Set<IMultiblockPart> partSet;
             long chunkHash = worldLocation.getChunkXZHash();
@@ -327,10 +325,8 @@ public class MultiblockWorldRegistry {
             if (partsAwaitingChunkLoad.containsKey(hash)) {
                 synchronized (partsAwaitingChunkLoadMutex) {
                     if (partsAwaitingChunkLoad.containsKey(hash)) {
-                        partsAwaitingChunkLoad.get(hash)
-                            .remove(part);
-                        if (partsAwaitingChunkLoad.get(hash)
-                            .size() <= 0) {
+                        partsAwaitingChunkLoad.get(hash).remove(part);
+                        if (partsAwaitingChunkLoad.get(hash).size() <= 0) {
                             partsAwaitingChunkLoad.remove(hash);
                         }
                     }

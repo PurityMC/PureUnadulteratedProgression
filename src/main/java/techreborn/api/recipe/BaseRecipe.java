@@ -32,8 +32,7 @@ public abstract class BaseRecipe implements IBaseRecipeType, Cloneable {
 
     @Override
     public ItemStack getOutput(int i) {
-        return outputs.get(i)
-            .copy();
+        return outputs.get(i).copy();
     }
 
     @Override

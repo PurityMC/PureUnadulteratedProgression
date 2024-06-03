@@ -21,8 +21,9 @@ import techreborn.init.ModBlocks;
 import techreborn.lib.Reference;
 import techreborn.multiblocks.MultiBlockCasing;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileBlastFurnace extends TilePowerAcceptor implements IInventory, ISidedInventory {
+public class TileBlastFurnace extends TilePowerAcceptor implements IWrenchable, IInventory, ISidedInventory {
 
     public int tickTime;
     public Inventory inventory = new Inventory(4, "TileBlastFurnace", 64);
@@ -48,38 +49,65 @@ public class TileBlastFurnace extends TilePowerAcceptor implements IInventory, I
         crafter.updateEntity();
     }
 
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.BlastFurnace, 1);
+    }
+
     public int getHeat() {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
             TileEntity tileEntity = worldObj
-                .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                    .getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (tileEntity instanceof TileMachineCasing) {
                 if (((TileMachineCasing) tileEntity).isConnected()
-                    && ((TileMachineCasing) tileEntity).getMultiblockController()
-                        .isAssembled()) {
+                        && ((TileMachineCasing) tileEntity).getMultiblockController().isAssembled()) {
                     MultiBlockCasing casing = ((TileMachineCasing) tileEntity).getMultiblockController();
                     Location location = new Location(xCoord, yCoord, zCoord, direction);
                     location.modifyPositionFromSide(direction, 1);
                     int heat = 0;
                     if (worldObj.getBlock(location.getX(), location.getY() - 1, location.getZ())
-                        == tileEntity.getBlockType()) {
+                            == tileEntity.getBlockType()) {
                         return 0;
                     }
 
                     for (IMultiblockPart part : casing.connectedParts) {
                         heat += BlockMachineCasing.getHeatFromMeta(
-                            part.getWorldObj()
-                                .getBlockMetadata(
-                                    part.getWorldLocation().x,
-                                    part.getWorldLocation().y,
-                                    part.getWorldLocation().z));
+                                part.getWorldObj().getBlockMetadata(
+                                        part.getWorldLocation().x,
+                                        part.getWorldLocation().y,
+                                        part.getWorldLocation().z));
                     }
 
-                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ())
-                        .getUnlocalizedName()
-                        .equals("tile.lava")
-                        && worldObj.getBlock(location.getX(), location.getY() + 1, location.getZ())
-                            .getUnlocalizedName()
-                            .equals("tile.lava")) {
+                    if (worldObj.getBlock(location.getX(), location.getY(), location.getZ()).getUnlocalizedName()
+                            .equals("tile.lava")
+                            && worldObj.getBlock(location.getX(), location.getY() + 1, location.getZ())
+                                    .getUnlocalizedName().equals("tile.lava")) {
                         heat += 500;
                     }
                     return heat;

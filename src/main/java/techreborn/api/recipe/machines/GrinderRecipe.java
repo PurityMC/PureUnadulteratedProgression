@@ -13,7 +13,7 @@ public class GrinderRecipe extends BaseRecipe {
     public FluidStack fluidStack;
 
     public GrinderRecipe(ItemStack input1, ItemStack input2, FluidStack fluidStack, ItemStack output1,
-        ItemStack output2, ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
+            ItemStack output2, ItemStack output3, ItemStack output4, int tickTime, int euPerTick) {
         super(Reference.grinderRecipe, tickTime, euPerTick);
         if (input1 != null) inputs.add(input1);
         if (input2 != null) inputs.add(input2);
@@ -39,8 +39,7 @@ public class GrinderRecipe extends BaseRecipe {
             if (grinder.tank.getFluid() == null) {
                 return false;
             }
-            if (grinder.tank.getFluid()
-                .getFluidID() == fluidStack.getFluidID()) {
+            if (grinder.tank.getFluid().getFluidID() == fluidStack.getFluidID()) {
                 if (grinder.tank.getFluidAmount() >= fluidStack.amount) {
                     return true;
                 }
@@ -59,12 +58,13 @@ public class GrinderRecipe extends BaseRecipe {
             if (grinder.tank.getFluid() == null) {
                 return false;
             }
-            if (grinder.tank.getFluid()
-                .getFluidID() == fluidStack.getFluidID()) {
+            if (grinder.tank.getFluid().getFluidID() == fluidStack.getFluidID()) {
                 if (grinder.tank.getFluidAmount() >= fluidStack.amount) {
                     if (grinder.tank.getFluidAmount() > 0) {
                         grinder.tank.setFluid(
-                            new FluidStack(fluidStack.getFluid(), grinder.tank.getFluidAmount() - fluidStack.amount));
+                                new FluidStack(
+                                        fluidStack.getFluid(),
+                                        grinder.tank.getFluidAmount() - fluidStack.amount));
                     } else {
                         grinder.tank.setFluid(null);
                     }

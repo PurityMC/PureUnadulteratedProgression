@@ -14,8 +14,8 @@ import techreborn.tiles.TileMatterFabricator;
 public class GuiMatterFabricator extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/matterfabricator.png");
+            "techreborn",
+            "textures/gui/matterfabricator.png");
 
     TileMatterFabricator matterfab;
 
@@ -32,8 +32,7 @@ public class GuiMatterFabricator extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager()
-            .bindTexture(texture);
+        this.mc.getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -49,9 +48,9 @@ public class GuiMatterFabricator extends GuiContainer {
         int l = (this.height - this.ySize) / 2;
         String name = StatCollector.translateToLocal("tile.techreborn.matterfabricator.name");
         this.fontRendererObj
-            .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
+                .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj
-            .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+                .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
         this.fontRendererObj.drawString(containerMatterFabricator.getProgressScaled(100) + "%", 80, 50, 4210752);
     }
 

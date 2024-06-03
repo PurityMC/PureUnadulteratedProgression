@@ -17,8 +17,8 @@ import techreborn.tiles.TileGrinder;
 public class GuiGrinder extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/industrial_grinder.png");
+            "techreborn",
+            "textures/gui/industrial_grinder.png");
 
     TileGrinder grinder;
     ContainerGrinder containerGrinder;
@@ -34,8 +34,7 @@ public class GuiGrinder extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager()
-            .bindTexture(texture);
+        this.mc.getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -55,16 +54,14 @@ public class GuiGrinder extends GuiContainer {
         if (containerGrinder.connectionStatus != 1) {
             GuiUtil.drawTooltipBox(k + 30, l + 50 + 12 - j, 114, 10);
             this.fontRendererObj.drawString(
-                StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
-                k + 38,
-                l + 52 + 12 - j,
-                -1);
+                    StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
+                    k + 38,
+                    l + 52 + 12 - j,
+                    -1);
         }
 
         if (grinder.tank.getFluidAmount() != 0) {
-            IIcon fluidIcon = grinder.tank.getFluid()
-                .getFluid()
-                .getIcon();
+            IIcon fluidIcon = grinder.tank.getFluid().getFluid().getIcon();
             if (fluidIcon != null) {
                 this.mc.renderEngine.bindTexture(texture);
                 drawTexturedModalRect(k + 7, l + 15, 176, 31, 20, 55);
@@ -83,9 +80,9 @@ public class GuiGrinder extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String name = StatCollector.translateToLocal("tile.techreborn.grinder.name");
         this.fontRendererObj
-            .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
+                .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj
-            .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+                .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 
 }

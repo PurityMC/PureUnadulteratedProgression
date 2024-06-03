@@ -6,9 +6,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 
+import techreborn.client.TechRebornCreativeTabMisc;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import techreborn.client.TechRebornCreativeTabMisc;
 
 public class ItemFluidbucket extends ItemBucket {
 

@@ -2,6 +2,7 @@ package reborncore.common.util;
 
 import java.util.ArrayList;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import reborncore.RebornCore;
@@ -14,22 +15,17 @@ public class OreUtil {
         if (!OreDictionary.doesOreNameExist(name)) {
             return false;
         }
-        return OreDictionary.getOres(name)
-            .size() >= 1;
+        return OreDictionary.getOres(name).size() >= 1;
     }
 
     public static void scanForOres() {
         String[] validPrefixes = new String[] { "ingot", "ore", "crushed", "plate", "nugget", "dustSmall", "dust",
-            "block" };
+                "block" };
         for (String oreDicName : OreDictionary.getOreNames()) {
             for (String prefix : validPrefixes) {
                 if (oreDicName.startsWith(prefix)) {
-                    if (!oreNames.contains(
-                        oreDicName.replace(prefix, "")
-                            .toLowerCase())) {
-                        oreNames.add(
-                            oreDicName.replace(prefix, "")
-                                .toLowerCase());
+                    if (!oreNames.contains(oreDicName.replace(prefix, "").toLowerCase())) {
+                        oreNames.add(oreDicName.replace(prefix, "").toLowerCase());
                     }
                 }
             }
@@ -71,8 +67,7 @@ public class OreUtil {
 
     public static String capitalizeFirstLetter(String original) {
         if (original.length() == 0) return original;
-        return original.substring(0, 1)
-            .toUpperCase() + original.substring(1);
+        return original.substring(0, 1).toUpperCase() + original.substring(1);
     }
 
 }

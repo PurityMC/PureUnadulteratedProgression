@@ -17,8 +17,8 @@ import techreborn.tiles.TileIndustrialSawmill;
 public class GuiIndustrialSawmill extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/industrial_sawmill.png");
+            "techreborn",
+            "textures/gui/industrial_sawmill.png");
 
     TileIndustrialSawmill sawmill;
 
@@ -39,8 +39,7 @@ public class GuiIndustrialSawmill extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager()
-            .bindTexture(texture);
+        this.mc.getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -58,9 +57,7 @@ public class GuiIndustrialSawmill extends GuiContainer {
         }
 
         if (sawmill.tank.getFluidAmount() != 0) {
-            IIcon fluidIcon = sawmill.tank.getFluid()
-                .getFluid()
-                .getIcon();
+            IIcon fluidIcon = sawmill.tank.getFluid().getFluid().getIcon();
             if (fluidIcon != null) {
                 this.mc.renderEngine.bindTexture(texture);
 
@@ -76,10 +73,10 @@ public class GuiIndustrialSawmill extends GuiContainer {
         if (sawmill.getMutliBlock() != true) {
             GuiUtil.drawTooltipBox(k + 30, l + 50 + 12 - 0, 114, 10);
             this.fontRendererObj.drawString(
-                StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
-                k + 38,
-                l + 52 + 12 - 0,
-                -1);
+                    StatCollector.translateToLocal("techreborn.message.missingmultiblock"),
+                    k + 38,
+                    l + 52 + 12 - 0,
+                    -1);
         }
 
     }
@@ -87,8 +84,8 @@ public class GuiIndustrialSawmill extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String name = StatCollector.translateToLocal("tile.techreborn.industrialsawmill.name");
         this.fontRendererObj
-            .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
+                .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj
-            .drawString(I18n.format("container.inventory", new Object[0]), 58, this.ySize - 96 + 2, 4210752);
+                .drawString(I18n.format("container.inventory", new Object[0]), 58, this.ySize - 96 + 2, 4210752);
     }
 }

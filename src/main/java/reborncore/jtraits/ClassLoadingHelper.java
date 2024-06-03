@@ -19,7 +19,7 @@ public class ClassLoadingHelper {
 
         try {
             m_defineClass = ClassLoader.class
-                .getDeclaredMethod("defineClass", String.class, byte[].class, int.class, int.class);
+                    .getDeclaredMethod("defineClass", String.class, byte[].class, int.class, int.class);
             m_defineClass.setAccessible(true);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -31,13 +31,8 @@ public class ClassLoadingHelper {
         bytecodes.put(name, bytecode);
         mixins.put(name, mixin);
         try {
-            return (Class<?>) m_defineClass.invoke(
-                this.getClass()
-                    .getClassLoader(),
-                name,
-                bytecode,
-                0,
-                bytecode.length);
+            return (Class<?>) m_defineClass
+                    .invoke(this.getClass().getClassLoader(), name, bytecode, 0, bytecode.length);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -52,9 +47,7 @@ public class ClassLoadingHelper {
 
     public Mixin<?> findMixin(Class<?> clazz, Class<?> trait) {
 
-        return findMixin(
-            Mixin.getName(clazz, trait)
-                .replace("/", "."));
+        return findMixin(Mixin.getName(clazz, trait).replace("/", "."));
     }
 
     public InputStream getResourceAsStream(String name) {
@@ -62,9 +55,7 @@ public class ClassLoadingHelper {
         for (String s : bytecodes.keySet())
             if ((s.replace(".", "/") + ".class").equals(name)) return new ByteArrayInputStream(bytecodes.get(s));
 
-        return this.getClass()
-            .getClassLoader()
-            .getResourceAsStream(name);
+        return this.getClass().getClassLoader().getResourceAsStream(name);
     }
 
     public Map<String, Mixin<?>> getDefinedMixins() {

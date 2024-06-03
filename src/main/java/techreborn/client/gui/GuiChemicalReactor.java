@@ -14,8 +14,8 @@ import techreborn.tiles.TileChemicalReactor;
 public class GuiChemicalReactor extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/chemical_reactor.png");
+            "techreborn",
+            "textures/gui/chemical_reactor.png");
 
     TileChemicalReactor chemicalReactor;
     ContainerChemicalReactor containerChemicalReactor;
@@ -38,8 +38,7 @@ public class GuiChemicalReactor extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager()
-            .bindTexture(texture);
+        this.mc.getTextureManager().bindTexture(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -61,8 +60,8 @@ public class GuiChemicalReactor extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String name = StatCollector.translateToLocal("tile.techreborn.chemicalreactor.name");
         this.fontRendererObj
-            .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
+                .drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj
-            .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+                .drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 }

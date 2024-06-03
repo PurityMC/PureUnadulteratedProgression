@@ -11,10 +11,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.recipe.ShapedRecipeHandler;
 import techreborn.api.RollingMachineRecipe;
 import techreborn.client.gui.GuiRollingMachine;
+import codechicken.nei.NEIServerUtils;
+import codechicken.nei.recipe.ShapedRecipeHandler;
 
 public class ShapedRollingMachineHandler extends ShapedRecipeHandler {
 

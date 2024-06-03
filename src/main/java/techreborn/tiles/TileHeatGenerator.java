@@ -8,8 +8,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileHeatGenerator extends TilePowerAcceptor {
+public class TileHeatGenerator extends TilePowerAcceptor implements IWrenchable {
 
     public static final int euTick = ConfigTechReborn.heatGeneratorOutput;
 
@@ -35,6 +36,37 @@ public class TileHeatGenerator extends TilePowerAcceptor {
             }
 
         }
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.heatGenerator, 1);
     }
 
     public boolean isComplete() {

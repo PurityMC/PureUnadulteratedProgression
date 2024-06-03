@@ -45,8 +45,7 @@ public abstract class MultiblockTileEntityBase extends IMultiblockPart {
         for (IMultiblockPart neighborPart : partsToCheck) {
             if (neighborPart.isConnected()) {
                 MultiblockControllerBase candidate = neighborPart.getMultiblockController();
-                if (!candidate.getClass()
-                    .equals(this.getMultiblockControllerType())) {
+                if (!candidate.getClass().equals(this.getMultiblockControllerType())) {
                     // Skip multiblocks with incompatible types
                     continue;
                 }
@@ -76,10 +75,10 @@ public abstract class MultiblockTileEntityBase extends IMultiblockPart {
     public void assertDetached() {
         if (this.controller != null) {
             BeefCoreLog.info(
-                "[assert] Part @ (%d, %d, %d) should be detached already, but detected that it was not. This is not a fatal error, and will be repaired, but is unusual.",
-                xCoord,
-                yCoord,
-                zCoord);
+                    "[assert] Part @ (%d, %d, %d) should be detached already, but detected that it was not. This is not a fatal error, and will be repaired, but is unusual.",
+                    xCoord,
+                    yCoord,
+                    zCoord);
             this.controller = null;
         }
     }
@@ -310,11 +309,11 @@ public abstract class MultiblockTileEntityBase extends IMultiblockPart {
     @Override
     public IMultiblockPart[] getNeighboringParts() {
         CoordTriplet[] neighbors = new CoordTriplet[] { new CoordTriplet(this.xCoord - 1, this.yCoord, this.zCoord),
-            new CoordTriplet(this.xCoord, this.yCoord - 1, this.zCoord),
-            new CoordTriplet(this.xCoord, this.yCoord, this.zCoord - 1),
-            new CoordTriplet(this.xCoord, this.yCoord, this.zCoord + 1),
-            new CoordTriplet(this.xCoord, this.yCoord + 1, this.zCoord),
-            new CoordTriplet(this.xCoord + 1, this.yCoord, this.zCoord) };
+                new CoordTriplet(this.xCoord, this.yCoord - 1, this.zCoord),
+                new CoordTriplet(this.xCoord, this.yCoord, this.zCoord - 1),
+                new CoordTriplet(this.xCoord, this.yCoord, this.zCoord + 1),
+                new CoordTriplet(this.xCoord, this.yCoord + 1, this.zCoord),
+                new CoordTriplet(this.xCoord + 1, this.yCoord, this.zCoord) };
 
         TileEntity te;
         List<IMultiblockPart> neighborParts = new ArrayList<IMultiblockPart>();

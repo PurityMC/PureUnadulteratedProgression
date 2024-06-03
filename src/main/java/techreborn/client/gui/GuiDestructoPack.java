@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 public class GuiDestructoPack extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(
-        "techreborn",
-        "textures/gui/destructopack.png");
+            "techreborn",
+            "textures/gui/destructopack.png");
 
     public GuiDestructoPack(Container container) {
         super(container);

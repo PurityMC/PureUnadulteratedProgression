@@ -17,8 +17,9 @@ import reborncore.common.util.Tank;
 import techreborn.config.ConfigTechReborn;
 import techreborn.init.ModBlocks;
 import techreborn.powerSystem.TilePowerAcceptor;
+import ic2.api.tile.IWrenchable;
 
-public class TileThermalGenerator extends TilePowerAcceptor implements IFluidHandler, IInventory {
+public class TileThermalGenerator extends TilePowerAcceptor implements IWrenchable, IFluidHandler, IInventory {
 
     public Tank tank = new Tank("TileThermalGenerator", FluidContainerRegistry.BUCKET_VOLUME * 10, this);
     public Inventory inventory = new Inventory(3, "TileThermalGenerator", 64);
@@ -26,6 +27,37 @@ public class TileThermalGenerator extends TilePowerAcceptor implements IFluidHan
 
     public TileThermalGenerator() {
         super(ConfigTechReborn.ThermalGeneratorTier);
+    }
+
+    @Override
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+        return false;
+    }
+
+    @Override
+    public short getFacing() {
+        return 0;
+    }
+
+    @Override
+    public void setFacing(short facing) {}
+
+    @Override
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        if (entityPlayer.isSneaking()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(ModBlocks.thermalGenerator, 1);
     }
 
     @Override
@@ -61,8 +93,7 @@ public class TileThermalGenerator extends TilePowerAcceptor implements IFluidHan
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return tank.getFluid() == null || tank.getFluid()
-            .getFluid() == fluid;
+        return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
     }
 
     @Override
@@ -103,8 +134,8 @@ public class TileThermalGenerator extends TilePowerAcceptor implements IFluidHan
             FluidUtils.drainContainers(this, inventory, 0, 1);
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 if (worldObj
-                    .getBlock(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ)
-                    == Blocks.lava) {
+                        .getBlock(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ)
+                        == Blocks.lava) {
                     addEnergy(1);
                 }
             }
@@ -115,11 +146,7 @@ public class TileThermalGenerator extends TilePowerAcceptor implements IFluidHan
             addEnergy(euTick);
         }
         if (tank.getFluidType() != null && getStackInSlot(2) == null) {
-            inventory.setInventorySlotContents(
-                2,
-                new ItemStack(
-                    tank.getFluidType()
-                        .getBlock()));
+            inventory.setInventorySlotContents(2, new ItemStack(tank.getFluidType().getBlock()));
         } else if (tank.getFluidType() == null && getStackInSlot(2) != null) {
             setInventorySlotContents(2, null);
         }

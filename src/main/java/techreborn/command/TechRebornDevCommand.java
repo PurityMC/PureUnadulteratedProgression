@@ -37,13 +37,13 @@ public class TechRebornDevCommand extends CommandBase {
         } else if ("recipes".equals(args[0])) {
             sender.addChatMessage(new ChatComponentText(RecipeHandler.recipeList.size() + " recipes loaded"));
         } else if ("fluid".equals(args[0])) {
-            for (Object object : FluidPowerManager.fluidPowerValues.keySet()
-                .toArray()) {
+            for (Object object : FluidPowerManager.fluidPowerValues.keySet().toArray()) {
                 if (object instanceof Fluid) {
                     Fluid fluid = (Fluid) object;
                     sender.addChatMessage(
-                        new ChatComponentText(
-                            fluid.getUnlocalizedName() + " : " + FluidPowerManager.fluidPowerValues.get(fluid)));
+                            new ChatComponentText(
+                                    fluid.getUnlocalizedName() + " : "
+                                            + FluidPowerManager.fluidPowerValues.get(fluid)));
                 } else {
                     sender.addChatMessage(new ChatComponentText("Found invalid fluid entry"));
                 }
